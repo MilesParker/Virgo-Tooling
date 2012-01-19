@@ -76,8 +76,8 @@ public class StartupEditorSection extends ServerEditorSection {
 		Section section = toolkit.createSection(parent, ExpandableComposite.TWISTIE
 				| ExpandableComposite.EXPANDED | ExpandableComposite.TITLE_BAR
 				| Section.DESCRIPTION | ExpandableComposite.FOCUS_TITLE);
-		section.setText("Server Startup Configuration");
-		section.setDescription("Specify startup options. Changing a setting requires a server restart.");
+		section.setText(Messages.StartupEditorSection_ConfigurationMessage);
+		section.setDescription(Messages.StartupEditorSection_ConfigurationDescription);
 		section.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.VERTICAL_ALIGN_FILL));
 
 		Composite composite = toolkit.createComposite(section);
@@ -95,7 +95,7 @@ public class StartupEditorSection extends ServerEditorSection {
 
 		GridData data = new GridData(SWT.FILL, SWT.TOP, true, false);
 
-		tailLogFiles = toolkit.createButton(composite, "Tail application trace files into Console view", SWT.CHECK);
+		tailLogFiles = toolkit.createButton(composite, Messages.StartupEditorSection_TailTraceCheckbox, SWT.CHECK);
 		tailLogFiles.setLayoutData(data);
 		tailLogFiles.addSelectionListener(new SelectionAdapter() {
 
@@ -110,7 +110,7 @@ public class StartupEditorSection extends ServerEditorSection {
 			}
 		});
 		
-		cleanStartup = toolkit.createButton(composite, "Start server with -clean option", SWT.CHECK);
+		cleanStartup = toolkit.createButton(composite, Messages.StartupEditorSection_StartCleanCheckbox, SWT.CHECK);
 		cleanStartup.setLayoutData(data);
 		cleanStartup.addSelectionListener(new SelectionAdapter() {
 			
@@ -125,7 +125,7 @@ public class StartupEditorSection extends ServerEditorSection {
 			}
 		});
 		
-		toolkit.createLabel(composite, "");
+		toolkit.createLabel(composite, ""); //$NON-NLS-1$
 
 		initialize();
 	}

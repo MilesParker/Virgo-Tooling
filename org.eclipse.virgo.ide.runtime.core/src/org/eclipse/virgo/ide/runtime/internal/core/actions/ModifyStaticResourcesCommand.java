@@ -33,7 +33,7 @@ public class ModifyStaticResourcesCommand extends AbstractOperation {
 	private String newValue;
 
 	public ModifyStaticResourcesCommand(IServerWorkingCopy workingCopy, String newValue) {
-		super("Modify static resources");
+		super(Messages.ModifyStaticResourcesCommand_Name);
 		this.workingCopy = workingCopy;
 		this.oldValue = workingCopy.getStaticFilenamePatterns();
 		this.newValue = newValue;

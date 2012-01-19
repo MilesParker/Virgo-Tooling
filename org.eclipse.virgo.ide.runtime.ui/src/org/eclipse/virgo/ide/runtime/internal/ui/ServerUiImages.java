@@ -52,7 +52,7 @@ import org.eclipse.swt.graphics.Image;
  */
 public class ServerUiImages {
 
-	private static final String ICON_PATH_PREFIX = "icons/full/";
+	private static final String ICON_PATH_PREFIX = "icons/full/"; //$NON-NLS-1$
 	private static final String NAME_PREFIX = ServerUiPlugin.PLUGIN_ID + '.';
 	private static final int NAME_PREFIX_LENGTH = NAME_PREFIX.length();
 
@@ -62,7 +62,7 @@ public class ServerUiImages {
 	static {
 		try {
 			ICON_BASE_URL = new URL(ServerUiPlugin.getDefault().getBundle()
-					.getEntry("/"), ICON_PATH_PREFIX);
+					.getEntry("/"), ICON_PATH_PREFIX); //$NON-NLS-1$
 		} catch (MalformedURLException e) {
 			ServerUiPlugin.log(e);
 		}
@@ -71,21 +71,21 @@ public class ServerUiImages {
 	/** A table of all the <code>ImageDescriptor</code>s. */
 	private static Map<String, ImageDescriptor> imageDescriptors;
 
-	public static final String IMG_WIZB_SERVER = NAME_PREFIX + "springsource_wiz.png";
-	public static final String IMG_WIZB_VIRGO_SERVER = NAME_PREFIX + "virgo_wiz.png";   
+	public static final String IMG_WIZB_SERVER = NAME_PREFIX + "springsource_wiz.png"; //$NON-NLS-1$
+	public static final String IMG_WIZB_VIRGO_SERVER = NAME_PREFIX + "virgo_wiz.png";    //$NON-NLS-1$
 
-	public static final String IMG_OBJ_PORT = NAME_PREFIX + "port_obj.gif";
-	public static final String IMG_OBJ_SPRINGSOURCE = NAME_PREFIX + "springsource_obj.png";
-	public static final String IMG_OBJ_VIRGO = NAME_PREFIX + "virgo_obj.png";
-	public static final String IMG_OBJ_BUNDLE = NAME_PREFIX + "bundle_obj.gif";
-	public static final String IMG_OBJ_BUNDLE_SRC = NAME_PREFIX + "bundle_src_obj.gif";
-	public static final String IMG_OBJ_LIB = NAME_PREFIX + "lib_obj.gif";
-	public static final String IMG_OBJ_FILE = NAME_PREFIX + "file_obj.gif";
+	public static final String IMG_OBJ_PORT = NAME_PREFIX + "port_obj.gif"; //$NON-NLS-1$
+	public static final String IMG_OBJ_SPRINGSOURCE = NAME_PREFIX + "springsource_obj.png"; //$NON-NLS-1$
+	public static final String IMG_OBJ_VIRGO = NAME_PREFIX + "virgo_obj.png"; //$NON-NLS-1$
+	public static final String IMG_OBJ_BUNDLE = NAME_PREFIX + "bundle_obj.gif"; //$NON-NLS-1$
+	public static final String IMG_OBJ_BUNDLE_SRC = NAME_PREFIX + "bundle_src_obj.gif"; //$NON-NLS-1$
+	public static final String IMG_OBJ_LIB = NAME_PREFIX + "lib_obj.gif"; //$NON-NLS-1$
+	public static final String IMG_OBJ_FILE = NAME_PREFIX + "file_obj.gif"; //$NON-NLS-1$
 	
 	
 	// Use IPath and toOSString to build the names to ensure they have the slashes correct
-	private final static String OBJECT = "obj16/"; //basic colors - size 16x16
-	private final static String WIZBAN = "wizban/"; //basic colors - size 16x16
+	private final static String OBJECT = "obj16/"; //basic colors - size 16x16 //$NON-NLS-1$
+	private final static String WIZBAN = "wizban/"; //basic colors - size 16x16 //$NON-NLS-1$
 	//private final static String OVR = "ovr16/"; //basic colors - size 7x8
 
 	public static final ImageDescriptor DESC_WIZB_SERVER = createManaged(WIZBAN, IMG_WIZB_SERVER);
@@ -123,7 +123,7 @@ public class ServerUiImages {
 	 */
 	public static void setToolImageDescriptors(IAction action,
 			String iconName) {
-		setImageDescriptors(action, "tool16", iconName);
+		setImageDescriptors(action, "tool16", iconName); //$NON-NLS-1$
 	}
 
 	/**
@@ -132,17 +132,17 @@ public class ServerUiImages {
 	 */
 	public static void setLocalImageDescriptors(IAction action,
 			String iconName) {
-		setImageDescriptors(action, "lcl16", iconName);
+		setImageDescriptors(action, "lcl16", iconName); //$NON-NLS-1$
 	}
 
 	//---- Helper methods to access icons on the file system -------------------
 
 	private static void setImageDescriptors(IAction action, String type,
 			String relPath) {
-		action.setImageDescriptor(create("e" + type, relPath));
+		action.setImageDescriptor(create("e" + type, relPath)); //$NON-NLS-1$
 		try {
 			ImageDescriptor id = ImageDescriptor.createFromURL(makeIconFileURL(
-					"d" + type, relPath));
+					"d" + type, relPath)); //$NON-NLS-1$
 			if (id != null) {
 				action.setDisabledImageDescriptor(id);
 			}

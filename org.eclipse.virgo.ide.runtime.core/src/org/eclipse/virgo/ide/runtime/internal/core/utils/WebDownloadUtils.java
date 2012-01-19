@@ -29,6 +29,7 @@ import org.eclipse.core.net.proxy.IProxyData;
 import org.eclipse.core.net.proxy.IProxyService;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.virgo.ide.runtime.core.ServerCorePlugin;
 import org.osgi.framework.ServiceReference;
 
@@ -198,8 +199,8 @@ public class WebDownloadUtils {
 					}
 					bytesRead = bytesRead + count;
 					float percent = (Float.valueOf(bytesRead) / Float.valueOf(totalBytes)) * 100;
-					monitor.subTask("Downloading file '" + fileName + "': " + bytesRead + "bytes/" + totalBytes
-							+ "bytes (" + Math.round(percent) + "%)");
+					monitor.subTask(NLS.bind(Messages.webDownloadUtils_DownloadingMessage, fileName + "': " + bytesRead + "bytes/" + totalBytes //$NON-NLS-1$ //$NON-NLS-2$
+							+ "bytes (" + Math.round(percent) + "%)")); //$NON-NLS-1$ //$NON-NLS-2$
 					fos.write(bytes, 0, count);
 					count = bis.read(bytes);
 				}

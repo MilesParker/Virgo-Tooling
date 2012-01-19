@@ -45,8 +45,8 @@ public class ServerRuntimeWizardFragment extends WizardFragment {
 
 	@Override
 	public Composite createComposite(Composite parent, IWizardHandle wizard) {
-		String wizardTitle = ServerUiPlugin.getResourceString("wizardTitle");
-		String wizardDescription = ServerUiPlugin.getResourceString("wizardDescription");
+		String wizardTitle = ServerUiPlugin.getResourceString("wizardTitle"); //$NON-NLS-1$
+		String wizardDescription = ServerUiPlugin.getResourceString("wizardDescription"); //$NON-NLS-1$
 		comp = new ServerRuntimeComposite(parent, wizard, wizardTitle, wizardDescription);
 		return comp;
 	}
@@ -64,7 +64,7 @@ public class ServerRuntimeWizardFragment extends WizardFragment {
 		IRuntimeWorkingCopy runtime = (IRuntimeWorkingCopy) getTaskModel().getObject(TaskModel.TASK_RUNTIME);
 		IPath path = runtime.getLocation();
 		if (runtime.validate(null).getSeverity() != IStatus.ERROR) {
-			ServerCorePlugin.setPreference("location" + runtime.getRuntimeType().getId(), path.toString());
+			ServerCorePlugin.setPreference("location" + runtime.getRuntimeType().getId(), path.toString()); //$NON-NLS-1$
 		}
 	}
 }

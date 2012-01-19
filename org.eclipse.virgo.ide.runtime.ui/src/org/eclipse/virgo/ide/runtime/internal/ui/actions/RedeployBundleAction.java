@@ -51,7 +51,7 @@ public class RedeployBundleAction implements IObjectActionDelegate {
 			return;
 		}
 		
-		Job publishJob = new Job("Redeploy of module '" + selectedModule.getName() +"'") {
+		Job publishJob = new Job(Messages.RedeployBundleAction_RedeployMessage + selectedModule.getName() +"'") { //$NON-NLS-2$
 
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {

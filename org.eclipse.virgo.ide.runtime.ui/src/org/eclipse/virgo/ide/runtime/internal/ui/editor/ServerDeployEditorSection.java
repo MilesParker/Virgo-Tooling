@@ -84,9 +84,9 @@ public class ServerDeployEditorSection extends ServerEditorSection {
 		Section section = toolkit.createSection(parent, ExpandableComposite.TWISTIE
 				| ExpandableComposite.EXPANDED | ExpandableComposite.TITLE_BAR
 				| Section.DESCRIPTION | ExpandableComposite.FOCUS_TITLE);
-		section.setText("Deployer Control");
+		section.setText(Messages.ServerDeployEditorSection_Title);
 		section
-				.setDescription("Configure the communication with the server Deployer Control.");
+				.setDescription(Messages.ServerDeployEditorSection_Description);
 		section
 				.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.VERTICAL_ALIGN_FILL));
 
@@ -105,9 +105,9 @@ public class ServerDeployEditorSection extends ServerEditorSection {
 
 		GridData data = new GridData(SWT.FILL, SWT.CENTER, true, false);
 
-		Label portLabel = toolkit.createLabel(composite, "Port:");
+		Label portLabel = toolkit.createLabel(composite, Messages.ServerDeployEditorSection_PortLabel);
 		portLabel.setForeground(toolkit.getColors().getColor(IFormColors.TITLE));
-		port = toolkit.createText(composite, "");
+		port = toolkit.createText(composite, ""); //$NON-NLS-1$
 		port.setLayoutData(data);
 		port.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
@@ -118,7 +118,7 @@ public class ServerDeployEditorSection extends ServerEditorSection {
 					newPort = Integer.valueOf(port.getText());
 				}
 				catch (NumberFormatException nfe) {
-					setErrorMessage(port.getText() + " is not a valid port number");
+					setErrorMessage(port.getText() + Messages.ServerDeployEditorSection_NotValidMessageEnd);
 					return;
 				}
 				setErrorMessage(null);
@@ -181,7 +181,7 @@ public class ServerDeployEditorSection extends ServerEditorSection {
 	 */
 	protected void initialize() {
 		updating = true;
-		this.port.setText("" + serverWorkingCopy.getMBeanServerPort());
+		this.port.setText("" + serverWorkingCopy.getMBeanServerPort()); //$NON-NLS-1$
 //		this.username.setText(serverWorkingCopy.getDeployerUsername());
 //		this.password.setText(serverWorkingCopy.getDeployerPassword());
 		updating = false;
@@ -193,8 +193,8 @@ public class ServerDeployEditorSection extends ServerEditorSection {
 			Integer.valueOf(port.getText());
 		}
 		catch (NumberFormatException nfe) {
-			return new IStatus[] { new Status(IStatus.ERROR, ServerUiPlugin.PLUGIN_ID, "'"
-					+ port.getText() + "' is not a valid port number") };
+			return new IStatus[] { new Status(IStatus.ERROR, ServerUiPlugin.PLUGIN_ID, "" //$NON-NLS-1$
+					+ port.getText() + Messages.ServerDeployEditorSection_NotValidMessageEnd) };
 		}
 		return super.getSaveStatus();
 	}

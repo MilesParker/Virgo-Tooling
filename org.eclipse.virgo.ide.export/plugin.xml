@@ -9,23 +9,23 @@
           class="org.eclipse.virgo.ide.export.BundleExportWizard"
           icon="icons/full/obj16/osgi_obj.gif"
           id="org.eclipse.virgo.ide.wizard.export.bundle"
-          name="Bundle Project">
+          name="%wizard.name">
        <description>
-          Export an OSGi bundle project into a JAR file on the local file system.
+          %wizard.description
        </description>
     </wizard>
     <category
           id="org.eclipse.virgo.ide.export"
-          name="EclipseRT">
+          name="%category.name">
     </category>
     <wizard
           category="org.eclipse.virgo.ide.export"
           class="org.eclipse.virgo.ide.export.ParExportWizard"
           icon="icons/full/obj16/par_obj.gif"
           id="org.eclipse.virgo.ide.wizard.export.par"
-          name="PAR Project">
+          name="%wizard.name.0">
        <description>
-          Export a Virgo PAR project into a JAR file on the local file system.
+          %wizard.description.0
        </description>
     </wizard>
  </extension>

@@ -36,10 +36,10 @@ import org.eclipse.virgo.util.osgi.manifest.BundleManifest;
 public class BundleExportWizardPage extends AbstractProjectExportWizardPage {
 
 	public BundleExportWizardPage(IStructuredSelection selection) {
-		super("bundleExportWizardPage", selection);
+		super("bundleExportWizardPage", selection); //$NON-NLS-1$
 
-		setTitle("JAR File Specification");
-		setDescription("Define which bundle project should be exported into the JAR.");
+		setTitle(Messages.BundleExportWizardPage_JarFileSpec_Title);
+		setDescription(Messages.BundleExportWizardPage_JarFileSpec_Message);
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public class BundleExportWizardPage extends AbstractProjectExportWizardPage {
 
 	@Override
 	protected String getExtension() {
-		return ".jar";
+		return ".jar"; //$NON-NLS-1$
 	}
 
 	@Override

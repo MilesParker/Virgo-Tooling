@@ -76,7 +76,7 @@ public abstract class AbstractProjectExportWizardPage extends WizardExportResour
 		composite.setLayout(layout);
 
 		Label selectProject = new Label(composite, SWT.NONE);
-		selectProject.setText("Select the project to export:");
+		selectProject.setText(Messages.AbstractProjectExportWizardPage_SelectProjectMessage);
 		selectProject.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 
 		createInputGroup(composite);
@@ -100,7 +100,7 @@ public abstract class AbstractProjectExportWizardPage extends WizardExportResour
 		destinationSelectionGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 
 		Label label = new Label(destinationSelectionGroup, SWT.NONE);
-		label.setText("Select the export destination:");
+		label.setText(Messages.AbstractProjectExportWizardPage_SelectDestinationMessage);
 		GridData gridData = new GridData(SWT.FILL, SWT.FILL, true, false);
 		gridData.horizontalSpan = 3;
 		label.setLayoutData(gridData);
@@ -115,7 +115,7 @@ public abstract class AbstractProjectExportWizardPage extends WizardExportResour
 		destinationText.addListener(SWT.Modify, this);
 
 		browseButton = new Button(destinationSelectionGroup, SWT.PUSH);
-		browseButton.setText("Browse...");
+		browseButton.setText(Messages.AbstractProjectExportWizardPage_BrowseButtonText);
 		browseButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true));
 		browseButton.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -134,7 +134,7 @@ public abstract class AbstractProjectExportWizardPage extends WizardExportResour
 		updateFileName();
 		
 		final Button overwriteButton = new Button(destinationSelectionGroup, SWT.CHECK);
-		overwriteButton.setText("Overwrite existing file without warning");
+		overwriteButton.setText(Messages.AbstractProjectExportWizardPage_OverwriteWithoutWarningMessage);
 		
 		GridData buttonData = new GridData(SWT.FILL, SWT.FILL, true, false);
 		buttonData.horizontalSpan = 3;
@@ -161,13 +161,13 @@ public abstract class AbstractProjectExportWizardPage extends WizardExportResour
 			
 			IPath path = null;
 			if (destinationText.getText() != null) {
-				path = new Path("");
+				path = new Path(""); //$NON-NLS-1$
 			}
 			else {
 				path = new Path(destinationText.getText());
 			}
 			if (name != null && version != null) {
-				path = path.removeLastSegments(1).append(name + "-" + version + getExtension());
+				path = path.removeLastSegments(1).append(name + "-" + version + getExtension()); //$NON-NLS-1$
 				destinationText.setText(path.toOSString());
 			}
 		}
@@ -224,7 +224,7 @@ public abstract class AbstractProjectExportWizardPage extends WizardExportResour
 	}
 
 	private String getOutputSuffix() {
-		return ".jar";
+		return ".jar"; //$NON-NLS-1$
 	}
 
 	public IProject getSelectedProject() {
@@ -255,7 +255,7 @@ public abstract class AbstractProjectExportWizardPage extends WizardExportResour
 	// copied from AbstractJarDestinationWizardPage
 	private void handleDestinationBrowseButtonPressed() {
 		FileDialog dialog = new FileDialog(getContainer().getShell(), SWT.SAVE);
-		dialog.setFilterExtensions(new String[] { "*" + getExtension() });
+		dialog.setFilterExtensions(new String[] { "*" + getExtension() }); //$NON-NLS-1$
 
 		String currentSourceString = getDestinationValue();
 		int lastSeparatorIndex = currentSourceString.lastIndexOf(File.separator);
@@ -292,12 +292,12 @@ public abstract class AbstractProjectExportWizardPage extends WizardExportResour
 		}
 
 		if (!text.endsWith(getExtension())) {
-			setErrorMessage("Export destination must have " + getExtension() + " extension.");
+			setErrorMessage(Messages.AbstractProjectExportWizardPage_ExportDestinationMessageStart + getExtension() + Messages.AbstractProjectExportWizardPage_ExportDestinationMessageEnd);
 			return false;
 		}
 
 		if (tableViewer.getSelection().isEmpty()) {
-			setErrorMessage("Bundle project selection must not be empty.");
+			setErrorMessage(Messages.AbstractProjectExportWizardPage_BundleProjectErrorMessage);
 			return false;
 		}
 

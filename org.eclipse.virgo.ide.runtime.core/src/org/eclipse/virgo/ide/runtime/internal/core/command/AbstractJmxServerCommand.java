@@ -61,7 +61,7 @@ public abstract class AbstractJmxServerCommand {
 		Server server = ServerUtils.getServer(serverBehaviour);
 
 		if (serverBehaviour.getMBeanServerIp() == null) {
-			throw new IOException("MBean server not open for connection");
+			throw new IOException(Messages.AbstractJmxServerCommand_MBeanNotOpenMessage);
 		}
 		String connectorUrl = String.format(JMX_CONNECTOR_URL, serverBehaviour.getMBeanServerIp(),
 				server.getMBeanServerPort());

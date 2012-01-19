@@ -46,8 +46,8 @@ public class VirgoServerRuntimeWizardFragment extends WizardFragment {
 
 	@Override
 	public Composite createComposite(Composite parent, IWizardHandle wizard) {
-		String wizardTitle = ServerUiPlugin.getResourceString("virgoWizardTitle");
-		String wizardDescription = ServerUiPlugin.getResourceString("virgoWizardDescription");
+		String wizardTitle = ServerUiPlugin.getResourceString("virgoWizardTitle"); //$NON-NLS-1$
+		String wizardDescription = ServerUiPlugin.getResourceString("virgoWizardDescription"); //$NON-NLS-1$
 		comp = new ServerRuntimeComposite(parent, wizard, wizardTitle, wizardDescription, ServerUiImages.DESC_WIZB_VIRGO_SERVER);
 		return comp;
 	}
@@ -65,7 +65,7 @@ public class VirgoServerRuntimeWizardFragment extends WizardFragment {
 		IRuntimeWorkingCopy runtime = (IRuntimeWorkingCopy) getTaskModel().getObject(TaskModel.TASK_RUNTIME);
 		IPath path = runtime.getLocation();
 		if (runtime.validate(null).getSeverity() != IStatus.ERROR) {
-			ServerCorePlugin.setPreference("location" + runtime.getRuntimeType().getId(), path.toString());
+			ServerCorePlugin.setPreference("location" + runtime.getRuntimeType().getId(), path.toString()); //$NON-NLS-1$
 		}
 	}
 }

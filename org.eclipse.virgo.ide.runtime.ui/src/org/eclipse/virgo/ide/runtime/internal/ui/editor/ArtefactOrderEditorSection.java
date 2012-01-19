@@ -92,9 +92,9 @@ public class ArtefactOrderEditorSection extends ServerEditorSection {
 		Section section = toolkit.createSection(parent, ExpandableComposite.TWISTIE
 				| ExpandableComposite.EXPANDED | ExpandableComposite.TITLE_BAR
 				| Section.DESCRIPTION | ExpandableComposite.FOCUS_TITLE);
-		section.setText("Artefact Deployment Order");
+		section.setText(Messages.ArtefactOrderEditorSection_Title);
 		section
-				.setDescription("Specify the deployment order of targeted bundles and PARs on server startup.");
+				.setDescription(Messages.ArtefactOrderEditorSection_Description);
 		section
 				.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.VERTICAL_ALIGN_FILL));
 
@@ -134,7 +134,7 @@ public class ArtefactOrderEditorSection extends ServerEditorSection {
 		data = new GridData(GridData.VERTICAL_ALIGN_BEGINNING);
 		buttonComposite.setLayoutData(data);
 
-		upButton = toolkit.createButton(buttonComposite, "Up", SWT.PUSH);
+		upButton = toolkit.createButton(buttonComposite, Messages.ArtefactOrderEditorSection_UpButton, SWT.PUSH);
 		data = new GridData();
 		data.widthHint = 50;
 		upButton.setLayoutData(data);
@@ -163,7 +163,7 @@ public class ArtefactOrderEditorSection extends ServerEditorSection {
 			}
 		});
 
-		downButton = toolkit.createButton(buttonComposite, "Down", SWT.PUSH);
+		downButton = toolkit.createButton(buttonComposite, Messages.ArtefactOrderEditorSection_DownButton, SWT.PUSH);
 		downButton.setLayoutData(data);
 		downButton.addSelectionListener(new SelectionAdapter() {
 			@Override

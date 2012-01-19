@@ -17,36 +17,36 @@ package org.eclipse.virgo.ide.ui.wizards;
 public class ProjectContentPageStrings {
 
 	// PDEUIMessages (modified)
-	public static String Bundle_ContentPage_title = "Bundle Content";
+	public static String Bundle_ContentPage_title = Messages.ProjectContentPageStrings_BundleTitle;
 
-	public static String Par_ContentPage_title = "PAR Content";
+	public static String Par_ContentPage_title = Messages.ProjectContentPageStrings_ParTitle;
 
-	public static String Bundle_ContentPage_desc = "Enter the data required to generate the bundle.";
+	public static String Bundle_ContentPage_desc = Messages.ProjectContentPageStrings_BundleDescription;
 
-	public static String Par_ContentPage_desc = "Enter the data required to generate the PAR.";
+	public static String Par_ContentPage_desc = Messages.ProjectContentPageStrings_ParDescription;
 
-	public static String Bundle_ContentPage_pGroup = "Bundle Properties";
+	public static String Bundle_ContentPage_pGroup = Messages.ProjectContentPageStrings_BundlePropertiesTitle;
 
-	public static String Par_ContentPage_pGroup = "PAR Properties";
+	public static String Par_ContentPage_pGroup = Messages.ProjectContentPageStrings_ParPropertiesTitle;
 
-	public static String Bundle_ContentPage_pid = "Bundle Symbolic Name";
+	public static String Bundle_ContentPage_pid = Messages.ProjectContentPageStrings_BundleSymbolicName;
 
-	public static String Par_ContentPage_pid = "Application Symbolic Name";
+	public static String Par_ContentPage_pid = Messages.ProjectContentPageStrings_ApplicationSymbolicName;
 
-	public static String Bundle_ContentPage_pversion = "Bundle Version";
+	public static String Bundle_ContentPage_pversion = Messages.ProjectContentPageStrings_BundleVersionLabel;
 
-	public static String Par_ContentPage_pversion = "Application Version";
+	public static String Par_ContentPage_pversion = Messages.ProjectContentPageStrings_ApplicationVersionLabel;
 
-	public static String Bundle_ContentPage_pname = "Bundle Name";
+	public static String Bundle_ContentPage_pname = Messages.ProjectContentPageStrings_BundleNameLabel;
 
-	public static String Par_ContentPage_pname = "Application Name";
+	public static String Par_ContentPage_pname = Messages.ProjectContentPageStrings_ApplicationNameLabel;
 
-	public static String Bundle_ContentPage_pprovider = "Bundle Description";
+	public static String Bundle_ContentPage_pprovider = Messages.ProjectContentPageStrings_BundleDescriptionLabel;
 
-	public static String Par_ContentPage_pprovider = "Application Description";
+	public static String Par_ContentPage_pprovider = Messages.ProjectContentPageStrings_ApplicationDescriptionLabel;
 
-	public static String Bundle_ContentPage_plugin = "{0} Bundle";
+	public static String Bundle_ContentPage_plugin = Messages.ProjectContentPageStrings_BundlePattern;
 
-	public static String Par_ContentPage_plugin = "{0} PAR";
+	public static String Par_ContentPage_plugin = Messages.ProjectContentPageStrings_PARPattern;
 
 }

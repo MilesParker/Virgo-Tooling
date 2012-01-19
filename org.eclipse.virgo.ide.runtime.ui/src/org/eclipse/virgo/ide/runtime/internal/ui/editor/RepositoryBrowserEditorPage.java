@@ -155,7 +155,7 @@ public class RepositoryBrowserEditorPage extends ServerEditorPart {
 
 	private Link update;
 
-	private static String PROXY_PREF_PAGE_ID = "org.eclipse.ui.net.NetPreferences";
+	private static String PROXY_PREF_PAGE_ID = "org.eclipse.ui.net.NetPreferences"; //$NON-NLS-1$
 
 	public void createPartControl(Composite parent) {
 
@@ -165,7 +165,7 @@ public class RepositoryBrowserEditorPage extends ServerEditorPart {
 
 		ScrolledForm form = toolkit.createScrolledForm(parent);
 		toolkit.decorateFormHeading(form.getForm());
-		form.setText("Bundle Repository Browser");
+		form.setText(Messages.RepositoryBrowserEditorPage_Title);
 		form.setImage(getFormImage());
 		GridLayout layout = new GridLayout(2, true);
 		layout.marginTop = 6;
@@ -214,9 +214,9 @@ public class RepositoryBrowserEditorPage extends ServerEditorPart {
 		GridLayout layout;
 		Section leftSection = toolkit.createSection(form.getBody(), ExpandableComposite.TITLE_BAR
 				| Section.DESCRIPTION);
-		leftSection.setText("Search for Bundles and Libraries");
+		leftSection.setText(Messages.RepositoryBrowserEditorPage_SearchMessage);
 		leftSection
-				.setDescription("Search for bundles and libraries by names, symbolic names, classes or packages. Wildcards such as * and ? are supported. Bundles and Libraries that appear in gray color are already installed.");
+				.setDescription(Messages.RepositoryBrowserEditorPage_SearchDescription);
 		leftSection.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		Composite leftComposite = toolkit.createComposite(leftSection);
@@ -227,7 +227,7 @@ public class RepositoryBrowserEditorPage extends ServerEditorPart {
 		toolkit.paintBordersFor(leftComposite);
 		leftSection.setClient(leftComposite);
 
-		searchText = toolkit.createText(leftComposite, "");
+		searchText = toolkit.createText(leftComposite, ""); //$NON-NLS-1$
 		GridData data = new GridData(GridData.FILL_HORIZONTAL);
 		searchText.setLayoutData(data);
 		searchText.addKeyListener(new KeyListener() {
@@ -247,7 +247,7 @@ public class RepositoryBrowserEditorPage extends ServerEditorPart {
 		data = new GridData(GridData.VERTICAL_ALIGN_BEGINNING);
 		searchButtonComposite.setLayoutData(data);
 
-		searchButton = toolkit.createButton(searchButtonComposite, "&Search", SWT.PUSH);
+		searchButton = toolkit.createButton(searchButtonComposite, Messages.RepositoryBrowserEditorPage_SearchButtonText, SWT.PUSH);
 		searchButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				handleSearch();
@@ -314,9 +314,9 @@ public class RepositoryBrowserEditorPage extends ServerEditorPart {
 
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.widthHint = 100;
-		Button selectAllButton = toolkit.createButton(buttonComposite, "Select &All", SWT.PUSH);
+		Button selectAllButton = toolkit.createButton(buttonComposite, Messages.RepositoryBrowserEditorPage_SelectButtonText, SWT.PUSH);
 		selectAllButton.setLayoutData(data);
-		selectAllButton.setToolTipText("Select all bundles and libraries.");
+		selectAllButton.setToolTipText(Messages.RepositoryBrowserEditorPage_SelectButtonTooltip);
 		selectAllButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent selectionEvent) {
 				searchResultTableViewer.setCheckedElements(contentProvider
@@ -324,8 +324,8 @@ public class RepositoryBrowserEditorPage extends ServerEditorPart {
 			}
 		});
 
-		Button deselectAllButton = toolkit.createButton(buttonComposite, "Dese&lect All", SWT.PUSH);
-		deselectAllButton.setToolTipText("Deselect all bundles and libraries.");
+		Button deselectAllButton = toolkit.createButton(buttonComposite, Messages.RepositoryBrowserEditorPage_DeselectButton, SWT.PUSH);
+		deselectAllButton.setToolTipText(Messages.RepositoryBrowserEditorPage_DeselectButtonTooltip);
 		deselectAllButton.setLayoutData(data);
 		deselectAllButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent selectionEvent) {
@@ -334,12 +334,12 @@ public class RepositoryBrowserEditorPage extends ServerEditorPart {
 		});
 
 		// insert vertical space to make the download button stand out
-		toolkit.createLabel(buttonComposite, "");
+		toolkit.createLabel(buttonComposite, ""); //$NON-NLS-1$
 
-		anaylseButton = toolkit.createButton(buttonComposite, "Anal&yse", SWT.PUSH);
+		anaylseButton = toolkit.createButton(buttonComposite, Messages.RepositoryBrowserEditorPage_AnalyzeButtonText, SWT.PUSH);
 		anaylseButton.setEnabled(false);
 		anaylseButton.setLayoutData(data);
-		anaylseButton.setToolTipText("Analyze the selected bundle or library.");
+		anaylseButton.setToolTipText(Messages.RepositoryBrowserEditorPage_AnalyzeButtonTooltip);
 		anaylseButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent selectionEvent) {
 				ISelection selection = searchResultTableViewer.getSelection();
@@ -352,10 +352,10 @@ public class RepositoryBrowserEditorPage extends ServerEditorPart {
 			}
 		});
 
-		licenseButton = toolkit.createButton(buttonComposite, "View &License", SWT.PUSH);
+		licenseButton = toolkit.createButton(buttonComposite, Messages.RepositoryBrowserEditorPage_ViewLicenseButton, SWT.PUSH);
 		licenseButton.setEnabled(false);
 		licenseButton.setLayoutData(data);
-		licenseButton.setToolTipText("Open the bundle or library license file.");
+		licenseButton.setToolTipText(Messages.RepositoryBrowserEditorPage_ViewLicenseTooltip);
 		licenseButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent selectionEvent) {
 				ISelection selection = searchResultTableViewer.getSelection();
@@ -374,12 +374,12 @@ public class RepositoryBrowserEditorPage extends ServerEditorPart {
 		});
 
 		// insert vertical space to make the download button stand out
-		toolkit.createLabel(buttonComposite, "");
+		toolkit.createLabel(buttonComposite, ""); //$NON-NLS-1$
 
-		downloadButton = toolkit.createButton(buttonComposite, "Download", SWT.PUSH);
+		downloadButton = toolkit.createButton(buttonComposite, Messages.RepositoryBrowserEditorPage_DownloadButton, SWT.PUSH);
 		downloadButton.setEnabled(false);
 		downloadButton.setLayoutData(data);
-		downloadButton.setToolTipText("Download selected bundles and libraries.");
+		downloadButton.setToolTipText(Messages.RepositoryBrowserEditorPage_DownloadButtonTooltip);
 		downloadButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent selectionEvent) {
 				Set<Artefact> artifacts = new LinkedHashSet<Artefact>();
@@ -391,23 +391,23 @@ public class RepositoryBrowserEditorPage extends ServerEditorPart {
 				}
 
 				boolean showDialog = ServerUiPlugin.getDefault().getPreferenceStore().getBoolean(
-						ServerUiPlugin.PLUGIN_ID + ".download.message");
+						ServerUiPlugin.PLUGIN_ID + ".download.message"); //$NON-NLS-1$
 
 				if (!showDialog) {
 					MessageDialogWithToggle dialog = MessageDialogWithToggle
 							.openOkCancelConfirm(
 									shell,
-									"Download Bundles and Libraries",
-									"A download job will be triggered to run in background.\n\nDo you want to proceed?",
-									"Don't show this dialog next time.", false, ServerUiPlugin
+									Messages.RepositoryBrowserEditorPage_DownloadBundlesTitle,
+									Messages.RepositoryBrowserEditorPage_DownloadBundlesDescription,
+									Messages.RepositoryBrowserEditorPage_DontShowDialog, false, ServerUiPlugin
 											.getDefault().getPreferenceStore(),
-									ServerUiPlugin.PLUGIN_ID + ".download.message");
+									ServerUiPlugin.PLUGIN_ID + ".download.message"); //$NON-NLS-1$
 					if (dialog.getReturnCode() != Dialog.OK) {
 						return;
 					}
 					else {
 						ServerUiPlugin.getDefault().getPreferenceStore().setValue(
-								ServerUiPlugin.PLUGIN_ID + ".download.message",
+								ServerUiPlugin.PLUGIN_ID + ".download.message", //$NON-NLS-1$
 								new Boolean(dialog.getToggleState()));
 					}
 				}
@@ -438,18 +438,18 @@ public class RepositoryBrowserEditorPage extends ServerEditorPart {
 		GridDataFactory.fillDefaults().grab(true, false).span(2, 1).applyTo(wrappedComposite);
 
 		downloadSourcesCheckbox = toolkit.createButton(wrappedComposite,
-				"Download source jars from repository", SWT.CHECK | SWT.WRAP);
+				Messages.RepositoryBrowserEditorPage_DownloadSourceJarsCheckbox, SWT.CHECK | SWT.WRAP);
 		downloadSourcesCheckbox.setSelection(true);
 		downloadSourcesCheckbox.setLayoutData(new TableWrapData(TableWrapData.LEFT,
 				TableWrapData.TOP));
 
 		Link repoLink = new Link(wrappedComposite, SWT.WRAP);
 		repoLink
-				.setText("The repository is also available for browsing at <A HREF=\"repo\">http://www.springsource.com/repository</A>.");
+				.setText(Messages.RepositoryBrowserEditorPage_RepositoryLinkText);
 		repoLink.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				WebUiUtils.openUrl("http://www.springsource.com/repository");
+				WebUiUtils.openUrl(Messages.RepositoryBrowserEditorPage_RepositoryLinkURL);
 			}
 		});
 		repoLink.setLayoutData(new TableWrapData(TableWrapData.LEFT, TableWrapData.TOP));
@@ -461,8 +461,8 @@ public class RepositoryBrowserEditorPage extends ServerEditorPart {
 				if (MessageDialog
 						.openQuestion(
 								shell,
-								"Update local bundle and library repository index",
-								"Do you really want to update your local index of available bundles and libraries from the online SpringSource Enterprise Bundle Repository?")) {
+								Messages.RepositoryBrowserEditorPage_UpdateIndexTitle,
+								Messages.RepositoryBrowserEditorPage_UpdateIndexMessage)) {
 					ServerCorePlugin.getArtefactRepositoryManager().update();
 				}
 
@@ -472,7 +472,7 @@ public class RepositoryBrowserEditorPage extends ServerEditorPart {
 		update.setLayoutData(new TableWrapData(TableWrapData.LEFT, TableWrapData.TOP));
 
 		Hyperlink disclaimer = toolkit.createHyperlink(wrappedComposite,
-				"Firewall and proxy should be appropriately configured.", SWT.WRAP);
+				Messages.RepositoryBrowserEditorPage_FirewallMessage, SWT.WRAP);
 		disclaimer.addHyperlinkListener(new HyperlinkAdapter() {
 			public void linkActivated(HyperlinkEvent e) {
 				PreferenceDialog dialog = PreferencesUtil.createPreferenceDialogOn(null,
@@ -489,21 +489,21 @@ public class RepositoryBrowserEditorPage extends ServerEditorPart {
 		Date date = ServerCorePlugin.getArtefactRepositoryManager().getArtefactRepositoryDate();
 		String dateString = dateFormat.format(date);
 		update
-				.setText("<A HREF=\"update\">Update local bundle and library repository index.</A> (Last update: "
-						+ dateString + ")");
+				.setText(Messages.RepositoryBrowserEditorPage_UpdateRepositoryMessage
+						+ dateString + Messages.RepositoryBrowserEditorPage_31);
 	}
 	
 	protected String getServerName() {
-		return "SpringSource dm Server";
+		return Messages.RepositoryBrowserEditorPage_ServerName;
 	}
 
 	private Section createRightSection(FormToolkit toolkit, ScrolledForm form) {
 		GridLayout layout;
 		Section leftSection = toolkit.createSection(form.getBody(), ExpandableComposite.TITLE_BAR
 				| Section.DESCRIPTION);
-		leftSection.setText("Installed Bundles and Libraries");
+		leftSection.setText(Messages.RepositoryBrowserEditorPage_IntalledBundlesSectionName);
 		leftSection
-				.setDescription("The following bundles and libraries are currently installed in the " + getServerName() + ".");
+				.setDescription(Messages.RepositoryBrowserEditorPage_IntalledBundlesSectionDescription + getServerName() + Messages.RepositoryBrowserEditorPage_35);
 		leftSection.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		Composite leftComposite = toolkit.createComposite(leftSection);
@@ -562,19 +562,19 @@ public class RepositoryBrowserEditorPage extends ServerEditorPart {
 
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.widthHint = 100;
-		refreshButton = toolkit.createButton(buttonComposite, "&Refresh", SWT.PUSH);
+		refreshButton = toolkit.createButton(buttonComposite, Messages.RepositoryBrowserEditorPage_RefreshButtonText, SWT.PUSH);
 		refreshButton.setLayoutData(data);
-		refreshButton.setToolTipText("Refresh installed bundles and libraries.");
+		refreshButton.setToolTipText(Messages.RepositoryBrowserEditorPage_RefreshButtonDescription);
 		refreshButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent selectionEvent) {
 				refreshBundleRepository();
 			}
 		});
 
-		downloadSourcesButton = toolkit.createButton(buttonComposite, "&Install Sources", SWT.PUSH);
+		downloadSourcesButton = toolkit.createButton(buttonComposite, Messages.RepositoryBrowserEditorPage_InstallSourcesText, SWT.PUSH);
 		downloadSourcesButton.setLayoutData(data);
 		downloadSourcesButton
-				.setToolTipText("Download sources of installed bundles and libraries.");
+				.setToolTipText(Messages.RepositoryBrowserEditorPage_InstallSourcesMessage);
 		downloadSourcesButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent selectionEvent) {
 				downloadSources();
@@ -582,11 +582,11 @@ public class RepositoryBrowserEditorPage extends ServerEditorPart {
 		});
 
 		// insert vertical space to make the download button stand out
-		toolkit.createLabel(buttonComposite, "");
+		toolkit.createLabel(buttonComposite, ""); //$NON-NLS-1$
 
-		openManifestButton = toolkit.createButton(buttonComposite, "&Open Manifest", SWT.PUSH);
+		openManifestButton = toolkit.createButton(buttonComposite, Messages.RepositoryBrowserEditorPage_OpenManifestButtonText, SWT.PUSH);
 		openManifestButton.setLayoutData(data);
-		openManifestButton.setToolTipText("Open Bundle or Library Manifest.");
+		openManifestButton.setToolTipText(Messages.RepositoryBrowserEditorPage_OpenManifestButtonDescription);
 		openManifestButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent selectionEvent) {
 				ISelection selection = repositoryTableViewer.getSelection();
@@ -594,7 +594,7 @@ public class RepositoryBrowserEditorPage extends ServerEditorPart {
 					Object element = ((IStructuredSelection) selection).getFirstElement();
 					if (element instanceof LocalBundleArtefact) {
 						BundleManifestEditor.openExternalPlugin(((LocalBundleArtefact) element)
-								.getFile(), "META-INF/MANIFEST.MF");
+								.getFile(), "META-INF/MANIFEST.MF"); //$NON-NLS-1$
 					}
 				}
 			}
@@ -614,7 +614,7 @@ public class RepositoryBrowserEditorPage extends ServerEditorPart {
 
 		Link repoLink = new Link(wrappedComposite, SWT.WRAP);
 		repoLink
-				.setText("New bundles or libraries added to the file system outside of Eclipse are not picked up automatically. <A HREF=\"update\" >Update the bundle and library index.</A>");
+				.setText(Messages.RepositoryBrowserEditorPage_NewBundlesMessage);
 		repoLink.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -632,7 +632,7 @@ public class RepositoryBrowserEditorPage extends ServerEditorPart {
 
 			public void run(final IProgressMonitor monitor) throws InvocationTargetException,
 					InterruptedException {
-				monitor.subTask("Refreshing installed Bundles and Libraries from file system");
+				monitor.subTask(Messages.RepositoryBrowserEditorPage_RefreshingBundlesSubTask);
 
 				ServerCorePlugin.getArtefactRepositoryManager().refreshBundleRepository(
 						getServer().getRuntime());
@@ -803,7 +803,7 @@ public class RepositoryBrowserEditorPage extends ServerEditorPart {
 				for (BundleArtefact bundle : repository.getBundles()) {
 					if (bundle instanceof LocalBundleArtefact) {
 						File file = ((LocalBundleArtefact) bundle).getFile().getParentFile();
-						if (file.getParentFile().getName().equals("subsystems")) {
+						if (file.getParentFile().getName().equals("subsystems")) { //$NON-NLS-1$
 							file = file.getParentFile();
 						}
 						if (bundles.containsKey(file)) {
@@ -876,7 +876,7 @@ public class RepositoryBrowserEditorPage extends ServerEditorPart {
 				if (fileName.startsWith(home)) {
 					fileName = fileName.substring(home.length() + 1);
 				}
-				return "Bundles - " + fileName;
+				return Messages.RepositoryBrowserEditorPage_BundlesLabelIntro + fileName;
 			}
 			else if (parentElement instanceof LocationAwareLibraries) {
 				String home = ServerUtils.getServerHome(getServer().getRuntime());
@@ -884,7 +884,7 @@ public class RepositoryBrowserEditorPage extends ServerEditorPart {
 				if (fileName.startsWith(home)) {
 					fileName = fileName.substring(home.length() + 1);
 				}
-				return "Libraries - " + fileName;
+				return Messages.RepositoryBrowserEditorPage_LibrariesLabelIntro + fileName;
 			}
 			return super.getText(parentElement);
 		}

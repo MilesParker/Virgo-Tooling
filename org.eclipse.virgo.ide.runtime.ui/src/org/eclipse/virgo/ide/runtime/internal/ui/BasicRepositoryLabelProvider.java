@@ -47,22 +47,22 @@ public class BasicRepositoryLabelProvider extends LabelProvider {
 	
 	public String getText(Object parentElement) {
 		if (parentElement instanceof Bundles) {
-			return "Bundles";
+			return Messages.BasicRepositoryLabelProvider_BundlesText;
 		}
 		else if (parentElement instanceof Libraries) {
-			return "Libraries";
+			return Messages.BasicRepositoryLabelProvider_BundlesLibrary;
 		}
 		else if (parentElement instanceof Artefact) {
 			Artefact version = (Artefact) parentElement;
 			StringBuilder l = new StringBuilder();
 			if (version.getName() != null) {
 				l.append(version.getName());
-				l.append(" - ");
+				l.append(" - "); //$NON-NLS-1$
 			}
 			l.append(version.getSymbolicName());
-			l.append(" (");
+			l.append(" ("); //$NON-NLS-1$
 			l.append(version.getVersion());
-			l.append(")");
+			l.append(")"); //$NON-NLS-1$
 			return l.toString();
 		}
 		return super.getText(parentElement);

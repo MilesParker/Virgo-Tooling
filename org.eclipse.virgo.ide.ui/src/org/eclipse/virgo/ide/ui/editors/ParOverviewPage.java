@@ -38,7 +38,6 @@ import org.eclipse.virgo.ide.export.ParExportWizard;
 import org.eclipse.virgo.ide.ui.ServerIdeUiPlugin;
 import org.springframework.ide.eclipse.beans.ui.graph.BeansGraphImages;
 
-
 /**
  * @author Christian Dupuis
  */
@@ -46,16 +45,16 @@ public class ParOverviewPage extends PDEFormPage implements IHyperlinkListener {
 
 	public static final String PAGE_ID = "par_overview"; //$NON-NLS-1$
 
-	private static final String BUNDLE_CONTENT_SECTION_TEXT = "<form><p>The content of the PAR is made up of one section:</p><li style=\"image\" value=\"page\" bindent=\"5\"><a href=\"dependencies\">Dependencies</a>: lists all the bundles required by this PAR to compile and run.</li></form>";
+	private static final String BUNDLE_CONTENT_SECTION_TEXT = org.eclipse.virgo.ide.ui.editors.Messages.ParOverviewPage_BundleContentSectionTitle;
 
 	private ParGeneralInfoSection fInfoSection;
 
-	private static String PAR_ACTION_SECTION_TEXT = "<form><p>Perform common actions on the PAR:</p>"
-			+ "<li style=\"image\" value=\"export\" bindent=\"5\"><a href=\"exportpar\">Export PAR</a>: export the contents of the PAR to a deployable JAR.</li>"
-			+ "</form>";
+	private static String PAR_ACTION_SECTION_TEXT = org.eclipse.virgo.ide.ui.editors.Messages.ParOverviewPage_ParActionText
+			+ org.eclipse.virgo.ide.ui.editors.Messages.ParOverviewPage_ParActionText2
+			+ org.eclipse.virgo.ide.ui.editors.Messages.ParOverviewPage_ParActionText3;
 
 	public ParOverviewPage(FormEditor editor) {
-		super(editor, PAGE_ID, "Overview");
+		super(editor, PAGE_ID, org.eclipse.virgo.ide.ui.editors.Messages.ParOverviewPage_Title);
 	}
 
 	@Override
@@ -63,7 +62,7 @@ public class ParOverviewPage extends PDEFormPage implements IHyperlinkListener {
 		super.createFormContent(managedForm);
 		ScrolledForm form = managedForm.getForm();
 		FormToolkit toolkit = managedForm.getToolkit();
-		form.setImage(ServerIdeUiPlugin.getImage("full/obj16/par_obj.gif"));
+		form.setImage(ServerIdeUiPlugin.getImage("full/obj16/par_obj.gif")); //$NON-NLS-1$
 		form.setText(PDEUIMessages.ManifestEditor_OverviewPage_title);
 		fillBody(managedForm, toolkit);
 	}
@@ -87,7 +86,7 @@ public class ParOverviewPage extends PDEFormPage implements IHyperlinkListener {
 
 	private void createParContentSection(IManagedForm managedForm, Composite parent, FormToolkit toolkit) {
 		String sectionTitle;
-		sectionTitle = "PAR Content";
+		sectionTitle = org.eclipse.virgo.ide.ui.editors.Messages.ParOverviewPage_ParSectionTitle;
 		Section section = createStaticSection(toolkit, parent, sectionTitle);
 
 		Composite container = createStaticSectionClient(toolkit, section);
@@ -100,13 +99,13 @@ public class ParOverviewPage extends PDEFormPage implements IHyperlinkListener {
 	}
 
 	private void createParActionSection(IManagedForm managedForm, Composite parent, FormToolkit toolkit) {
-		String sectionTitle = "PAR Actions";
+		String sectionTitle = org.eclipse.virgo.ide.ui.editors.Messages.ParOverviewPage_ParActionsTitle;
 		Section section = createStaticSection(toolkit, parent, sectionTitle);
 
 		Composite container = createStaticSectionClient(toolkit, section);
 
 		FormText text = createClient(container, PAR_ACTION_SECTION_TEXT, true, toolkit);
-		text.setImage("export", BeansGraphImages.getImage(BeansGraphImages.IMG_OBJS_EXPORT_ENABLED));
+		text.setImage("export", BeansGraphImages.getImage(BeansGraphImages.IMG_OBJS_EXPORT_ENABLED)); //$NON-NLS-1$
 		text.addHyperlinkListener(this);
 
 		section.setClient(container);
@@ -142,17 +141,17 @@ public class ParOverviewPage extends PDEFormPage implements IHyperlinkListener {
 	}
 
 	public void linkActivated(HyperlinkEvent e) {
-		if (e.getHref().equals("dependencies")) {
+		if (e.getHref().equals("dependencies")) { //$NON-NLS-1$
 			getEditor().setActivePage(ParXmlEditorPage.ID_EDITOR);
 		}
-		else if (e.getHref().equals("exportpar")) {
+		else if (e.getHref().equals("exportpar")) { //$NON-NLS-1$
 			Display.getDefault().asyncExec(new Runnable() {
 
 				public void run() {
 					ParExportWizard wizard = new ParExportWizard();
 					WizardDialog dialog = new WizardDialog(Display.getDefault().getActiveShell(), wizard);
-					wizard.init(PlatformUI.getWorkbench(), new StructuredSelection(new Object[] { fInfoSection
-							.getParProject() }));
+					wizard.init(PlatformUI.getWorkbench(),
+							new StructuredSelection(new Object[] { fInfoSection.getParProject() }));
 					dialog.open();
 				}
 			});

@@ -175,12 +175,12 @@ public class SpringBundleHyperlinkDetector implements IHyperlinkDetector {
 
 					// try to figure out the version range
 					String version = value.substring(upOffset + 1);
-					if (version.startsWith(";version=\"")) {
+					if (version.startsWith(";version=\"")) { //$NON-NLS-1$
 						version = version.substring(10);
 						int lastindex = version.indexOf('"');
 						version = version.substring(0, lastindex);
 					}
-					else if (version.startsWith(";bundle-version=\"")) {
+					else if (version.startsWith(";bundle-version=\"")) { //$NON-NLS-1$
 						version = version.substring(17);
 						int lastindex = version.indexOf('"');
 						version = version.substring(0, lastindex);

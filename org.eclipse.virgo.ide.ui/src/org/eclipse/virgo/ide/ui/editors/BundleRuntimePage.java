@@ -20,7 +20,6 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.pde.core.plugin.IPluginModelBase;
 import org.eclipse.pde.internal.ui.PDEPlugin;
 import org.eclipse.pde.internal.ui.PDEPluginImages;
-import org.eclipse.pde.internal.ui.PDEUIMessages;
 import org.eclipse.pde.internal.ui.editor.FormLayoutFactory;
 import org.eclipse.pde.internal.ui.editor.PDEFormPage;
 import org.eclipse.swt.SWT;
@@ -49,10 +48,10 @@ public class BundleRuntimePage extends PDEFormPage implements IBundleManifestSav
 
 	protected IResource resource = null;
 
-	private static final String MANIFEST_ERRORS = "Runtime: Please correct one or more errors in the manifest";
+	private static final String MANIFEST_ERRORS = Messages.BundleRuntimePage_CorrectErrorsMessage;
 
 	public BundleRuntimePage(FormEditor editor) {
-		super(editor, PAGE_ID, PDEUIMessages.RuntimePage_tabName);
+		super(editor, PAGE_ID, Messages.RuntimePage_tabName);
 	}
 
 	@Override
@@ -60,7 +59,7 @@ public class BundleRuntimePage extends PDEFormPage implements IBundleManifestSav
 		super.createFormContent(mform);
 		form = mform.getForm();
 		form.setImage(PDEPlugin.getDefault().getLabelProvider().get(PDEPluginImages.DESC_JAVA_LIB_OBJ));
-		form.setText(PDEUIMessages.ManifestEditor_RuntimeForm_title);
+		form.setText(Messages.ManifestEditor_RuntimeForm_title);
 
 		Composite body = form.getBody();
 		body.setLayout(FormLayoutFactory.createFormGridLayout(true, 2));
@@ -96,11 +95,11 @@ public class BundleRuntimePage extends PDEFormPage implements IBundleManifestSav
 			Job.getJobManager().join(ResourcesPlugin.FAMILY_AUTO_BUILD, null);
 		}
 		catch (OperationCanceledException e) {
-			StatusHandler.log(new Status(Status.ERROR, ServerIdeUiPlugin.PLUGIN_ID, "Could not update page title text",
+			StatusHandler.log(new Status(Status.ERROR, ServerIdeUiPlugin.PLUGIN_ID, Messages.BundleRuntimePage_CouldNotUpdateMessage,
 					e));
 		}
 		catch (InterruptedException e) {
-			StatusHandler.log(new Status(Status.ERROR, ServerIdeUiPlugin.PLUGIN_ID, "Could not update page title text",
+			StatusHandler.log(new Status(Status.ERROR, ServerIdeUiPlugin.PLUGIN_ID, Messages.BundleRuntimePage_CouldNotUpdateMessage,
 					e));
 		}
 
@@ -109,16 +108,16 @@ public class BundleRuntimePage extends PDEFormPage implements IBundleManifestSav
 				IMarker[] markers = resource.findMarkers(null, true, IResource.DEPTH_ZERO);
 				if (ManifestEditorUtils.hasErrorSeverityMarker(markers)) {
 					form.setText(MANIFEST_ERRORS);
-					form.setImage(ServerIdeUiPlugin.getImage("full/obj16/manifest_error.png"));
+					form.setImage(ServerIdeUiPlugin.getImage("full/obj16/manifest_error.png")); //$NON-NLS-1$
 				}
 				else {
-					form.setText(PDEUIMessages.ManifestEditor_RuntimeForm_title);
-					form.setImage(ServerIdeUiPlugin.getImage("full/obj16/osgi_obj.gif"));
+					form.setText(Messages.ManifestEditor_RuntimeForm_title);
+					form.setImage(ServerIdeUiPlugin.getImage("full/obj16/osgi_obj.gif")); //$NON-NLS-1$
 				}
 			}
 		}
 		catch (CoreException e) {
-			StatusHandler.log(new Status(Status.ERROR, ServerIdeUiPlugin.PLUGIN_ID, "Could not update page title text",
+			StatusHandler.log(new Status(Status.ERROR, ServerIdeUiPlugin.PLUGIN_ID, Messages.BundleRuntimePage_CouldNotUpdateMessage,
 					e));
 		}
 	}

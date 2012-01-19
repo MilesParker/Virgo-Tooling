@@ -24,7 +24,7 @@ import org.eclipse.virgo.ide.bundlor.ui.BundlorUiPlugin;
 public class BundlorStatePropertyTester extends PropertyTester {
 
 	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
-		if (receiver instanceof IResource && "isBundlorEnabled".equals(property)) {
+		if (receiver instanceof IResource && "isBundlorEnabled".equals(property)) { //$NON-NLS-1$
 			return BundlorUiPlugin.isBundlorBuilderEnabled((IResource) receiver);
 		}
 		return false;

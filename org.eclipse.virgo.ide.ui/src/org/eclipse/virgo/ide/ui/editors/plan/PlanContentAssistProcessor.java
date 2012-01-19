@@ -36,15 +36,15 @@ public class PlanContentAssistProcessor extends NamespaceContentAssistProcessorS
 
 	@Override
 	public void init() {
-		registerContentAssistCalculator("type", new TypeContentAssistCalculator());
-		registerContentAssistCalculator("name", new NameContentAssistCalculator());
-		registerContentAssistCalculator("version", new VersionContentAssistCalculator());
+		registerContentAssistCalculator("type", new TypeContentAssistCalculator()); //$NON-NLS-1$
+		registerContentAssistCalculator("name", new NameContentAssistCalculator()); //$NON-NLS-1$
+		registerContentAssistCalculator("version", new VersionContentAssistCalculator()); //$NON-NLS-1$
 	}
 
 	private static class TypeContentAssistCalculator implements IContentAssistCalculator {
 
 		private static final List<String> TYPES = Arrays
-				.asList(new String[] { "configuration", "bundle", "plan", "par" });
+				.asList(new String[] { "configuration", "bundle", "plan", "par" }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 
 		public void computeProposals(IContentAssistContext context, IContentAssistProposalRecorder recorder) {
 			String prefix = context.getMatchString();
@@ -60,12 +60,12 @@ public class PlanContentAssistProcessor extends NamespaceContentAssistProcessorS
 
 		public void computeProposals(IContentAssistContext context, IContentAssistProposalRecorder recorder) {
 			String prefix = context.getMatchString();
-			String type = BeansEditorUtils.getAttribute(context.getNode(), "type");
-			if (type == null || "bundle".equals(type)) {
+			String type = BeansEditorUtils.getAttribute(context.getNode(), "type"); //$NON-NLS-1$
+			if (type == null || "bundle".equals(type)) { //$NON-NLS-1$
 				Set<BundleArtefact> bundles = RepositoryUtils.getImportBundleProposals(context.getFile().getProject(),
 						prefix);
 				for (BundleArtefact bundle : bundles) {
-					recorder.recordProposal(ServerIdeUiPlugin.getImage("full/obj16/osgi_obj.gif"), 10, bundle
+					recorder.recordProposal(ServerIdeUiPlugin.getImage("full/obj16/osgi_obj.gif"), 10, bundle //$NON-NLS-1$
 							.getSymbolicName(), bundle.getSymbolicName());
 				}
 			}
@@ -76,9 +76,9 @@ public class PlanContentAssistProcessor extends NamespaceContentAssistProcessorS
 
 		public void computeProposals(IContentAssistContext context, IContentAssistProposalRecorder recorder) {
 			String prefix = context.getMatchString();
-			String bundleId = BeansEditorUtils.getAttribute(context.getNode(), "name");
-			String type = BeansEditorUtils.getAttribute(context.getNode(), "type");
-			if (type == null || "bundle".equals(type)) {
+			String bundleId = BeansEditorUtils.getAttribute(context.getNode(), "name"); //$NON-NLS-1$
+			String type = BeansEditorUtils.getAttribute(context.getNode(), "type"); //$NON-NLS-1$
+			if (type == null || "bundle".equals(type)) { //$NON-NLS-1$
 				Set<BundleArtefact> bundles = RepositoryUtils.getImportBundleProposals(context.getFile().getProject(),
 						bundleId);
 				for (BundleArtefact element : bundles) {

@@ -101,7 +101,7 @@ import org.eclipse.virgo.ide.ui.ServerIdeUiPlugin;
  */
 public class ParEditor extends SharedHeaderFormEditor implements ISelectionProvider {
 
-	public final static String EDITOR_ID = "org.eclipse.virgo.ide.par.ui.editor";
+	public final static String EDITOR_ID = Messages.ParEditor_0;
 
 	/**
 	 * This is the one adapter factory used for providing views of the model.
@@ -353,8 +353,8 @@ public class ParEditor extends SharedHeaderFormEditor implements ISelectionProvi
 	 * @generated
 	 */
 	protected void createContextMenuFor(StructuredViewer viewer) {
-		MenuManager contextMenu = new MenuManager("#PopUp");
-		contextMenu.add(new Separator("additions"));
+		MenuManager contextMenu = new MenuManager(Messages.ParEditor_1);
+		contextMenu.add(new Separator(Messages.ParEditor_2));
 		contextMenu.setRemoveAllWhenShown(true);
 		// contextMenu.addMenuListener(this);
 		Menu menu = contextMenu.createContextMenu(viewer.getControl());
@@ -798,8 +798,8 @@ public class ParEditor extends SharedHeaderFormEditor implements ISelectionProvi
 	 * @generated
 	 */
 	protected boolean handleDirtyConflict() {
-		return MessageDialog.openQuestion(getSite().getShell(), "File changed detected",
-				"The file has changed on disk. Discard changes and reload?");
+		return MessageDialog.openQuestion(getSite().getShell(), Messages.ParEditor_DirtyConflictTitle,
+				Messages.ParEditor_DirtyConflictMessage);
 	}
 
 	private void handleError(IOException exception) {

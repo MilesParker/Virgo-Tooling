@@ -49,9 +49,9 @@ public class ServerDeploymentDecorator implements ILightweightLabelDecorator {
 						}
 					}
 					if (deployed) {
-						decoration.addSuffix(" [Deployed]");
+						decoration.addSuffix(Messages.ServerDeploymentDecorator_DeployedDecoration);
 					} else {
-						decoration.addSuffix(" [Not Running]");
+						decoration.addSuffix(Messages.ServerDeploymentDecorator_NotRunningDecoration);
 					}
 				}
 			}

@@ -137,7 +137,7 @@ public class BundleTypeCompletionProposal implements ICompletionProposal, ICompl
 	 * (org.eclipse.jface.text.IDocument)
 	 */
 	public Point getSelection(IDocument document) {
-		if (fReplacementString.equals("\"\"")) {
+		if (fReplacementString.equals("\"\"")) { //$NON-NLS-1$
 			return new Point(fBeginInsertPoint + 1, 0);
 		}
 		return new Point(fBeginInsertPoint + fReplacementString.length(), 0);

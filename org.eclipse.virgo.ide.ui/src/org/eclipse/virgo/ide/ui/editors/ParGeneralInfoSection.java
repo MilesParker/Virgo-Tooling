@@ -121,7 +121,7 @@ public class ParGeneralInfoSection extends AbstractPdeGeneralInfoSection {
 
 	@Override
 	protected void createProviderEntry(Composite client, FormToolkit toolkit, IActionBars actionBars) {
-		fProviderEntry = new FormEntry(client, toolkit, "Description", null, false);
+		fProviderEntry = new FormEntry(client, toolkit, org.eclipse.virgo.ide.ui.editors.Messages.ParGeneralInfoSection_Title, null, false);
 		fProviderEntry.setFormEntryListener(new FormEntryAdapter(this, actionBars) {
 			@Override
 			public void textValueChanged(FormEntry entry) {
@@ -141,7 +141,7 @@ public class ParGeneralInfoSection extends AbstractPdeGeneralInfoSection {
 
 	@Override
 	protected String getSectionDescription() {
-		return "This section describes general information about this PAR";
+		return org.eclipse.virgo.ide.ui.editors.Messages.ParGeneralInfoSection_Description;
 	}
 
 	@Override

@@ -28,7 +28,7 @@ import org.eclipse.swt.widgets.Text;
  */
 public class WebModulePropertiesPage extends AbstractPropertiesPage {
 
-	protected static String ID_PAGE = "web.properties";
+	protected static String ID_PAGE = Messages.WebModulePropertiesPage_0;
 
 	private Label contextPathLabel;
 
@@ -43,10 +43,10 @@ public class WebModulePropertiesPage extends AbstractPropertiesPage {
 		Group propertiesGroup = new Group(container, SWT.NONE);
 		propertiesGroup.setLayout(new GridLayout(3, false));
 		propertiesGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		propertiesGroup.setText("Web Module Properties");
+		propertiesGroup.setText(Messages.WebModulePropertiesPage_Title);
 
 		contextPathLabel = new Label(propertiesGroup, SWT.NONE);
-		contextPathLabel.setText("Web-ContextPath");
+		contextPathLabel.setText(Messages.WebModulePropertiesPage_2);
 
 		contextPathText = new Text(propertiesGroup, SWT.BORDER | SWT.SINGLE);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.CENTER).grab(true, false).span(2, 1)
@@ -62,7 +62,7 @@ public class WebModulePropertiesPage extends AbstractPropertiesPage {
 
 	@Override
 	public String getModuleType() {
-		return "Web";
+		return Messages.WebModulePropertiesPage_3;
 	}
 
 }

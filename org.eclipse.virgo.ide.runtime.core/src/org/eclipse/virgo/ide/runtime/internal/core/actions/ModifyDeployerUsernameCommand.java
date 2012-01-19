@@ -33,7 +33,7 @@ public class ModifyDeployerUsernameCommand extends AbstractOperation {
 	private String newUsername;
 
 	public ModifyDeployerUsernameCommand(IServerWorkingCopy workingCopy, String username) {
-		super("Modify JMX server port");
+		super(Messages.ModifyDeployerUsernameCommand_Name);
 		this.workingCopy = workingCopy;
 		this.oldUsername = workingCopy.getMBeanServerUsername();
 		this.newUsername = username;

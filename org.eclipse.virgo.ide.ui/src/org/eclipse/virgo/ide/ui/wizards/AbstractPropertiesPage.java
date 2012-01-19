@@ -25,9 +25,9 @@ public abstract class AbstractPropertiesPage extends WizardPage {
 
 	public AbstractPropertiesPage(String name) {
 		super(name);
-		setTitle("Bundle Properties");
-		setDescription("Set the additional properties of the bundle. "
-				+ "You can modify the properties at any time in the MANIFEST.MF file.");
+		setTitle(Messages.AbstractPropertiesPage_Title);
+		setDescription(Messages.AbstractPropertiesPage_Description
+				+ Messages.AbstractPropertiesPage_Description2);
 	}
 
 	public void createControl(Composite parent) {

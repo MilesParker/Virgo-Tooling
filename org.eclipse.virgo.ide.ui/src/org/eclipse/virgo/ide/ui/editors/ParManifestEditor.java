@@ -76,7 +76,7 @@ import org.eclipse.virgo.ide.ui.StatusHandler;
  */
 public class ParManifestEditor extends BundleManifestEditor {
 
-	public static String ID_EDITOR = "org.eclipse.virgo.ide.ui.parmanifest";
+	public static String ID_EDITOR = Messages.ParManifestEditor_0;
 
 	protected ComposedAdapterFactory adapterFactory;
 
@@ -111,7 +111,7 @@ public class ParManifestEditor extends BundleManifestEditor {
 		}
 		catch (PartInitException e) {
 			StatusHandler
-					.log(new Status(IStatus.ERROR, ServerIdeUiPlugin.PLUGIN_ID, "Failed to create editor pages", e));
+					.log(new Status(IStatus.ERROR, ServerIdeUiPlugin.PLUGIN_ID, Messages.ParManifestEditor_FailedCreateMesssage, e));
 		}
 		addSourcePage(BundleInputContext.CONTEXT_ID);
 	}
@@ -133,7 +133,7 @@ public class ParManifestEditor extends BundleManifestEditor {
 			manifestFile = file;
 			parFile = FacetUtils.getParFile(project);
 		}
-		else if (name.equalsIgnoreCase("org.eclipse.virgo.ide.runtime.core.par.xml")) {
+		else if (name.equalsIgnoreCase(Messages.ParManifestEditor_2)) {
 			parFile = file;
 			manifestFile = container.getProject().getFile(new Path("META-INF/MANIFEST.MF")); //$NON-NLS-1$
 		}
@@ -169,9 +169,9 @@ public class ParManifestEditor extends BundleManifestEditor {
 		if (name.equals("manifest.mf")) { //$NON-NLS-1$
 			manifestFile = file;
 			File dir = file.getParentFile().getParentFile();
-			parFile = new File(dir, "org.eclipse.virgo.ide.runtime.core.par.xml");
+			parFile = new File(dir, Messages.ParManifestEditor_3);
 		}
-		else if (name.equals("org.eclipse.virgo.ide.runtime.core.par.xml")) {
+		else if (name.equals(Messages.ParManifestEditor_4)) {
 			parFile = file;
 			File dir = file.getParentFile();
 			manifestFile = new File(dir.getParentFile(), "META-INF/MANIFEST.MF"); //$NON-NLS-1$
@@ -286,7 +286,7 @@ public class ParManifestEditor extends BundleManifestEditor {
 
 	protected void addParPages() {
 		try {
-			addPage(new ParXmlEditorPage(this, "org.eclipse.virgo.ide.ui.editor.par.dependencies", "Dependencies"));
+			addPage(new ParXmlEditorPage(this, Messages.ParManifestEditor_5, Messages.ParManifestEditor_DependenciesLabel));
 		}
 		catch (PartInitException e) {
 			ServerIdeUiPlugin.getDefault().log(e);

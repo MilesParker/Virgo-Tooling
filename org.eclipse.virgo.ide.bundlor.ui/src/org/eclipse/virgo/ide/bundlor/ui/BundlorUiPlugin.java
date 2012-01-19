@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.progress.IProgressConstants;
@@ -38,9 +39,9 @@ import org.springframework.ide.eclipse.core.SpringCoreUtils;
  */
 public class BundlorUiPlugin extends AbstractUIPlugin {
 
-	public static final String PLUGIN_ID = "org.eclipse.virgo.ide.bundlor.ui";
+	public static final String PLUGIN_ID = "org.eclipse.virgo.ide.bundlor.ui"; //$NON-NLS-1$
 
-	public static final String JOB_FAMILY = "org.eclipse.virgo.ide.bundlor.ui.job.family";
+	public static final String JOB_FAMILY = "org.eclipse.virgo.ide.bundlor.ui.job.family"; //$NON-NLS-1$
 
 	private static BundlorUiPlugin plugin;
 
@@ -75,7 +76,7 @@ public class BundlorUiPlugin extends AbstractUIPlugin {
 	}
 
 	public static ImageDescriptor getImageDescriptor(String path) {
-		return imageDescriptorFromPlugin(PLUGIN_ID, "icons/" + path);
+		return imageDescriptorFromPlugin(PLUGIN_ID, "icons/" + path); //$NON-NLS-1$
 	}
 
 	public static void runBundlorOnProject(IJavaProject javaProject) {
@@ -88,10 +89,10 @@ public class BundlorUiPlugin extends AbstractUIPlugin {
 		private final IJavaProject javaProject;
 
 		public RunBundlorJob(IJavaProject javaProject) {
-			super("Generating MANIFEST.MF file for project '" + javaProject.getElementName() + "'");
+			super(NLS.bind(Messages.BundlorUiPlugin_GenerateManifest_Text, javaProject.getElementName()));
 			this.javaProject = javaProject;
 			setPriority(Job.BUILD);
-			setProperty(IProgressConstants.ICON_PROPERTY, BundlorUiPlugin.getImageDescriptor("full/obj16/osgi_obj.gif"));
+			setProperty(IProgressConstants.ICON_PROPERTY, BundlorUiPlugin.getImageDescriptor("full/obj16/osgi_obj.gif")); //$NON-NLS-1$
 			setProperty(IProgressConstants.KEEPONE_PROPERTY, true);
 		}
 

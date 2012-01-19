@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bundle-Name: Virgo Server Remote Management Bundle
+Bundle-Name: %Bundle-Name.0
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.virgo.ide.management.remote
 Bundle-Version: 1.0.0
@@ -15,5 +15,5 @@ Import-Package: org.osgi.framework,
  org.eclipse.osgi.framework.internal.core,
  org.eclipse.osgi.framework.console,
  org.eclipse.osgi.util
-Bundle-Vendor: SpringSource, a divison of VMware, Inc.
+Bundle-Vendor: %Bundle-Vendor.0
 Export-Package: org.eclipse.virgo.ide.management.remote

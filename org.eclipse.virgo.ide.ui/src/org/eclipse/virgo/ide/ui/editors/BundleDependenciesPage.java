@@ -33,7 +33,6 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.virgo.ide.ui.ServerIdeUiPlugin;
 import org.eclipse.virgo.ide.ui.StatusHandler;
 
-
 /**
  * @author Christian Dupuis
  */
@@ -51,10 +50,10 @@ public class BundleDependenciesPage extends PDEFormPage implements IBundleManife
 
 	protected IResource resource = null;
 
-	private static final String MANIFEST_ERRORS = "Dependencies: Please correct one or more errors in the manifest";
+	private static final String MANIFEST_ERRORS = org.eclipse.virgo.ide.ui.editors.Messages.BundleDependenciesPage_Description;
 
 	public BundleDependenciesPage(FormEditor editor) {
-		super(editor, PAGE_ID, "Dependencies");
+		super(editor, PAGE_ID, org.eclipse.virgo.ide.ui.editors.Messages.BundleDependenciesPage_Title);
 	}
 
 	@Override
@@ -99,8 +98,8 @@ public class BundleDependenciesPage extends PDEFormPage implements IBundleManife
 			Job.getJobManager().join(ResourcesPlugin.FAMILY_AUTO_BUILD, null);
 		}
 		catch (OperationCanceledException e) {
-			StatusHandler.log(new Status(Status.ERROR, ServerIdeUiPlugin.PLUGIN_ID,
-					"Could not update page title text", e));
+			StatusHandler.log(new Status(Status.ERROR, ServerIdeUiPlugin.PLUGIN_ID, org.eclipse.virgo.ide.ui.editors.Messages.BundleDependenciesPage_CantUpdateMessage,
+					e));
 		}
 		catch (InterruptedException e) {
 			// Nothing to do?
@@ -111,17 +110,17 @@ public class BundleDependenciesPage extends PDEFormPage implements IBundleManife
 				IMarker[] markers = resource.findMarkers(null, true, IResource.DEPTH_ZERO);
 				if (ManifestEditorUtils.hasErrorSeverityMarker(markers)) {
 					form.setText(MANIFEST_ERRORS);
-					form.setImage(ServerIdeUiPlugin.getImage("full/obj16/manifest_error.png"));
+					form.setImage(ServerIdeUiPlugin.getImage("full/obj16/manifest_error.png")); //$NON-NLS-1$
 				}
 				else {
 					form.setText(PDEUIMessages.DependenciesPage_title);
-					form.setImage(ServerIdeUiPlugin.getImage("full/obj16/osgi_obj.gif"));
+					form.setImage(ServerIdeUiPlugin.getImage("full/obj16/osgi_obj.gif")); //$NON-NLS-1$
 				}
 			}
 		}
 		catch (CoreException e) {
-			StatusHandler.log(new Status(Status.ERROR, ServerIdeUiPlugin.PLUGIN_ID,
-					"Could not update page title text", e));
+			StatusHandler.log(new Status(Status.ERROR, ServerIdeUiPlugin.PLUGIN_ID, org.eclipse.virgo.ide.ui.editors.Messages.BundleDependenciesPage_CantUpdateMessage,
+					e));
 		}
 
 	}

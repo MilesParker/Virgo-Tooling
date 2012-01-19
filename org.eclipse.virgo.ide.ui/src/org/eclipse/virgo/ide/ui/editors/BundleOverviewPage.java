@@ -66,7 +66,6 @@ import org.springframework.ide.eclipse.beans.ui.graph.BeansGraphImages;
 import org.springframework.ide.eclipse.core.SpringCoreUtils;
 import org.springframework.ide.eclipse.core.java.JdtUtils;
 
-
 /**
  * @author Christian Dupuis
  */
@@ -76,21 +75,21 @@ public class BundleOverviewPage extends PDEFormPage implements IHyperlinkListene
 
 	private BundleGeneralInfoSection fInfoSection;
 
-	private static final String BUNDLE_CONTENT_SECTION_TEXT = "<form><p>The content of the bundle is made up of two sections:</p><li style=\"image\" value=\"page\" bindent=\"5\"><a href=\"dependencies\">Dependencies</a>: lists all the bundles required on this bundle's classpath to compile and run.</li><li style=\"image\" value=\"page\" bindent=\"5\"><a href=\"runtime\">Runtime</a>: lists the packages that this bundle exports to other bundles.</li></form>";
+	private static final String BUNDLE_CONTENT_SECTION_TEXT = org.eclipse.virgo.ide.ui.editors.Messages.BundleOverviewPage_BundleSectionText;
 
-	private static final String BUNDLE_ACTION_SECTION_TEXT = "<form><p>Perform common actions on the bundle:</p>"
-			+ "<li style=\"image\" value=\"dependencies\" bindent=\"5\"><a href=\"refreshdependencies\">Refresh Bundle Dependencies</a>: refresh the Bundle Classpath Container to reflect changes in the MANIFEST.MF file.</li>"
-			+ "<li style=\"image\" value=\"export\" bindent=\"5\"><a href=\"exportbundle\">Export Bundle</a>: export the contents of the Bundle to a deployable JAR.</li>"
-			+ "</form>";
+	private static final String BUNDLE_ACTION_SECTION_TEXT = org.eclipse.virgo.ide.ui.editors.Messages.BundleOverviewPage_BundleActionSectionText
+			+ org.eclipse.virgo.ide.ui.editors.Messages.BundleOverviewPage_BundleActionSectionText2
+			+ org.eclipse.virgo.ide.ui.editors.Messages.BundleOverviewPage_BundleActionSectionText3
+			+ org.eclipse.virgo.ide.ui.editors.Messages.BundleOverviewPage_BundleActionSectionText4;
 
-	private static final String MANIFEST_ERRORS = "Overview: Please correct one or more errors in the manifest";
+	private static final String MANIFEST_ERRORS = org.eclipse.virgo.ide.ui.editors.Messages.BundleOverviewPage_ErrorsText;
 
 	protected ScrolledForm form = null;
 
 	protected IResource resource = null;
 
 	public BundleOverviewPage(FormEditor editor) {
-		super(editor, PAGE_ID, "Overview");
+		super(editor, PAGE_ID, org.eclipse.virgo.ide.ui.editors.Messages.BundleOverviewPage_Title);
 	}
 
 	@Override
@@ -100,7 +99,7 @@ public class BundleOverviewPage extends PDEFormPage implements IHyperlinkListene
 		resource = model.getUnderlyingResource();
 		form = managedForm.getForm();
 		FormToolkit toolkit = managedForm.getToolkit();
-		form.setImage(ServerIdeUiPlugin.getImage("full/obj16/osgi_obj.gif"));
+		form.setImage(ServerIdeUiPlugin.getImage("full/obj16/osgi_obj.gif")); //$NON-NLS-1$
 		form.setText(PDEUIMessages.ManifestEditor_OverviewPage_title);
 		fillBody(managedForm, toolkit);
 		updateFormText();
@@ -120,24 +119,24 @@ public class BundleOverviewPage extends PDEFormPage implements IHyperlinkListene
 				IMarker[] markers = resource.findMarkers(null, true, IResource.DEPTH_ZERO);
 				if (ManifestEditorUtils.hasErrorSeverityMarker(markers)) {
 					form.setText(MANIFEST_ERRORS);
-					form.setImage(ServerIdeUiPlugin.getImage("full/obj16/manifest_error.png"));
+					form.setImage(ServerIdeUiPlugin.getImage("full/obj16/manifest_error.png")); //$NON-NLS-1$
 				}
 				else {
 					form.setText(PDEUIMessages.ManifestEditor_OverviewPage_title);
-					form.setImage(ServerIdeUiPlugin.getImage("full/obj16/osgi_obj.gif"));
+					form.setImage(ServerIdeUiPlugin.getImage("full/obj16/osgi_obj.gif")); //$NON-NLS-1$
 				}
 			}
 			catch (OperationCanceledException e) {
 				StatusHandler.log(new Status(Status.ERROR, ServerIdeUiPlugin.PLUGIN_ID,
-						"Could not update page title text", e));
+						org.eclipse.virgo.ide.ui.editors.Messages.BundleOverviewPage_CouldNotUpdateTitleText, e));
 			}
 			catch (InterruptedException e) {
 				StatusHandler.log(new Status(Status.ERROR, ServerIdeUiPlugin.PLUGIN_ID,
-						"Could not update page title text", e));
+						org.eclipse.virgo.ide.ui.editors.Messages.BundleOverviewPage_CouldNotUpdateTitleText, e));
 			}
 			catch (CoreException e) {
 				StatusHandler.log(new Status(Status.ERROR, ServerIdeUiPlugin.PLUGIN_ID,
-						"Could not update page title text", e));
+						org.eclipse.virgo.ide.ui.editors.Messages.BundleOverviewPage_CouldNotUpdateTitleText, e));
 			}
 		}
 	}
@@ -163,7 +162,7 @@ public class BundleOverviewPage extends PDEFormPage implements IHyperlinkListene
 
 	private void createBundleContentSection(IManagedForm managedForm, Composite parent, FormToolkit toolkit) {
 		String sectionTitle;
-		sectionTitle = "Bundle Content";
+		sectionTitle = org.eclipse.virgo.ide.ui.editors.Messages.BundleOverviewPage_BundleContentLabel;
 		Section section = createStaticSection(toolkit, parent, sectionTitle);
 
 		Composite container = createStaticSectionClient(toolkit, section);
@@ -177,19 +176,19 @@ public class BundleOverviewPage extends PDEFormPage implements IHyperlinkListene
 
 	private void createBundleActionSection(IManagedForm managedForm, Composite parent, FormToolkit toolkit) {
 		String sectionTitle;
-		sectionTitle = "Bundle Actions";
+		sectionTitle = org.eclipse.virgo.ide.ui.editors.Messages.BundleOverviewPage_BundleActionsLabel;
 		Section section = createStaticSection(toolkit, parent, sectionTitle);
 
 		Composite container = createStaticSectionClient(toolkit, section);
 
 		FormText noteText = createClient(
 				container,
-				"<form><p>OSGi dependency meta data in the MANIFEST.MF file can automatically be updated based on dependencies expressed in source code artifacts.</p><p>Java source files, Spring XML configuration, JPA persistence.xml and Hibernate .hbm mapping files will be analysed. The process will create Import-Package and Export-Package headers.</p><li style=\"image\" value=\"manifest\" bindent=\"5\"><a href=\"generate\">Update MANIFEST.MF</a>: automatically generate MANIFEST.MF file based on dependencies in source code artifacts.</li></form>",
+				org.eclipse.virgo.ide.ui.editors.Messages.BundleOverviewPage_NoteMessage,
 				true, toolkit);
-		noteText.setImage("manifest", ServerIdeUiPlugin.getImage("full/obj16/osgi_obj.gif")); //$NON-NLS-1$
+		noteText.setImage("manifest", ServerIdeUiPlugin.getImage("full/obj16/osgi_obj.gif")); //$NON-NLS-1$ //$NON-NLS-2$
 		noteText.addHyperlinkListener(this);
 
-		Button button = toolkit.createButton(container, "Automatically update MANIFEST.MF file in background.",
+		Button button = toolkit.createButton(container, org.eclipse.virgo.ide.ui.editors.Messages.BundleOverviewPage_AutoUpdateCheckBox,
 				SWT.CHECK);
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -211,8 +210,8 @@ public class BundleOverviewPage extends PDEFormPage implements IHyperlinkListene
 					}
 				};
 				try {
-					PlatformUI.getWorkbench().getProgressService().runInUI(PDEPlugin.getActiveWorkbenchWindow(), op,
-							PDEPlugin.getWorkspace().getRoot());
+					PlatformUI.getWorkbench().getProgressService()
+							.runInUI(PDEPlugin.getActiveWorkbenchWindow(), op, PDEPlugin.getWorkspace().getRoot());
 				}
 				catch (InvocationTargetException e1) {
 				}
@@ -226,14 +225,14 @@ public class BundleOverviewPage extends PDEFormPage implements IHyperlinkListene
 		button.setLayoutData(data);
 		button.setSelection(isBundlorBuilderEnabled());
 
-		toolkit.createLabel(container, "");
+		toolkit.createLabel(container, ""); //$NON-NLS-1$
 
 		FormText text = createClient(container, BUNDLE_ACTION_SECTION_TEXT, true, toolkit);
 		PDELabelProvider lp = PDEPlugin.getDefault().getLabelProvider();
 		text.setImage("page", lp.get(PDEPluginImages.DESC_PAGE_OBJ, SharedLabelProvider.F_EDIT)); //$NON-NLS-1$
 		text.setImage(
 				"dependencies", JavaUI.getSharedImages().getImage(ISharedImages.IMG_OBJS_EXTERNAL_ARCHIVE_WITH_SOURCE)); //$NON-NLS-1$
-		text.setImage("export", BeansGraphImages.getImage(BeansGraphImages.IMG_OBJS_EXPORT_ENABLED));
+		text.setImage("export", BeansGraphImages.getImage(BeansGraphImages.IMG_OBJS_EXPORT_ENABLED)); //$NON-NLS-1$
 		text.addHyperlinkListener(this);
 
 		section.setClient(container);
@@ -282,39 +281,39 @@ public class BundleOverviewPage extends PDEFormPage implements IHyperlinkListene
 	}
 
 	public void linkActivated(HyperlinkEvent e) {
-		if (e.getHref().equals("dependencies")) {
+		if (e.getHref().equals("dependencies")) { //$NON-NLS-1$
 			getEditor().setActivePage(BundleDependenciesPage.PAGE_ID);
 		}
-		else if (e.getHref().equals("runtime")) {
+		else if (e.getHref().equals("runtime")) { //$NON-NLS-1$
 			getEditor().setActivePage(BundleRuntimePage.PAGE_ID);
 		}
-		else if (e.getHref().equals("refreshdependencies")) {
+		else if (e.getHref().equals("refreshdependencies")) { //$NON-NLS-1$
 			IRunnableWithProgress op = new WorkspaceModifyOperation() {
 				protected void execute(IProgressMonitor monitor) throws CoreException, InterruptedException {
-					ServerClasspathContainerUpdateJob.scheduleClasspathContainerUpdateJob(JdtUtils
-							.getJavaProject(resource), BundleManifestManager.IMPORTS_CHANGED);
+					ServerClasspathContainerUpdateJob.scheduleClasspathContainerUpdateJob(
+							JdtUtils.getJavaProject(resource), BundleManifestManager.IMPORTS_CHANGED);
 				}
 			};
 			try {
-				PlatformUI.getWorkbench().getProgressService().runInUI(PDEPlugin.getActiveWorkbenchWindow(), op,
-						PDEPlugin.getWorkspace().getRoot());
+				PlatformUI.getWorkbench().getProgressService()
+						.runInUI(PDEPlugin.getActiveWorkbenchWindow(), op, PDEPlugin.getWorkspace().getRoot());
 			}
 			catch (InvocationTargetException e1) {
 			}
 			catch (InterruptedException e1) {
 			}
 		}
-		else if (e.getHref().equals("generate")) {
+		else if (e.getHref().equals("generate")) { //$NON-NLS-1$
 			BundlorUiPlugin.runBundlorOnProject(JdtUtils.getJavaProject(resource));
 		}
-		else if (e.getHref().equals("exportbundle")) {
+		else if (e.getHref().equals("exportbundle")) { //$NON-NLS-1$
 			Display.getDefault().asyncExec(new Runnable() {
 
 				public void run() {
 					BundleExportWizard wizard = new BundleExportWizard();
 					WizardDialog dialog = new WizardDialog(Display.getDefault().getActiveShell(), wizard);
-					wizard.init(PlatformUI.getWorkbench(), new StructuredSelection(new Object[] { JdtUtils
-							.getJavaProject(resource) }));
+					wizard.init(PlatformUI.getWorkbench(),
+							new StructuredSelection(new Object[] { JdtUtils.getJavaProject(resource) }));
 					dialog.open();
 				}
 			});

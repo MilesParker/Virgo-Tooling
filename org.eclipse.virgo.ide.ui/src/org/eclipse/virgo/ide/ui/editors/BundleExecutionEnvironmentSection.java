@@ -70,7 +70,7 @@ import org.eclipse.ui.forms.widgets.TableWrapData;
 import org.osgi.framework.Constants;
 
 /**
- * Adapted from PDE's <code>ExcecutionEnvironmentSection</code>. * 
+ * Adapted from PDE's <code>ExcecutionEnvironmentSection</code>. *
  * @author Christian Dupuis
  * @author Steffen Pingel
  */

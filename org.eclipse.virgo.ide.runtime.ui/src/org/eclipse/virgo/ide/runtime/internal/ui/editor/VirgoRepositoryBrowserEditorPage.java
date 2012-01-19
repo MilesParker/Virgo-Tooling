@@ -30,7 +30,7 @@ public class VirgoRepositoryBrowserEditorPage extends RepositoryBrowserEditorPag
 	
 	@Override
 	protected String getServerName() {
-		return "Virgo Server";
+		return Messages.VirgoRepositoryBrowserEditorPage_VirgoServerName;
 	}
 
 }

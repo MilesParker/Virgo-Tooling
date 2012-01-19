@@ -32,7 +32,7 @@ class PdeCompatibilityUtil {
 		if (isEclipse34) {
 			Class<?> systemFileEditorInputClass;
 			try {
-				systemFileEditorInputClass = Class.forName("org.eclipse.pde.internal.ui.editor.SystemFileEditorInput");
+				systemFileEditorInputClass = Class.forName("org.eclipse.pde.internal.ui.editor.SystemFileEditorInput"); //$NON-NLS-1$
 				return systemFileEditorInputClass.isInstance(input);
 			}
 			catch (ClassNotFoundException e) {
@@ -40,7 +40,7 @@ class PdeCompatibilityUtil {
 			}
 			catch (Throwable e) {
 				SpringCore.log(new Status(IStatus.ERROR, ServerIdeUiPlugin.PLUGIN_ID,
-						"Failed to check fo instance of SystemFileEditorInput"));
+						"Failed to check fo instance of SystemFileEditorInput")); //$NON-NLS-1$
 				isEclipse34 = false;
 			}
 		}
@@ -55,7 +55,7 @@ class PdeCompatibilityUtil {
 		if (isEclipse34) {
 			Class<?> systemFileEditorInputClass;
 			try {
-				systemFileEditorInputClass = Class.forName("org.eclipse.pde.internal.ui.editor.SystemFileEditorInput");
+				systemFileEditorInputClass = Class.forName("org.eclipse.pde.internal.ui.editor.SystemFileEditorInput"); //$NON-NLS-1$
 				Constructor<?> constructor = systemFileEditorInputClass.getConstructor(File.class);
 				return (IEditorInput) constructor.newInstance(file);
 			}
@@ -64,7 +64,7 @@ class PdeCompatibilityUtil {
 			}
 			catch (Throwable e) {
 				SpringCore.log(new Status(IStatus.ERROR, ServerIdeUiPlugin.PLUGIN_ID,
-						"Failed to create instance of SystemFileEditorInput"));
+						"Failed to create instance of SystemFileEditorInput")); //$NON-NLS-1$
 				isEclipse34 = false;
 			}
 		}

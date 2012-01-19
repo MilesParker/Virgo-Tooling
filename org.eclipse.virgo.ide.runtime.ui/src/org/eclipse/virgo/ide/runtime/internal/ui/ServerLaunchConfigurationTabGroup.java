@@ -27,7 +27,7 @@ public class ServerLaunchConfigurationTabGroup extends AbstractLaunchConfigurati
 
 	public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
 		ILaunchConfigurationTab[] tabs = new ILaunchConfigurationTab[6];
-		tabs[0] = new ServerLaunchConfigurationTab(new String[] { "com.springsource.server.10", "com.springsource.server.20" });
+		tabs[0] = new ServerLaunchConfigurationTab(new String[] { "com.springsource.server.10", "com.springsource.server.20" }); //$NON-NLS-1$ //$NON-NLS-2$
 		tabs[0].setLaunchConfigurationDialog(dialog);
 		tabs[1] = new JavaArgumentsTab();
 		tabs[1].setLaunchConfigurationDialog(dialog);

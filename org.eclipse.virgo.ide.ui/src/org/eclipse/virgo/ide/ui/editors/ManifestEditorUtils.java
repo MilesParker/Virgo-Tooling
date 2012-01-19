@@ -60,7 +60,7 @@ public class ManifestEditorUtils {
 	public static boolean hasErrorSeverityMarker(IMarker[] markers) throws CoreException {
 
 		for (IMarker currMarker : markers) {
-			Integer severity = (Integer) currMarker.getAttribute("severity");
+			Integer severity = (Integer) currMarker.getAttribute("severity"); //$NON-NLS-1$
 			if (severity != null && severity.intValue() == 2) {
 				return true;
 			}

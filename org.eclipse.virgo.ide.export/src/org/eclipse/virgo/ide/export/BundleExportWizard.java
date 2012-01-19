@@ -35,7 +35,7 @@ public class BundleExportWizard extends Wizard implements IExportWizard {
 
 	private IStructuredSelection selection;
 
-	private static final String TITLE = "Bundle Export Wizard";
+	private static final String TITLE = Messages.BundleExportWizard_Title;
 	
 	@Override
 	public void addPages() {
@@ -49,7 +49,7 @@ public class BundleExportWizard extends Wizard implements IExportWizard {
 		IPath jarLocation = wizardPage.getJarLocation();
 		
 		if (jarLocation.toFile().exists() && ! wizardPage.getOverwrite()) {
-			boolean overwrite = MessageDialog.openQuestion(getShell(), "Overwrite File", "The file " + jarLocation.toOSString() + " already exists. Do you want to overwrite the existing file?");
+			boolean overwrite = MessageDialog.openQuestion(getShell(), Messages.BundleExportWizard_OverwriteTitle, Messages.BundleExportWizard_OverwriteMessageStart + jarLocation.toOSString() + Messages.BundleExportWizard_OverwriteMessageEnd);
 			if (! overwrite) {
 				return false;
 			}

@@ -55,7 +55,7 @@ public class BundleManifestContentAssistProcessor extends AbstractPdeManifestCon
 
 	static {
 		List<String> headers = new ArrayList<String>(Arrays.asList(fHeader));
-		ResourceBundle bundle = ResourceBundle.getBundle("org.eclipse.virgo.ide.ui.editors.text.headers");
+		ResourceBundle bundle = ResourceBundle.getBundle("org.eclipse.virgo.ide.ui.editors.text.headers"); //$NON-NLS-1$
 		Enumeration<String> values = bundle.getKeys();
 		while (values.hasMoreElements()) {
 			headers.add(values.nextElement());
@@ -188,7 +188,7 @@ public class BundleManifestContentAssistProcessor extends AbstractPdeManifestCon
 				Constants.RESOLUTION_DIRECTIVE.length())) {
 			return matchValueCompletion(currentValue.substring(equals + 1), new String[] {
 					Constants.RESOLUTION_MANDATORY, Constants.RESOLUTION_OPTIONAL }, new int[] { F_TYPE_VALUE,
-					F_TYPE_VALUE }, offset, "RESOLUTION_");
+					F_TYPE_VALUE }, offset, "RESOLUTION_"); //$NON-NLS-1$
 		}
 		if (Constants.VERSION_ATTRIBUTE.regionMatches(true, 0, attributeValue, 0, Constants.VERSION_ATTRIBUTE.length())) {
 			String pluginId = removeLeadingSpaces(currentValue.substring((comma == -1) ? 0 : comma + 1, semicolon));
@@ -288,7 +288,7 @@ public class BundleManifestContentAssistProcessor extends AbstractPdeManifestCon
 				Constants.RESOLUTION_DIRECTIVE.length())) {
 			return matchValueCompletion(currentValue.substring(equals + 1), new String[] {
 					Constants.RESOLUTION_MANDATORY, Constants.RESOLUTION_OPTIONAL }, new int[] { F_TYPE_VALUE,
-					F_TYPE_VALUE }, offset, "RESOLUTION_");
+					F_TYPE_VALUE }, offset, "RESOLUTION_"); //$NON-NLS-1$
 		}
 		if (IHeaderConstants.PROMOTES_DIRECTIVE.regionMatches(true, 0, attributeValue, 0,
 				IHeaderConstants.PROMOTES_DIRECTIVE.length())) {
@@ -344,7 +344,7 @@ public class BundleManifestContentAssistProcessor extends AbstractPdeManifestCon
 				Constants.RESOLUTION_DIRECTIVE.length())) {
 			return matchValueCompletion(currentValue.substring(equals + 1), new String[] {
 					Constants.RESOLUTION_MANDATORY, Constants.RESOLUTION_OPTIONAL }, new int[] { F_TYPE_VALUE,
-					F_TYPE_VALUE }, offset, "RESOLUTION_");
+					F_TYPE_VALUE }, offset, "RESOLUTION_"); //$NON-NLS-1$
 		}
 		if (Constants.VERSION_ATTRIBUTE.regionMatches(true, 0, attributeValue, 0, Constants.VERSION_ATTRIBUTE.length())) {
 			String pluginId = removeLeadingSpaces(currentValue.substring((comma == -1) ? 0 : comma + 1, semicolon));
@@ -398,13 +398,13 @@ public class BundleManifestContentAssistProcessor extends AbstractPdeManifestCon
 				Constants.VISIBILITY_DIRECTIVE.length())) {
 			return matchValueCompletion(currentValue.substring(equals + 1), new String[] {
 					Constants.VISIBILITY_PRIVATE, Constants.VISIBILITY_REEXPORT }, new int[] { F_TYPE_VALUE,
-					F_TYPE_VALUE }, offset, "VISIBILITY_");
+					F_TYPE_VALUE }, offset, "VISIBILITY_"); //$NON-NLS-1$
 		}
 		if (Constants.RESOLUTION_DIRECTIVE.regionMatches(true, 0, attributeValue, 0,
 				Constants.RESOLUTION_DIRECTIVE.length())) {
 			return matchValueCompletion(currentValue.substring(equals + 1), new String[] {
 					Constants.RESOLUTION_MANDATORY, Constants.RESOLUTION_OPTIONAL }, new int[] { F_TYPE_VALUE,
-					F_TYPE_VALUE }, offset, "RESOLUTION_");
+					F_TYPE_VALUE }, offset, "RESOLUTION_"); //$NON-NLS-1$
 		}
 		if (Constants.BUNDLE_VERSION_ATTRIBUTE.regionMatches(true, 0, attributeValue, 0,
 				Constants.RESOLUTION_DIRECTIVE.length())) {
@@ -443,7 +443,7 @@ public class BundleManifestContentAssistProcessor extends AbstractPdeManifestCon
 			return proposals.toArray(new ICompletionProposal[proposals.size()]);
 		}
 		else if (existingValue.length() == 0) {
-			return new ICompletionProposal[] { new BundleTypeCompletionProposal("\"\"", getImage(F_TYPE_VALUE), "\"\"",
+			return new ICompletionProposal[] { new BundleTypeCompletionProposal("\"\"", getImage(F_TYPE_VALUE), "\"\"", //$NON-NLS-1$ //$NON-NLS-2$
 					offset, 0) };
 		}
 		return new ICompletionProposal[0];
@@ -469,7 +469,7 @@ public class BundleManifestContentAssistProcessor extends AbstractPdeManifestCon
 			return proposals.toArray(new ICompletionProposal[proposals.size()]);
 		}
 		else if (existingValue.length() == 0) {
-			return new ICompletionProposal[] { new BundleTypeCompletionProposal("\"\"", getImage(F_TYPE_VALUE), "\"\"",
+			return new ICompletionProposal[] { new BundleTypeCompletionProposal("\"\"", getImage(F_TYPE_VALUE), "\"\"", //$NON-NLS-1$ //$NON-NLS-2$
 					offset, 0) };
 		}
 		return new ICompletionProposal[0];
@@ -477,7 +477,7 @@ public class BundleManifestContentAssistProcessor extends AbstractPdeManifestCon
 
 	private ICompletionProposal[] getPackageVersionCompletions(String packageId, String existingValue, int offset) {
 		Set<String> proposedVersions = new HashSet<String>();
-		boolean wildcard = packageId.endsWith(".*");
+		boolean wildcard = packageId.endsWith(".*"); //$NON-NLS-1$
 		packageId = getSymbolicName(packageId);
 		Set<PackageExport> packages = RepositoryUtils.getImportPackageProposals(getProject(), packageId);
 		if (packages.size() > 0) {
@@ -499,7 +499,7 @@ public class BundleManifestContentAssistProcessor extends AbstractPdeManifestCon
 			return proposals.toArray(new ICompletionProposal[proposals.size()]);
 		}
 		else if (existingValue.length() == 0) {
-			return new ICompletionProposal[] { new BundleTypeCompletionProposal("\"\"", getImage(F_TYPE_VALUE), "\"\"",
+			return new ICompletionProposal[] { new BundleTypeCompletionProposal("\"\"", getImage(F_TYPE_VALUE), "\"\"", //$NON-NLS-1$ //$NON-NLS-2$
 					offset, 0) };
 		}
 		return new ICompletionProposal[0];
@@ -510,13 +510,13 @@ public class BundleManifestContentAssistProcessor extends AbstractPdeManifestCon
 		versionStrings.add(version.toString());
 		List<String> versions = new ArrayList<String>();
 		for (String ver : RepositoryUtils.getVersionProposals(versionStrings)) {
-			versions.add(new StringBuilder().append("\"").append(ver).append("\"").toString());
+			versions.add(new StringBuilder().append("\"").append(ver).append("\"").toString()); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		return versions;
 	}
 
 	private String getSymbolicName(String string) {
-		if (string.endsWith(".*")) {
+		if (string.endsWith(".*")) { //$NON-NLS-1$
 			string = string.substring(0, string.length() - 2);
 		}
 		int ix = string.indexOf(';');

@@ -77,7 +77,7 @@ import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipse.ui.views.navigator.ResourceComparator;
 
 /**
- * Adapted from PDE's <code>LibrarySection</code>. 
+ * Adapted from PDE's <code>LibrarySection</code>.
  * @author Christian Dupuis
  */
 @SuppressWarnings("unchecked")
@@ -145,8 +145,8 @@ public class BundleLibrarySection extends TableSection implements IModelChangedL
 	}
 
 	private String getSectionDescription() {
-		return "Specify the libraries and folders that constitute the bundle classpath. "
-				+ "If unspecified, the classes and resources are assumed to be at the root of the bundle.";
+		return org.eclipse.virgo.ide.ui.editors.Messages.BundleLibrarySection_Description
+				+ org.eclipse.virgo.ide.ui.editors.Messages.BundleLibrarySection_Description2;
 	}
 
 	protected boolean isBundle() {
@@ -423,7 +423,7 @@ public class BundleLibrarySection extends TableSection implements IModelChangedL
 		IPluginModelBase pluginModel = getModel();
 		IPluginLibrary[] libraries = pluginModel.getPluginBase().getLibraries();
 		for (IPluginLibrary element : libraries) {
-			if (element.getName().equals(".")) {
+			if (element.getName().equals(".")) { //$NON-NLS-1$
 				return;
 			}
 		}

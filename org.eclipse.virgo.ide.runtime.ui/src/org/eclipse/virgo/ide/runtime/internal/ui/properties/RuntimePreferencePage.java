@@ -46,8 +46,7 @@ public class RuntimePreferencePage extends PropertyPage implements
 		entryTable.setLayout(layout);
 
 		Label label = new Label(entryTable, SWT.NONE);
-		label.setText("Use this preference page to enable loading of class and resource names\n"
-					+ "from the Bundle Repository Index so that they will be included in searches.");
+		label.setText(Messages.RuntimePreferencePage_Title);
 
 		Composite radioComposite = new Composite(entryTable, SWT.NONE);
 		radioComposite.setLayout(new GridLayout());
@@ -61,13 +60,13 @@ public class RuntimePreferencePage extends PropertyPage implements
 		radioComposite2.setLayout(layout);
 		radioComposite2.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		booleanEditor = new BooleanFieldEditor(ServerCorePlugin.PREF_LOAD_CLASSES_KEY,
-				"Load class and resource names", radioComposite2);
+				Messages.RuntimePreferencePage_LoadClassOption, radioComposite2);
 		booleanEditor.setPage(this);
 		booleanEditor.setPreferenceStore(getPreferenceStore());
 		booleanEditor.load();
 
 		Label noteLabel = new Label(radioComposite, SWT.NONE);
-		noteLabel.setText("Note: enabling this option will increase memory consumption.\nChanging the setting requires a restart to take effect.");
+		noteLabel.setText(Messages.RuntimePreferencePage_LoadClassNote);
 
 		return entryTable;
 
