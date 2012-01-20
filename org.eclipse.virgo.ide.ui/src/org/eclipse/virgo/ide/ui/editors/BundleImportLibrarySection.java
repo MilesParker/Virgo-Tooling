@@ -22,7 +22,6 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.window.Window;
 import org.eclipse.pde.internal.ui.PDEPlugin;
 import org.eclipse.pde.internal.ui.PDEPluginImages;
-import org.eclipse.pde.internal.ui.PDEUIMessages;
 import org.eclipse.pde.internal.ui.editor.PDEFormPage;
 import org.eclipse.pde.internal.ui.elements.DefaultTableProvider;
 import org.eclipse.pde.internal.ui.util.SWTUtil;
@@ -40,14 +39,13 @@ import org.eclipse.virgo.ide.manifest.core.editor.model.ImportLibraryHeader;
 import org.eclipse.virgo.ide.manifest.core.editor.model.ImportLibraryObject;
 import org.eclipse.virgo.ide.runtime.core.provisioning.RepositoryUtils;
 
-
 /**
  * @author Christian Dupuis
  * @author Leo Dos Santos
  */
 public class BundleImportLibrarySection extends AbstractImportSection {
 
-	private static final String DESCRIPTION = "Specify the list of libraries required for the operation of this bundle.";
+	private static final String DESCRIPTION = Messages.BundleImportLibrarySection_Description;
 
 	private static final int ADD_INDEX = 0;
 
@@ -58,10 +56,10 @@ public class BundleImportLibrarySection extends AbstractImportSection {
 	private static final int PROPERTIES_INDEX = 3;
 
 	public BundleImportLibrarySection(PDEFormPage page, Composite parent) {
-		super(page, parent, Section.DESCRIPTION, new String[] { PDEUIMessages.ImportPackageSection_add, "Download...",
-				PDEUIMessages.ImportPackageSection_remove, PDEUIMessages.ImportPackageSection_properties });
+		super(page, parent, Section.DESCRIPTION, new String[] { "",
+				Messages.BundleImportLibrarySection_DownloadButton, "", "" });
 
-		getSection().setText("Import Library");
+		getSection().setText(Messages.BundleImportLibrarySection_Title);
 		getSection().setDescription(DESCRIPTION);
 		getTablePart().setEditable(false);
 	}
@@ -93,11 +91,11 @@ public class BundleImportLibrarySection extends AbstractImportSection {
 		IProject project = ((BundleManifestEditor) this.getPage().getEditor()).getCommonProject();
 		Collection<LibraryArtefact> libraries = null;
 		if (addRemote) {
-			ArtefactRepository bundleRepository = RepositoryUtils.searchForArtifacts("", false, true);
+			ArtefactRepository bundleRepository = RepositoryUtils.searchForArtifacts("", false, true); //$NON-NLS-1$
 			libraries = bundleRepository.getLibraries();
 		}
 		else {
-			libraries = RepositoryUtils.getImportLibraryProposals(project, "");
+			libraries = RepositoryUtils.getImportLibraryProposals(project, ""); //$NON-NLS-1$
 			removeExistingLibraries(libraries);
 		}
 		dialog.setElements(libraries.toArray());
@@ -136,8 +134,8 @@ public class BundleImportLibrarySection extends AbstractImportSection {
 			public void run() {
 				setElements(dialog, addRemote);
 				dialog.setMultipleSelection(true);
-				dialog.setTitle("Library Selection");
-				dialog.setMessage("Select a Library:");
+				dialog.setTitle(Messages.BundleImportLibrarySection_SelectionDialogTitle);
+				dialog.setMessage(Messages.BundleImportLibrarySection_SelectionDialogMessage);
 				dialog.create();
 				SWTUtil.setDialogSize(dialog, 400, 500);
 			}
@@ -164,7 +162,7 @@ public class BundleImportLibrarySection extends AbstractImportSection {
 		for (Object currSelectedElement : selected) {
 			LibraryArtefact currBundle = (LibraryArtefact) currSelectedElement;
 			if (null == importLibraryHeader) {
-				getBundle().setHeader(IHeaderConstants.IMPORT_LIBRARY, "");
+				getBundle().setHeader(IHeaderConstants.IMPORT_LIBRARY, ""); //$NON-NLS-1$
 				importLibraryHeader = (ImportLibraryHeader) getBundle().getManifestHeader(
 						IHeaderConstants.IMPORT_LIBRARY);
 			}
@@ -172,9 +170,9 @@ public class BundleImportLibrarySection extends AbstractImportSection {
 			String versionString = null;
 			OsgiVersion osgiVers = currBundle.getVersion();
 			if (osgiVers.getMajor() != 0 || osgiVers.getMinor() != 0 || osgiVers.getService() != 0
-					|| (osgiVers.getQualifier() != null && !osgiVers.getQualifier().trim().equals(""))) {
-				versionString = "[" + currBundle.getVersion().toString() + "," + currBundle.getVersion().toString()
-						+ "]";
+					|| (osgiVers.getQualifier() != null && !osgiVers.getQualifier().trim().equals(""))) { //$NON-NLS-1$
+				versionString = "[" + currBundle.getVersion().toString() + "," + currBundle.getVersion().toString() //$NON-NLS-1$ //$NON-NLS-2$
+						+ "]"; //$NON-NLS-1$
 			}
 			importLibraryHeader.addLibrary(currBundle.getSymbolicName(), versionString);
 		}
@@ -197,7 +195,7 @@ public class BundleImportLibrarySection extends AbstractImportSection {
 		for (Object currSelectedElement : selected) {
 			LibraryArtefact currLibrary = (LibraryArtefact) currSelectedElement;
 			if (null == importLibraryHeader) {
-				getBundle().setHeader(IHeaderConstants.IMPORT_LIBRARY, "");
+				getBundle().setHeader(IHeaderConstants.IMPORT_LIBRARY, ""); //$NON-NLS-1$
 				importLibraryHeader = (ImportLibraryHeader) getBundle().getManifestHeader(
 						IHeaderConstants.IMPORT_LIBRARY);
 			}
@@ -205,8 +203,8 @@ public class BundleImportLibrarySection extends AbstractImportSection {
 			String versionString = null;
 			OsgiVersion osgiVers = currLibrary.getVersion();
 			if (osgiVers.getMajor() != 0 || osgiVers.getMinor() != 0 || osgiVers.getService() != 0
-					|| (osgiVers.getQualifier() != null && !osgiVers.getQualifier().trim().equals(""))) {
-				versionString = "[" + currLibrary.getVersion().toString() + "," + currLibrary.getVersion().toString()
+					|| (osgiVers.getQualifier() != null && !osgiVers.getQualifier().trim().equals(""))) { //$NON-NLS-1$
+				versionString = "[" + currLibrary.getVersion().toString() + "," + currLibrary.getVersion().toString() //$NON-NLS-1$
 						+ "]";
 			}
 
@@ -320,7 +318,7 @@ public class BundleImportLibrarySection extends AbstractImportSection {
 			dialog.setTitle(((ImportLibraryObject) selected[0]).getValue());
 		}
 		else {
-			dialog.setTitle("Properties");
+			dialog.setTitle(Messages.BundleImportLibrarySection_PropertiesDialogTitle);
 		}
 		if (dialog.open() == Window.OK && isEditable()) {
 			String newVersion = dialog.getVersion();

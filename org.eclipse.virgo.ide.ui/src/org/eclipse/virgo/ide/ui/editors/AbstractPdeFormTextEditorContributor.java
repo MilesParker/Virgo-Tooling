@@ -42,7 +42,6 @@ import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
 import org.eclipse.ui.texteditor.RetargetTextEditorAction;
 import org.eclipse.virgo.ide.ui.internal.actions.ManifestFormatAction;
 
-
 /**
  * @author Christian Dupuis
  */

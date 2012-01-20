@@ -47,8 +47,8 @@ public class ParDependenciesSection extends DependenciesSection {
 		super(page, parent, buttonLabels);
 		this.page = page;
 		initialize();
-		getSection().setText("Nested Bundles");
-		getSection().setDescription("Add or remove bundle dependencies to the PAR.");
+		getSection().setText(Messages.ParDependenciesSection_Title);
+		getSection().setDescription(Messages.ParDependenciesSection_Description);
 	}
 
 	@Override

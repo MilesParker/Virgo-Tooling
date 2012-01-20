@@ -26,11 +26,11 @@ import org.osgi.framework.BundleContext;
 public class ServerUiPlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "org.eclipse.virgo.ide.runtime.ui";
+	public static final String PLUGIN_ID = "org.eclipse.virgo.ide.runtime.ui"; //$NON-NLS-1$
 
-	private static final String RESOURCE_NAME = "org.eclipse.virgo.ide.runtime.internal.ui.messages";
+	private static final String RESOURCE_NAME = "org.eclipse.virgo.ide.runtime.internal.ui.messages"; //$NON-NLS-1$
 
-	public static final String PREF_DOWNLOAD_MESSAGE_KEY = PLUGIN_ID + "..download.message";
+	public static final String PREF_DOWNLOAD_MESSAGE_KEY = PLUGIN_ID + "..download.message"; //$NON-NLS-1$
 
 	// The shared instance
 	private static ServerUiPlugin plugin;
@@ -101,7 +101,7 @@ public class ServerUiPlugin extends AbstractUIPlugin {
 	}
 
 	public static void log(Throwable exception) {
-		getDefault().getLog().log(createErrorStatus("Internal Error", exception));
+		getDefault().getLog().log(createErrorStatus(Messages.ServerUiPlugin_InternalErrorMessage, exception));
 	}
 
 	/**
@@ -109,7 +109,7 @@ public class ServerUiPlugin extends AbstractUIPlugin {
 	 */
 	public static IStatus createErrorStatus(String message, Throwable exception) {
 		if (message == null) {
-			message = "";
+			message = ""; //$NON-NLS-1$
 		}
 		return new Status(IStatus.ERROR, PLUGIN_ID, 0, message, exception);
 	}
@@ -126,11 +126,11 @@ public class ServerUiPlugin extends AbstractUIPlugin {
 			}
 			catch (MissingResourceException e) {
 				log(e);
-				bundleString = "!" + key + "!";
+				bundleString = "!" + key + "!"; //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
 		else {
-			bundleString = "!" + key + "!";
+			bundleString = "!" + key + "!"; //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		return bundleString;
 	}

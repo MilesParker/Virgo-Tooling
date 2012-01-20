@@ -64,7 +64,7 @@ public class WebUiUtils {
 							| IWorkbenchBrowserSupport.NAVIGATION_BAR;
 				}
 
-				String generatedId = "org.eclipse.mylyn.web.browser-"
+				String generatedId = "org.eclipse.mylyn.web.browser-" //$NON-NLS-1$
 						+ Calendar.getInstance().getTimeInMillis();
 				browser = WorkbenchBrowserSupport.getInstance().createBrowser(flags, generatedId,
 						null, null);
@@ -72,8 +72,8 @@ public class WebUiUtils {
 			}
 		}
 		catch (PartInitException e) {
-			MessageDialog.openError(Display.getDefault().getActiveShell(), "Browser init error",
-					"Browser could not be initiated");
+			MessageDialog.openError(Display.getDefault().getActiveShell(), Messages.WebUiUtils_BrowserErrorMessage,
+					Messages.WebUiUtils_BrowserErrorDescription);
 		}
 		catch (MalformedURLException e) {
 		}

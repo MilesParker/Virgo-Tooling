@@ -145,8 +145,8 @@ public class BundleLibrarySection extends TableSection implements IModelChangedL
 	}
 
 	private String getSectionDescription() {
-		return "Specify the libraries and folders that constitute the bundle classpath. "
-				+ "If unspecified, the classes and resources are assumed to be at the root of the bundle.";
+		return org.eclipse.virgo.ide.ui.editors.PDEUIMessages.BundleLibrarySection_SpecifyLibrariesMessage
+				+ org.eclipse.virgo.ide.ui.editors.PDEUIMessages.BundleLibrarySection_SpecifyLibrariesMessage2;
 	}
 
 	protected boolean isBundle() {
@@ -423,7 +423,7 @@ public class BundleLibrarySection extends TableSection implements IModelChangedL
 		IPluginModelBase pluginModel = getModel();
 		IPluginLibrary[] libraries = pluginModel.getPluginBase().getLibraries();
 		for (IPluginLibrary element : libraries) {
-			if (element.getName().equals(".")) {
+			if (element.getName().equals(org.eclipse.virgo.ide.ui.editors.PDEUIMessages.BundleLibrarySection_SpecifyLibrariesMessage3)) {
 				return;
 			}
 		}

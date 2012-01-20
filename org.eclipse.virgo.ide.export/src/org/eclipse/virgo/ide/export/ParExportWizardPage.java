@@ -39,10 +39,10 @@ import org.eclipse.virgo.util.osgi.manifest.BundleManifestFactory;
 public class ParExportWizardPage extends AbstractProjectExportWizardPage {
 
 	protected ParExportWizardPage(IStructuredSelection selection) {
-		super("parExportWizardPage", selection);
+		super("parExportWizardPage", selection); //$NON-NLS-1$
 
-		setTitle("JAR File Specification");
-		setDescription("Define which PAR project should be exported into the JAR.");
+		setTitle(Messages.ParExportWizardPage_JarFIleSpecTitle);
+		setDescription(Messages.ParExportWizardPage_JarFIleSpecMessage);
 	}
 
 	@Override
@@ -124,27 +124,27 @@ public class ParExportWizardPage extends AbstractProjectExportWizardPage {
 
 	@Override
 	protected String getExtension() {
-		return ".par";
+		return Messages.ParExportWizardPage_PAR_EXTENSION;
 	}
 
 	@Override
 	protected String getDestinationLabel() {
-		return "PAR file:";
+		return Messages.ParExportWizardPage_ParFileName;
 	}
 
 	@Override
 	protected String getSymbolicName(BundleManifest bundleManifest) {
-		return bundleManifest.toDictionary().get("Application-SymbolicName");
+		return bundleManifest.toDictionary().get("Application-SymbolicName"); //$NON-NLS-1$
 	}
 
 	@Override
 	protected String getVersion(BundleManifest bundleManifest) {
-		return bundleManifest.toDictionary().get("Application-Version");
+		return bundleManifest.toDictionary().get("Application-Version"); //$NON-NLS-1$
 	}
 
 	@Override
 	protected BundleManifest getBundleManifest(IProject project) {
-		Path path = new Path("META-INF/MANIFEST.MF");
+		Path path = new Path("META-INF/MANIFEST.MF"); //$NON-NLS-1$
 		IFile manifestFile = (IFile) project.findMember(path);
 		if (manifestFile != null) {
 			try {

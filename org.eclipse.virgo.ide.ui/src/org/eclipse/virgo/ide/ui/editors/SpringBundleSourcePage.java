@@ -85,7 +85,7 @@ import org.springframework.util.ReflectionUtils;
  */
 public class SpringBundleSourcePage extends BundleSourcePage {
 
-	private final String ID_CONTEXT_MENU = "org.eclipse.virgo.ide.bundlemanifest.text.menu";
+	private final String ID_CONTEXT_MENU = "org.eclipse.virgo.ide.bundlemanifest.text.menu"; //$NON-NLS-1$
 
 	private IFoldingStructureProvider fFoldingStructureProvider;
 
@@ -231,7 +231,7 @@ public class SpringBundleSourcePage extends BundleSourcePage {
 	@Override
 	public IDocumentRange findRange() {
 		try {
-			java.lang.reflect.Field field = ReflectionUtils.findField(this.getClass(), "fSelection", Object.class);
+			java.lang.reflect.Field field = ReflectionUtils.findField(this.getClass(), "fSelection", Object.class); //$NON-NLS-1$
 			field.setAccessible(true);
 			Object selection = field.get(this);
 
@@ -438,7 +438,7 @@ public class SpringBundleSourcePage extends BundleSourcePage {
 			}
 			else if (obj instanceof ManifestHeader) {
 				if (isSpringHeader(((ManifestHeader) obj).getKey())) {
-					return labelProvider.get(ServerIdeUiPlugin.getImageDescriptor("full/view16/green_ball_obj.gif"));
+					return labelProvider.get(ServerIdeUiPlugin.getImageDescriptor("full/view16/green_ball_obj.gif")); //$NON-NLS-1$
 				}
 				return labelProvider.get(PDEPluginImages.DESC_BUILD_VAR_OBJ);
 			}
@@ -450,7 +450,7 @@ public class SpringBundleSourcePage extends BundleSourcePage {
 	}
 
 	private boolean isSpringHeader(String key) {
-		ResourceBundle bundle = ResourceBundle.getBundle("org.eclipse.virgo.ide.ui.editors.text.headers");
+		ResourceBundle bundle = ResourceBundle.getBundle("org.eclipse.virgo.ide.ui.editors.text.headers"); //$NON-NLS-1$
 		List<String> headers = Collections.list(bundle.getKeys());
 		return headers.contains(key);
 	}

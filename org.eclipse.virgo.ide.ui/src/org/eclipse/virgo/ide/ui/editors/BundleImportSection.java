@@ -22,7 +22,6 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.window.Window;
 import org.eclipse.pde.internal.ui.PDEPlugin;
 import org.eclipse.pde.internal.ui.PDEPluginImages;
-import org.eclipse.pde.internal.ui.PDEUIMessages;
 import org.eclipse.pde.internal.ui.editor.PDEFormPage;
 import org.eclipse.pde.internal.ui.elements.DefaultTableProvider;
 import org.eclipse.pde.internal.ui.util.SWTUtil;
@@ -47,7 +46,7 @@ import org.eclipse.virgo.ide.runtime.core.provisioning.RepositoryUtils;
  */
 public class BundleImportSection extends AbstractImportSection {
 
-	private static final String DESCRIPTION = "Specify the list of bundles required for the operation of this bundle.";
+	private static final String DESCRIPTION = Messages.BundleImportSection_Description;
 
 	private static final int ADD_INDEX = 0;
 
@@ -58,10 +57,10 @@ public class BundleImportSection extends AbstractImportSection {
 	private static final int PROPERTIES_INDEX = 3;
 
 	public BundleImportSection(PDEFormPage page, Composite parent) {
-		super(page, parent, Section.DESCRIPTION, new String[] { PDEUIMessages.ImportPackageSection_add, "Download...",
-				PDEUIMessages.ImportPackageSection_remove, PDEUIMessages.ImportPackageSection_properties });
+		super(page, parent, Section.DESCRIPTION, new String[] { "", Messages.BundleImportSection_DownloadButton, //$NON-NLS-1$
+				"", "" }); //$NON-NLS-1$ //$NON-NLS-1$
 
-		getSection().setText("Import Bundle");
+		getSection().setText(Messages.BundleImportSection_Title);
 		getSection().setDescription(DESCRIPTION);
 		getTablePart().setEditable(false);
 	}
@@ -93,11 +92,11 @@ public class BundleImportSection extends AbstractImportSection {
 		IProject project = ((BundleManifestEditor) this.getPage().getEditor()).getCommonProject();
 		Collection<BundleArtefact> bundles = null;
 		if (addRemote) {
-			ArtefactRepository bundleRepository = RepositoryUtils.searchForArtifacts("", true, false);
+			ArtefactRepository bundleRepository = RepositoryUtils.searchForArtifacts(Messages.BundleImportSection_3, true, false);
 			bundles = bundleRepository.getBundles();
 		}
 		else {
-			bundles = RepositoryUtils.getImportBundleProposals(project, "");
+			bundles = RepositoryUtils.getImportBundleProposals(project, Messages.BundleImportSection_4);
 			removeExistingImports(bundles);
 		}
 
@@ -137,8 +136,8 @@ public class BundleImportSection extends AbstractImportSection {
 			public void run() {
 				setElements(dialog, addRemote);
 				dialog.setMultipleSelection(true);
-				dialog.setTitle("Bundle Selection");
-				dialog.setMessage("Select a Bundle:");
+				dialog.setTitle(Messages.BundleImportSection_SelectionTitle);
+				dialog.setMessage(Messages.BundleImportSection_SelectionMessage);
 				dialog.create();
 				SWTUtil.setDialogSize(dialog, 400, 500);
 			}
@@ -165,16 +164,16 @@ public class BundleImportSection extends AbstractImportSection {
 		for (Object currSelectedElement : selected) {
 			BundleArtefact currBundle = (BundleArtefact) currSelectedElement;
 			if (null == importBundleHeader) {
-				getBundle().setHeader(IHeaderConstants.IMPORT_BUNDLE, "");
+				getBundle().setHeader(IHeaderConstants.IMPORT_BUNDLE, ""); //$NON-NLS-1$
 				importBundleHeader = (ImportBundleHeader) getBundle().getManifestHeader(IHeaderConstants.IMPORT_BUNDLE);
 			}
 
 			String versionString = null;
 			OsgiVersion osgiVers = currBundle.getVersion();
 			if (osgiVers.getMajor() != 0 || osgiVers.getMinor() != 0 || osgiVers.getService() != 0
-					|| (osgiVers.getQualifier() != null && !osgiVers.getQualifier().trim().equals(""))) {
-				versionString = "[" + currBundle.getVersion().toString() + "," + currBundle.getVersion().toString()
-						+ "]";
+					|| (osgiVers.getQualifier() != null && !osgiVers.getQualifier().trim().equals(""))) { //$NON-NLS-1$
+				versionString = "[" + currBundle.getVersion().toString() + "," + currBundle.getVersion().toString() //$NON-NLS-1$ //$NON-NLS-2$
+						+ "]"; //$NON-NLS-1$
 			}
 			importBundleHeader.addBundle(currBundle.getSymbolicName(), versionString);
 		}
@@ -197,16 +196,16 @@ public class BundleImportSection extends AbstractImportSection {
 		for (Object currSelectedElement : selected) {
 			BundleArtefact currBundle = (BundleArtefact) currSelectedElement;
 			if (null == importBundleHeader) {
-				getBundle().setHeader(IHeaderConstants.IMPORT_BUNDLE, "");
+				getBundle().setHeader(IHeaderConstants.IMPORT_BUNDLE, ""); //$NON-NLS-1$
 				importBundleHeader = (ImportBundleHeader) getBundle().getManifestHeader(IHeaderConstants.IMPORT_BUNDLE);
 			}
 
 			String versionString = null;
 			OsgiVersion osgiVers = currBundle.getVersion();
 			if (osgiVers.getMajor() != 0 || osgiVers.getMinor() != 0 || osgiVers.getService() != 0
-					|| (osgiVers.getQualifier() != null && !osgiVers.getQualifier().trim().equals(""))) {
-				versionString = "[" + currBundle.getVersion().toString() + "," + currBundle.getVersion().toString()
-						+ "]";
+					|| (osgiVers.getQualifier() != null && !osgiVers.getQualifier().trim().equals(""))) { //$NON-NLS-1$
+				versionString = "[" + currBundle.getVersion().toString() + "," + currBundle.getVersion().toString() //$NON-NLS-1$ //$NON-NLS-2$
+						+ "]"; //$NON-NLS-1$
 			}
 
 			if (importBundleHeader.hasElement(currBundle.getSymbolicName())) {
@@ -252,7 +251,7 @@ public class BundleImportSection extends AbstractImportSection {
 			BundleArtefact bundleArtifact = (BundleArtefact) element;
 			String label = bundleArtifact.getSymbolicName();
 			if (null != bundleArtifact.getVersion()) {
-				label += " " + bundleArtifact.getVersion();
+				label += " " + bundleArtifact.getVersion(); //$NON-NLS-1$
 			}
 			return label;
 		}
@@ -270,7 +269,7 @@ public class BundleImportSection extends AbstractImportSection {
 			ImportBundleObject importBundleObject = (ImportBundleObject) element;
 			String label = importBundleObject.getValue();
 			if (null != importBundleObject.getVersion()) {
-				label += " " + importBundleObject.getVersion();
+				label += " " + importBundleObject.getVersion(); //$NON-NLS-1$
 			}
 			return label;
 		}
@@ -318,7 +317,7 @@ public class BundleImportSection extends AbstractImportSection {
 			dialog.setTitle(((ImportBundleObject) selected[0]).getValue());
 		}
 		else {
-			dialog.setTitle("Properties");
+			dialog.setTitle(Messages.BundleImportSection_ProeprtiesName);
 		}
 		if (dialog.open() == Window.OK && isEditable()) {
 			String newVersion = dialog.getVersion();

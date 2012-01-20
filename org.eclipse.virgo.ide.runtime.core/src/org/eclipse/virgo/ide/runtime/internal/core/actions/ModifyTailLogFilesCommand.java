@@ -33,7 +33,7 @@ public class ModifyTailLogFilesCommand extends AbstractOperation {
 	private boolean newValue;
 
 	public ModifyTailLogFilesCommand(IServerWorkingCopy workingCopy, boolean newValue) {
-		super("Modify Tail Log Files");
+		super(Messages.ModifyTailLogFilesCommand_Name);
 		this.workingCopy = workingCopy;
 		this.oldValue = workingCopy.shouldTailTraceFiles();
 		this.newValue = newValue;

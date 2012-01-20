@@ -126,7 +126,7 @@ public class TestSourceFolderPreferencePage extends PropertyPage {
 	private void initialize() {
 		project = (IProject) getElement().getAdapter(IResource.class);
 		noDefaultAndApplyButton();
-		setDescription("Select Java source folders that contain unit and integration test classes.\nThe contents of those test folders will not get deployed to any server runtime.");
+		setDescription(Messages.TestSourceFolderPreferencePage_SelectJavaFoldersMessage);
 	}
 
 	public boolean performOk() {
@@ -169,9 +169,9 @@ public class TestSourceFolderPreferencePage extends PropertyPage {
 
 	private IClasspathAttribute getClasspathAttribute(IClasspathEntry entry) {
 		IClasspathAttribute testFolderAttribute = JavaCore.newClasspathAttribute(
-				ServerModuleDelegate.TEST_CLASSPATH_ENTRY_ATTRIBUTE, "true");
+				ServerModuleDelegate.TEST_CLASSPATH_ENTRY_ATTRIBUTE, "true"); //$NON-NLS-1$
 		IClasspathAttribute sourceFolderAttribute = JavaCore.newClasspathAttribute(
-				ServerModuleDelegate.TEST_CLASSPATH_ENTRY_ATTRIBUTE, "false");
+				ServerModuleDelegate.TEST_CLASSPATH_ENTRY_ATTRIBUTE, "false"); //$NON-NLS-1$
 
 		Object[] testFolders = listViewer.getCheckedElements();
 		for (Object testFolder : testFolders) {

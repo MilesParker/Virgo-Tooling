@@ -43,7 +43,7 @@ public class WebModulePropertiesPage extends AbstractPropertiesPage {
 		Group propertiesGroup = new Group(container, SWT.NONE);
 		propertiesGroup.setLayout(new GridLayout(3, false));
 		propertiesGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		propertiesGroup.setText("Web Module Properties");
+		propertiesGroup.setText(Messages.WebModulePropertiesPage_Title);
 
 		contextPathLabel = new Label(propertiesGroup, SWT.NONE);
 		contextPathLabel.setText("Web-ContextPath");

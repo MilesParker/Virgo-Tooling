@@ -86,7 +86,7 @@ import org.osgi.service.prefs.BackingStoreException;
  */
 public class BundleManifestEditor extends ManifestEditor {
 
-	public static String ID_EDITOR = "org.eclipse.virgo.ide.ui.bundlemanifest";
+	public static String ID_EDITOR = "org.eclipse.virgo.ide.ui.bundlemanifest"; //$NON-NLS-1$
 
 	protected boolean fEquinox = true;
 
@@ -129,7 +129,7 @@ public class BundleManifestEditor extends ManifestEditor {
 		}
 		catch (PartInitException e) {
 			StatusHandler
-					.log(new Status(IStatus.ERROR, ServerIdeUiPlugin.PLUGIN_ID, "Failed to create editor pages", e));
+					.log(new Status(IStatus.ERROR, ServerIdeUiPlugin.PLUGIN_ID, Messages.BundleManifestEditor_FailedCreateMessage, e));
 		}
 		addSourcePage(BundleInputContext.CONTEXT_ID);
 	}
@@ -348,11 +348,11 @@ public class BundleManifestEditor extends ManifestEditor {
 		StringBuilder builder = new StringBuilder();
 
 		if (model.getUnderlyingResource() != null) {
-			if (model.getUnderlyingResource().getName().equals("TEST.MF")) {
-				builder.append("test: ");
+			if (model.getUnderlyingResource().getName().equals("TEST.MF")) { //$NON-NLS-1$
+				builder.append("test: "); //$NON-NLS-1$
 			}
-			else if (model.getUnderlyingResource().getName().equals("template.mf")) {
-				builder.append("template: ");
+			else if (model.getUnderlyingResource().getName().equals("template.mf")) { //$NON-NLS-1$
+				builder.append("template: "); //$NON-NLS-1$
 			}
 		}
 
@@ -398,7 +398,7 @@ public class BundleManifestEditor extends ManifestEditor {
 	public static IEditorPart openPluginEditor(Object object, boolean source) {
 		if (object instanceof BundleDefinition) {
 			URI file = ((BundleDefinition) object).getLocation();
-			return openExternalPlugin(new File(file), "META-INF/MANIFEST.MF");
+			return openExternalPlugin(new File(file), "META-INF/MANIFEST.MF"); //$NON-NLS-1$
 		}
 		return null;
 	}

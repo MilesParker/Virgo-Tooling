@@ -33,7 +33,7 @@ public class ModifyDeployerPortCommand extends AbstractOperation {
 	private int newPort;
 
 	public ModifyDeployerPortCommand(IServerWorkingCopy workingCopy, int portNumber) {
-		super("Modify JMX server port");
+		super(Messages.ModifyDeployerPortCommand_Name);
 		this.workingCopy = workingCopy;
 		this.oldPort = workingCopy.getMBeanServerPort();
 		this.newPort = portNumber;

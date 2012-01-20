@@ -26,6 +26,7 @@ import org.eclipse.core.runtime.jobs.IJobChangeListener;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.virgo.ide.jdt.core.JdtCorePlugin;
 import org.eclipse.virgo.ide.jdt.internal.core.util.ClasspathUtils;
 import org.eclipse.virgo.ide.manifest.core.IBundleManifestChangeListener.Type;
@@ -67,8 +68,7 @@ public class ServerClasspathContainerUpdateJob extends WorkspaceJob {
 	 */
 	private ServerClasspathContainerUpdateJob(IJavaProject javaProject,
 			Set<Type> types) {
-		super("Updating bundle classpath container for project '"
-				+ javaProject.getElementName() + "'");
+		super(NLS.bind(Messages.ServerClasspathContainerUpdateJob_UpdatingContainerMessage, javaProject.getElementName()));
 		this.javaProject = javaProject;
 		this.types = types;
 	}
@@ -100,7 +100,7 @@ public class ServerClasspathContainerUpdateJob extends WorkspaceJob {
 		}
 
 		return new Status(IStatus.OK, JdtCorePlugin.PLUGIN_ID,
-				"Updated SpringSource dm Server classpath container");
+				Messages.ServerClasspathContainerUpdateJob_UpdatingSpringSourceContainerMessage);
 	}
 
 	/**
@@ -194,9 +194,7 @@ public class ServerClasspathContainerUpdateJob extends WorkspaceJob {
 		public void running(IJobChangeEvent event) {
 			ServerClasspathContainerUpdateJob job = (ServerClasspathContainerUpdateJob) event
 					.getJob();
-			logInfo("Updating classpath of: "
-					+ job.javaProject.getProject().getName() + ". Queue size: "
-					+ SCHEDULED_JOBS.size());
+			logInfo(NLS.bind(Messages.ServerClasspathContainerUpdateJob_UpdatingClasspathMessage, new String[]{job.javaProject.getProject().getName(), SCHEDULED_JOBS.size() + ""})); //$NON-NLS-1$
 		}
 
 		@Override

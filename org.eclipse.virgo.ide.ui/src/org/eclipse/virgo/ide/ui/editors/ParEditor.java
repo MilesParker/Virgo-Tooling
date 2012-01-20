@@ -798,8 +798,8 @@ public class ParEditor extends SharedHeaderFormEditor implements ISelectionProvi
 	 * @generated
 	 */
 	protected boolean handleDirtyConflict() {
-		return MessageDialog.openQuestion(getSite().getShell(), "File changed detected",
-				"The file has changed on disk. Discard changes and reload?");
+		return MessageDialog.openQuestion(getSite().getShell(), Messages.ParEditor_DirtyConflictTitle,
+				Messages.ParEditor_DirtyConflictMessage);
 	}
 
 	private void handleError(IOException exception) {

@@ -105,7 +105,7 @@ public class ServerRuntimeComposite extends Composite {
 		if (runtimeWC == null) {
 			ir = null;
 			install.setEnabled(false);
-			installLabel.setText("");
+			installLabel.setText(""); //$NON-NLS-1$
 		}
 		else {
 			ir = ServerPlugin.findInstallableRuntime(runtimeWC.getRuntimeType().getId());
@@ -122,7 +122,7 @@ public class ServerRuntimeComposite extends Composite {
 		setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		Label label = new Label(this, SWT.NONE);
-		label.setText(ServerUiPlugin.getResourceString("runtimeName"));
+		label.setText(ServerUiPlugin.getResourceString("runtimeName")); //$NON-NLS-1$
 		GridData data = new GridData();
 		data.horizontalSpan = 2;
 		label.setLayoutData(data);
@@ -138,7 +138,7 @@ public class ServerRuntimeComposite extends Composite {
 		});
 
 		label = new Label(this, SWT.NONE);
-		label.setText(ServerUiPlugin.getResourceString("installDir"));
+		label.setText(ServerUiPlugin.getResourceString("installDir")); //$NON-NLS-1$
 		data = new GridData();
 		data.horizontalSpan = 2;
 		label.setLayoutData(data);
@@ -153,13 +153,13 @@ public class ServerRuntimeComposite extends Composite {
 			}
 		});
 
-		Button browse = SWTUtil.createButton(this, ServerUiPlugin.getResourceString("browse"));
+		Button browse = SWTUtil.createButton(this, ServerUiPlugin.getResourceString("browse")); //$NON-NLS-1$
 		browse.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent se) {
 				DirectoryDialog dialog = new DirectoryDialog(ServerRuntimeComposite.this
 						.getShell());
-				dialog.setMessage(ServerUiPlugin.getResourceString("selectInstallDir"));
+				dialog.setMessage(ServerUiPlugin.getResourceString("selectInstallDir")); //$NON-NLS-1$
 				dialog.setFilterPath(installDir.getText());
 				String selectedDirectory = dialog.open();
 				if (selectedDirectory != null) {
@@ -172,7 +172,7 @@ public class ServerRuntimeComposite extends Composite {
 
 		// JDK location
 		label = new Label(this, SWT.NONE);
-		label.setText(ServerUiPlugin.getResourceString("installedJRE"));
+		label.setText(ServerUiPlugin.getResourceString("installedJRE")); //$NON-NLS-1$
 		data = new GridData();
 		data.horizontalSpan = 2;
 		label.setLayoutData(data);
@@ -199,7 +199,7 @@ public class ServerRuntimeComposite extends Composite {
 			}
 		});
 
-		Button button = SWTUtil.createButton(this, ServerUiPlugin.getResourceString("installedJREs"));
+		Button button = SWTUtil.createButton(this, ServerUiPlugin.getResourceString("installedJREs")); //$NON-NLS-1$
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -240,7 +240,7 @@ public class ServerRuntimeComposite extends Composite {
 		// get names
 		size = installedJREs.size();
 		jreNames = new String[size + 1];
-		jreNames[0] = ServerUiPlugin.getResourceString("runtimeDefaultJRE");
+		jreNames[0] = ServerUiPlugin.getResourceString("runtimeDefaultJRE"); //$NON-NLS-1$
 		for (int i = 0; i < size; i++) {
 			IVMInstall vmInstall = installedJREs.get(i);
 			jreNames[i + 1] = vmInstall.getName();
@@ -248,10 +248,10 @@ public class ServerRuntimeComposite extends Composite {
 	}
 
 	protected boolean showPreferencePage() {
-		String id = "org.eclipse.jdt.debug.ui.preferences.VMPreferencePage";
+		String id = "org.eclipse.jdt.debug.ui.preferences.VMPreferencePage"; //$NON-NLS-1$
 		PreferenceManager manager = PlatformUI.getWorkbench().getPreferenceManager();
 		IPreferenceNode node = manager
-				.find("org.eclipse.jdt.ui.preferences.JavaBasePreferencePage").findSubNode(id);
+				.find("org.eclipse.jdt.ui.preferences.JavaBasePreferencePage").findSubNode(id); //$NON-NLS-1$
 		PreferenceManager manager2 = new PreferenceManager();
 		manager2.addToRoot(node);
 		PreferenceDialog dialog = new PreferenceDialog(getShell(), manager2);
@@ -268,14 +268,14 @@ public class ServerRuntimeComposite extends Composite {
 			name.setText(runtimeWC.getName());
 		}
 		else {
-			name.setText("");
+			name.setText(""); //$NON-NLS-1$
 		}
 
 		if (runtimeWC.getLocation() != null) {
 			installDir.setText(runtimeWC.getLocation().toOSString());
 		}
 		else {
-			installDir.setText("");
+			installDir.setText(""); //$NON-NLS-1$
 		}
 
 		// set selection
@@ -300,7 +300,7 @@ public class ServerRuntimeComposite extends Composite {
 
 	protected void validate() {
 		if (runtime == null) {
-			wizard.setMessage("", IMessageProvider.ERROR);
+			wizard.setMessage("", IMessageProvider.ERROR); //$NON-NLS-1$
 			return;
 		}
 

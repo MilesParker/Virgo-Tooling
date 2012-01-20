@@ -36,7 +36,6 @@ import org.eclipse.pde.internal.core.text.bundle.ImportPackageObject;
 import org.eclipse.pde.internal.core.text.bundle.PackageObject;
 import org.eclipse.pde.internal.core.util.PDEJavaHelper;
 import org.eclipse.pde.internal.ui.PDEPlugin;
-import org.eclipse.pde.internal.ui.PDEUIMessages;
 import org.eclipse.pde.internal.ui.editor.PDEFormPage;
 import org.eclipse.pde.internal.ui.elements.DefaultTableProvider;
 import org.eclipse.pde.internal.ui.util.SWTUtil;
@@ -62,7 +61,7 @@ import org.osgi.framework.Version;
  */
 public class BundleImportPackageSection extends AbstractImportSection {
 
-	private static final String DESCRIPTION = "Specify packages on which this bundle depends without explicitly identifying their originating bundle.";
+	private static final String DESCRIPTION = Messages.BundleImportPackageSection_Message;
 
 	private Action fGoToAction;
 
@@ -75,16 +74,16 @@ public class BundleImportPackageSection extends AbstractImportSection {
 	private static final int PROPERTIES_INDEX = 3;
 
 	public BundleImportPackageSection(PDEFormPage page, Composite parent) {
-		super(page, parent, Section.DESCRIPTION, new String[] { PDEUIMessages.ImportPackageSection_add, "Download...",
-				PDEUIMessages.ImportPackageSection_remove, PDEUIMessages.ImportPackageSection_properties });
-		getSection().setText("Import Package");
+		super(page, parent, Section.DESCRIPTION, new String[] { "", Messages.BundleImportPackageSection_DownloadButton, //$NON-NLS-1$
+				"", "" }); //$NON-NLS-1$ //$NON-NLS-1$
+		getSection().setText(Messages.BundleImportPackageSection_Title);
 		getSection().setDescription(DESCRIPTION);
 		getTablePart().setEditable(false);
 	}
 
 	protected void setElementsLocal(ImportListSelectionDialog dialog) {
 		IProject project = ((BundleManifestEditor) this.getPage().getEditor()).getCommonProject();
-		Set<PackageExport> packages = RepositoryUtils.getImportPackageProposals(project, "");
+		Set<PackageExport> packages = RepositoryUtils.getImportPackageProposals(project, ""); //$NON-NLS-1$
 		ImportPackageHeader header = (ImportPackageHeader) getBundle().getManifestHeader(Constants.IMPORT_PACKAGE);
 		Set<PackageExport> filteredElements = new HashSet<PackageExport>();
 
@@ -104,7 +103,7 @@ public class BundleImportPackageSection extends AbstractImportSection {
 
 	protected void setElementsRemote(ImportListSelectionDialog dialog) {
 		Collection<BundleArtefact> bundles = null;
-		ArtefactRepository bundleRepository = RepositoryUtils.searchForArtifacts("", true, false);
+		ArtefactRepository bundleRepository = RepositoryUtils.searchForArtifacts("", true, false); //$NON-NLS-1$
 		bundles = bundleRepository.getBundles();
 
 		Set<PackageExport> allPackageExports = new HashSet<PackageExport>();
@@ -132,7 +131,7 @@ public class BundleImportPackageSection extends AbstractImportSection {
 			ImportPackageObject importPackageObject = (ImportPackageObject) element;
 			String label = importPackageObject.getName();
 			if (null != importPackageObject.getVersion()) {
-				label += " " + importPackageObject.getVersion();
+				label += " " + importPackageObject.getVersion(); //$NON-NLS-1$
 			}
 			return label;
 		}
@@ -168,8 +167,8 @@ public class BundleImportPackageSection extends AbstractImportSection {
 				}
 
 				dialog.setMultipleSelection(true);
-				dialog.setMessage(PDEUIMessages.ImportPackageSection_required);
-				dialog.setTitle(PDEUIMessages.ImportPackageSection_selection);
+				dialog.setMessage(""); //$NON-NLS-1$
+				dialog.setTitle(""); //$NON-NLS-1$
 				dialog.create();
 				SWTUtil.setDialogSize(dialog, 400, 500);
 			}
@@ -202,16 +201,16 @@ public class BundleImportPackageSection extends AbstractImportSection {
 		for (Object element : selected) {
 			PackageExport currPackage = (PackageExport) element;
 			if (null == importPackageHeader) {
-				getBundle().setHeader(Constants.IMPORT_PACKAGE, "");
+				getBundle().setHeader(Constants.IMPORT_PACKAGE, ""); //$NON-NLS-1$
 				importPackageHeader = (ImportPackageHeader) getBundle().getManifestHeader(Constants.IMPORT_PACKAGE);
 			}
 
 			String versionString = null;
 			OsgiVersion osgiVers = currPackage.getVersion();
 			if (osgiVers.getMajor() != 0 || osgiVers.getMinor() != 0 || osgiVers.getService() != 0
-					|| (osgiVers.getQualifier() != null && !osgiVers.getQualifier().trim().equals(""))) {
-				versionString = "[" + currPackage.getVersion().toString() + "," + currPackage.getVersion().toString()
-						+ "]";
+					|| (osgiVers.getQualifier() != null && !osgiVers.getQualifier().trim().equals(""))) { //$NON-NLS-1$
+				versionString = "[" + currPackage.getVersion().toString() + "," + currPackage.getVersion().toString() //$NON-NLS-1$ //$NON-NLS-2$
+						+ "]"; //$NON-NLS-1$
 			}
 
 			ImportPackageObject newPackageObject = new ImportPackageObject(importPackageHeader, currPackage.getName(),
@@ -242,7 +241,7 @@ public class BundleImportPackageSection extends AbstractImportSection {
 			dialog.setTitle(((ImportPackageObject) selected[0]).getName());
 		}
 		else {
-			dialog.setTitle(PDEUIMessages.ExportPackageSection_props);
+			dialog.setTitle(""); //$NON-NLS-1$
 		}
 		if (dialog.open() == Window.OK && isEditable()) {
 			String newVersion = dialog.getVersion();
@@ -267,7 +266,7 @@ public class BundleImportPackageSection extends AbstractImportSection {
 	@Override
 	protected void makeActions() {
 		super.makeActions();
-		fGoToAction = new Action(PDEUIMessages.ImportPackageSection_goToPackage) {
+		fGoToAction = new Action("") { //$NON-NLS-1$
 			@Override
 			public void run() {
 				handleGoToPackage(fViewer.getSelection());
@@ -332,7 +331,7 @@ public class BundleImportPackageSection extends AbstractImportSection {
 			PackageExport packageExport = (PackageExport) element;
 			String label = packageExport.getName();
 			if (null != packageExport.getVersion()) {
-				label += " " + packageExport.getVersion();
+				label += " " + packageExport.getVersion(); //$NON-NLS-1$
 			}
 			return label;
 		}

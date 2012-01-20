@@ -70,9 +70,9 @@ import org.springframework.ide.eclipse.core.SpringCoreUtils;
  */
 public class NewParProjectWizard extends AbstractNewParProjectWizard implements INewWizard {
 
-	private static final String PAR_FILE_NAME = ".settings/org.eclipse.virgo.ide.runtime.core.par.xml";
+	private static final String PAR_FILE_NAME = ".settings/org.eclipse.virgo.ide.runtime.core.par.xml"; //$NON-NLS-1$
 
-	private static final String ENCODING_UTF8 = "UTF-8";
+	private static final String ENCODING_UTF8 = "UTF-8"; //$NON-NLS-1$
 
 	private WizardNewProjectCreationPage mainPage;
 
@@ -86,7 +86,7 @@ public class NewParProjectWizard extends AbstractNewParProjectWizard implements 
 
 	private final IDataModel model;
 
-	private final String title = "New PAR Project";
+	private final String title = Messages.NewParProjectWizard_Title;
 
 	protected ParPackage parPackage = ParPackage.eINSTANCE;
 
@@ -139,7 +139,7 @@ public class NewParProjectWizard extends AbstractNewParProjectWizard implements 
 
 	@Override
 	public void addPages() {
-		mainPage = new NewParProjectSettingsPage("basicNewProjectPage", getSelection());
+		mainPage = new NewParProjectSettingsPage("basicNewProjectPage", getSelection()); //$NON-NLS-1$
 		setMainPage(mainPage);
 		addPage(mainPage);
 
@@ -162,7 +162,7 @@ public class NewParProjectWizard extends AbstractNewParProjectWizard implements 
 
 		// only add page if there are already projects in the workspace
 		if (ResourcesPlugin.getWorkspace().getRoot().getProjects().length > 0) {
-			referencePage = new NewParProjectReferencePage("basicReferenceProjectPage");
+			referencePage = new NewParProjectReferencePage("basicReferenceProjectPage"); //$NON-NLS-1$
 			addPage(referencePage);
 		}
 	}
@@ -247,7 +247,7 @@ public class NewParProjectWizard extends AbstractNewParProjectWizard implements 
 			getWorkbench().getWorkingSetManager().addToWorkingSets(getNewProject(), workingSets);
 		}
 
-		IFile manifestFile = (IFile) getNewProject().findMember("META-INF/MANIFEST.MF");
+		IFile manifestFile = (IFile) getNewProject().findMember("META-INF/MANIFEST.MF"); //$NON-NLS-1$
 		if (manifestFile != null) {
 			// Select the new file resource in the current view.
 			//
@@ -269,7 +269,7 @@ public class NewParProjectWizard extends AbstractNewParProjectWizard implements 
 				page.openEditor(new FileEditorInput(manifestFile), ParManifestEditor.ID_EDITOR);
 			}
 			catch (PartInitException exception) {
-				MessageDialog.openError(workbenchWindow.getShell(), "Error opening editor", exception.getMessage());
+				MessageDialog.openError(workbenchWindow.getShell(), Messages.NewParProjectWizard_ErrorMessage, exception.getMessage());
 			}
 			return true;
 		}
@@ -302,7 +302,7 @@ public class NewParProjectWizard extends AbstractNewParProjectWizard implements 
 
 	@Override
 	protected void initializeDefaultPageImageDescriptor() {
-		setDefaultPageImageDescriptor(ServerIdeUiPlugin.getImageDescriptor("full/wizban/wizban-par.png"));
+		setDefaultPageImageDescriptor(ServerIdeUiPlugin.getImageDescriptor("full/wizban/wizban-par.png")); //$NON-NLS-1$
 	}
 
 }

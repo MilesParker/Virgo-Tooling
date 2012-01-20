@@ -53,16 +53,16 @@ public class RepositoryViewerSorter extends ViewerSorter {
 					((LocationAwareLibraries) e2).getLocation());
 		}
 		else if (e1 instanceof BundleArtefact && e2 instanceof BundleArtefact) {
-			String st1 = ((BundleArtefact) e1).getSymbolicName() + ";"
+			String st1 = ((BundleArtefact) e1).getSymbolicName() + ";" //$NON-NLS-1$
 					+ ((BundleArtefact) e1).getVersion();
-			String st2 = ((BundleArtefact) e2).getSymbolicName() + ";"
+			String st2 = ((BundleArtefact) e2).getSymbolicName() + ";" //$NON-NLS-1$
 					+ ((BundleArtefact) e2).getVersion();
 			return super.compare(viewer, st1, st2);
 		}
 		else if (e1 instanceof LibraryArtefact && e2 instanceof LibraryArtefact) {
-			String st1 = ((LibraryArtefact) e1).getSymbolicName() + ";"
+			String st1 = ((LibraryArtefact) e1).getSymbolicName() + ";" //$NON-NLS-1$
 					+ ((LibraryArtefact) e1).getVersion();
-			String st2 = ((LibraryArtefact) e2).getSymbolicName() + ";"
+			String st2 = ((LibraryArtefact) e2).getSymbolicName() + ";" //$NON-NLS-1$
 					+ ((LibraryArtefact) e2).getVersion();
 			return super.compare(viewer, st1, st2);
 		}

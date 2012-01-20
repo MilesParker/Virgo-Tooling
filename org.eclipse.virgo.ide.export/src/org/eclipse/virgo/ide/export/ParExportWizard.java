@@ -65,7 +65,7 @@ public class ParExportWizard extends Wizard implements IExportWizard {
 
 	private IStructuredSelection selection;
 
-	private static final String TITLE = "Par Export Wizard";
+	private static final String TITLE = Messages.ParExportWizard_Title;
 
 	private static final String PAR_FILE_NAME = ".settings/org.eclipse.virgo.ide.runtime.core.par.xml";
 
@@ -81,7 +81,7 @@ public class ParExportWizard extends Wizard implements IExportWizard {
 		IPath jarLocation = wizardPage.getJarLocation();
 		
 		if (jarLocation.toFile().exists() && ! wizardPage.getOverwrite()) {
-			boolean overwrite = MessageDialog.openQuestion(getShell(), "Overwrite File", "The file " + jarLocation.toOSString() + " already exists. Do you want to overwrite the existing file?");
+			boolean overwrite = MessageDialog.openQuestion(getShell(), Messages.ParExportWizard_OverwriteTitle, Messages.ParExportWizard_OverwriteStart + jarLocation.toOSString() + Messages.ParExportWizard_OverwriteEnd);
 			if (! overwrite) {
 				return false;
 			}
@@ -208,7 +208,7 @@ public class ParExportWizard extends Wizard implements IExportWizard {
 		}
 		
 		if (warnings.size() > 0) {
-			ErrorDialog.openError(shell, "PAR export warnings", null, new MultiStatus(ServerExportPlugin.PLUGIN_ID, Status.WARNING, warnings.toArray(new IStatus[0]), "There were warnings while export the PAR project. Click Details to see more...", null));
+			ErrorDialog.openError(shell, Messages.ParExportWizard_ExportWarningsTitle, null, new MultiStatus(ServerExportPlugin.PLUGIN_ID, Status.WARNING, warnings.toArray(new IStatus[0]), Messages.ParExportWizard_ExportWarningsMessage, null));
 		}
 		return true;
 	}

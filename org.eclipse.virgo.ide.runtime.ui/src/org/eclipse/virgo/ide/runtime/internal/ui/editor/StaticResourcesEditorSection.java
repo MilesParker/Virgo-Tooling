@@ -100,9 +100,9 @@ public class StaticResourcesEditorSection extends ServerEditorSection {
 		Section section = toolkit.createSection(parent, ExpandableComposite.TWISTIE
 				| ExpandableComposite.EXPANDED | ExpandableComposite.TITLE_BAR
 				| Section.DESCRIPTION | ExpandableComposite.FOCUS_TITLE);
-		section.setText("Redeploy Behavior");
+		section.setText(Messages.StaticResourcesEditorSection_RedeploySectionTitle);
 		section
-				.setDescription("Configure server redeploy and refresh behavior on changes to project resources.\n\nDefine patterns for files that should be copied into the server without redeploying the bundle or application. Spring XML configuration files be handled separately.");
+				.setDescription(Messages.StaticResourcesEditorSection_RedeploySectionMessage);
 		section
 				.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.VERTICAL_ALIGN_FILL));
 
@@ -144,7 +144,7 @@ public class StaticResourcesEditorSection extends ServerEditorSection {
 		buttonComposite.setLayout(buttonLayout);
 		GridDataFactory.fillDefaults().applyTo(buttonComposite);
 		
-		addButton = toolkit.createButton(buttonComposite, "Add", SWT.PUSH);
+		addButton = toolkit.createButton(buttonComposite, Messages.StaticResourcesEditorSection_AddButtonText, SWT.PUSH);
 		GridDataFactory.fillDefaults().applyTo(addButton);
 		addButton.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -154,13 +154,13 @@ public class StaticResourcesEditorSection extends ServerEditorSection {
 
 				InputDialog dialog = new InputDialog(
 						getShell(),
-						"New filename pattern",
-						"Enter a new filename pattern for static resources (wildcards such as '*' and '?' are supported):",
-						"", new IInputValidator() {
+						Messages.StaticResourcesEditorSection_NewFileParamMessage,
+						Messages.StaticResourcesEditorSection_NewFileParamDescription,
+						"", new IInputValidator() { //$NON-NLS-1$
 
 							public String isValid(String newText) {
 								if (!StringUtils.hasText(newText)) {
-									return "Pattern can't be empty";
+									return Messages.StaticResourcesEditorSection_PatternEmptyMessage;
 								}
 								return null;
 							}
@@ -180,7 +180,7 @@ public class StaticResourcesEditorSection extends ServerEditorSection {
 			}
 		});
 
-		deleteButton = toolkit.createButton(buttonComposite, "Delete", SWT.PUSH);
+		deleteButton = toolkit.createButton(buttonComposite, Messages.StaticResourcesEditorSection_DeleteButtonMessage, SWT.PUSH);
 		GridDataFactory.fillDefaults().applyTo(deleteButton);
 		deleteButton.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -201,7 +201,7 @@ public class StaticResourcesEditorSection extends ServerEditorSection {
 			}
 		});
 
-		upButton = toolkit.createButton(buttonComposite, "Up", SWT.PUSH);
+		upButton = toolkit.createButton(buttonComposite, Messages.StaticResourcesEditorSection_UpButtonMessage, SWT.PUSH);
 		GridDataFactory.fillDefaults().applyTo(upButton);
 		upButton.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -224,7 +224,7 @@ public class StaticResourcesEditorSection extends ServerEditorSection {
 			}
 		});
 
-		downButton = toolkit.createButton(buttonComposite, "Down", SWT.PUSH);
+		downButton = toolkit.createButton(buttonComposite, Messages.StaticResourcesEditorSection_DownButtonMessage, SWT.PUSH);
 		GridDataFactory.fillDefaults().applyTo(downButton);
 		downButton.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -250,7 +250,7 @@ public class StaticResourcesEditorSection extends ServerEditorSection {
 		FormText restoreDefault = toolkit.createFormText(composite, true);
 		restoreDefault
 				.setText(
-						"<form><p><a href=\"exportbundle\">Restore default</a> filename pattern</p></form>",
+						Messages.StaticResourcesEditorSection_RestoreDefaultMessage,
 						true, false);
 		restoreDefault.addHyperlinkListener(new HyperlinkAdapter() {
 			public void linkActivated(HyperlinkEvent e) {
@@ -334,7 +334,7 @@ public class StaticResourcesEditorSection extends ServerEditorSection {
 				IServerWorkingCopy dmServer = (IServerWorkingCopy) server.loadAdapter(
 						IServerWorkingCopy.class, null);
 				String[] filenames = StringUtils.delimitedListToStringArray(dmServer
-						.getStaticFilenamePatterns(), ",");
+						.getStaticFilenamePatterns(), ","); //$NON-NLS-1$
 				return filenames;
 
 			}

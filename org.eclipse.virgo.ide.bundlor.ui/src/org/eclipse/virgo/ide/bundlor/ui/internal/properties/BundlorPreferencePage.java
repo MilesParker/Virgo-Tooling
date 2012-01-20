@@ -98,7 +98,7 @@ public class BundlorPreferencePage extends PropertyPage {
 		initialize();
 
 		scanByteCode = new Button(parentComposite, SWT.CHECK);
-		scanByteCode.setText("Scan output folders instead of source folders to generate MANIFEST.MF");
+		scanByteCode.setText(Messages.BundlorPreferencePage_ScanOutputMessage);
 		scanByteCode.setSelection(checkScanByteCodeButton);
 		scanByteCode.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -108,7 +108,7 @@ public class BundlorPreferencePage extends PropertyPage {
 		});
 		
 		formatManifests = new Button(parentComposite, SWT.CHECK);
-		formatManifests.setText("Auto-format generated MANIFEST.MF and TEST.MF files");
+		formatManifests.setText(Messages.BundlorPreferencePage_AutoFormatMessage);
 		formatManifests.setSelection(checkFormatManifestsButton);
 		formatManifests.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -157,7 +157,7 @@ public class BundlorPreferencePage extends PropertyPage {
 		buttonComposite.setLayoutData(data);
 
 		addButton = new Button(buttonComposite, SWT.PUSH);
-		addButton.setText("Add");
+		addButton.setText(Messages.BundlorPreferencePage_AddButton);
 		data = new GridData();
 		data.widthHint = 100;
 		addButton.setLayoutData(data);
@@ -168,9 +168,9 @@ public class BundlorPreferencePage extends PropertyPage {
 				FilteredElementTreeSelectionDialog selDialog = new FilteredElementTreeSelectionDialog(SpringUIUtils
 						.getStandardDisplay().getActiveShell(), new JavaElementLabelProvider(),
 						new WorkspaceResourceContentProvider());
-				selDialog.setTitle("Select properties files");
+				selDialog.setTitle(Messages.BundlorPreferencePage_SelectPropertiesTitle);
 				selDialog
-						.setMessage("Select properties files in the workspace that should be\nused for variable substitution:");
+						.setMessage(Messages.BundlorPreferencePage_SelectPropertiesMessage);
 				selDialog.setValidator(new StorageSelectionValidator(true));
 				selDialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
 				selDialog.setSorter(new JavaElementSorter());
@@ -191,7 +191,7 @@ public class BundlorPreferencePage extends PropertyPage {
 		});
 
 		deleteButton = new Button(buttonComposite, SWT.PUSH);
-		deleteButton.setText("Delete");
+		deleteButton.setText(Messages.BundlorPreferencePage_DeleteButton);
 		deleteButton.setLayoutData(data);
 		deleteButton.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -211,14 +211,14 @@ public class BundlorPreferencePage extends PropertyPage {
 	private void initialize() {
 		project = (IProject) getElement().getAdapter(IResource.class);
 		noDefaultAndApplyButton();
-		setDescription("Define properties files that should be used for variable substitution during\ngeneration of MANIFEST.MF file:");
+		setDescription(Messages.BundlorPreferencePage_DefinePropertiesMessage);
 
 		if (project != null) {
 			String properties = SpringCorePreferences.getProjectPreferences(project, BundlorCorePlugin.PLUGIN_ID)
 					.getString(BundlorCorePlugin.TEMPLATE_PROPERTIES_FILE_KEY,
 							BundlorCorePlugin.TEMPLATE_PROPERTIES_FILE_DEFAULT);
 			filenames = new ArrayList<String>(Arrays.asList(org.springframework.util.StringUtils
-					.delimitedListToStringArray(properties, ";")));
+					.delimitedListToStringArray(properties, ";"))); //$NON-NLS-1$
 			checkScanByteCodeButton = SpringCorePreferences.getProjectPreferences(project, BundlorCorePlugin.PLUGIN_ID)
 					.getBoolean(BundlorCorePlugin.TEMPLATE_BYTE_CODE_SCANNING_KEY,
 							BundlorCorePlugin.TEMPLATE_BYTE_CODE_SCANNING_DEFAULT);
@@ -240,7 +240,7 @@ public class BundlorPreferencePage extends PropertyPage {
 
 		SpringCorePreferences.getProjectPreferences(project, BundlorCorePlugin.PLUGIN_ID)
 				.putString(BundlorCorePlugin.TEMPLATE_PROPERTIES_FILE_KEY,
-						StringUtils.collectionToDelimitedString(filenames, ";"));
+						StringUtils.collectionToDelimitedString(filenames, ";")); //$NON-NLS-1$
 
 		boolean oldScanByteCode = SpringCorePreferences.getProjectPreferences(project, BundlorCorePlugin.PLUGIN_ID)
 				.getBoolean(BundlorCorePlugin.TEMPLATE_BYTE_CODE_SCANNING_KEY,
@@ -292,7 +292,7 @@ public class BundlorPreferencePage extends PropertyPage {
 	class FilenameLabelProvider extends LabelProvider {
 
 		public Image getImage(Object element) {
-			return BundlorUiPlugin.getImage("full/obj16/file_obj.gif");
+			return BundlorUiPlugin.getImage("full/obj16/file_obj.gif"); //$NON-NLS-1$
 		}
 
 		public String getText(Object element) {

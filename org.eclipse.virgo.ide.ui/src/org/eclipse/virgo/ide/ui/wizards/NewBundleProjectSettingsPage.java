@@ -18,9 +18,9 @@ import org.eclipse.jdt.ui.wizards.NewJavaProjectWizardPageOne;
  */
 public class NewBundleProjectSettingsPage extends NewJavaProjectWizardPageOne {
 
-	private static String NEW_PROJECT_SETTINGS_TITLE = "Create a Bundle project";
+	private static String NEW_PROJECT_SETTINGS_TITLE = Messages.NewBundleProjectSettingsPage_Title;
 
-	private static String NEW_PROJECT_SETTINGS_DESCRIPTION = "Create a Bundle project in the workspace or in an external location.";
+	private static String NEW_PROJECT_SETTINGS_DESCRIPTION = Messages.NewBundleProjectSettingsPage_Description;
 
 	public NewBundleProjectSettingsPage() {
 		super();

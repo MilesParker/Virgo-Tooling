@@ -44,9 +44,8 @@ import org.eclipse.ui.forms.widgets.TableWrapData;
 /**
  * This abstract class is essentially a copy of GeneralInfoSection from PDE with
  * visibility increased to "protected" as required to re-use this code without
- * unnecessary copying into subclasses.
- * This class should not be further modified to keep the separation between PDE
- * and non-PDE code.
+ * unnecessary copying into subclasses. This class should not be further
+ * modified to keep the separation between PDE and non-PDE code.
  * @author Christian Dupuis
  */
 public abstract class AbstractPdeGeneralInfoSection extends PDESection {
@@ -82,8 +81,9 @@ public abstract class AbstractPdeGeneralInfoSection extends PDESection {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.pde.internal.ui.neweditor.PDESection#createClient(org.eclipse.ui.forms.widgets.Section,
-	 * org.eclipse.ui.forms.widgets.FormToolkit)
+	 * @see
+	 * org.eclipse.pde.internal.ui.neweditor.PDESection#createClient(org.eclipse
+	 * .ui.forms.widgets.Section, org.eclipse.ui.forms.widgets.FormToolkit)
 	 */
 	@Override
 	protected void createClient(Section section, FormToolkit toolkit) {
@@ -341,7 +341,9 @@ public abstract class AbstractPdeGeneralInfoSection extends PDESection {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.pde.internal.ui.editor.PDESection#modelChanged(org.eclipse.pde.core.IModelChangedEvent)
+	 * @see
+	 * org.eclipse.pde.internal.ui.editor.PDESection#modelChanged(org.eclipse
+	 * .pde.core.IModelChangedEvent)
 	 */
 	@Override
 	public void modelChanged(IModelChangedEvent e) {

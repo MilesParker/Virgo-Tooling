@@ -41,7 +41,7 @@ public class ParXmlEditorPage extends AbstractParXmlEditorPage {
 		super.createFormContent(managedForm);
 		ScrolledForm form = managedForm.getForm();
 		form.setImage(ServerIdeUiPlugin.getImage("full/obj16/par_obj.gif"));
-		form.setText("PAR Editor");
+		form.setText(Messages.ParXmlEditorPage_Title);
 	}
 
 	protected AdapterFactoryEditingDomain getModel() {

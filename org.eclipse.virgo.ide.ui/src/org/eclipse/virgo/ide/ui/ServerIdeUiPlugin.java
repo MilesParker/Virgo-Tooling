@@ -30,7 +30,7 @@ import org.osgi.framework.BundleContext;
 public class ServerIdeUiPlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "org.eclipse.virgo.ide.ui";
+	public static final String PLUGIN_ID = "org.eclipse.virgo.ide.ui"; //$NON-NLS-1$
 
 	// The shared instance
 	private static ServerIdeUiPlugin plugin;
@@ -53,7 +53,7 @@ public class ServerIdeUiPlugin extends AbstractUIPlugin {
 	}
 
 	public void log(Exception e) {
-		getLog().log(new Status(IStatus.ERROR, ServerIdeUiPlugin.PLUGIN_ID, "Unexpected error", e));
+		getLog().log(new Status(IStatus.ERROR, ServerIdeUiPlugin.PLUGIN_ID, Messages.ServerIdeUiPlugin_ErrorMessage, e));
 	}
 
 	/*
@@ -98,7 +98,7 @@ public class ServerIdeUiPlugin extends AbstractUIPlugin {
 	}
 
 	public static ImageDescriptor getImageDescriptor(String path) {
-		return imageDescriptorFromPlugin(PLUGIN_ID, "icons/" + path);
+		return imageDescriptorFromPlugin(PLUGIN_ID, "icons/" + path); //$NON-NLS-1$
 	}
 
 	public FormColors getFormColors(Display display) {

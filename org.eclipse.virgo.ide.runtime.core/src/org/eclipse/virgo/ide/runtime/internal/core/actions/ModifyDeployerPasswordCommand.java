@@ -33,7 +33,7 @@ public class ModifyDeployerPasswordCommand extends AbstractOperation {
 	private String newPassword;
 
 	public ModifyDeployerPasswordCommand(IServerWorkingCopy workingCopy, String username) {
-		super("Modify JMX server port");
+		super(Messages.ModifyDeployerPasswordCommand_Name);
 		this.workingCopy = workingCopy;
 		this.oldPassword = workingCopy.getMBeanServerPassword();
 		this.newPassword = username;

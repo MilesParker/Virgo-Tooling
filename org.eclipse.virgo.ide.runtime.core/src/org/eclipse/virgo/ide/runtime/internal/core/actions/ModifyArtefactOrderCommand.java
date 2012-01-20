@@ -35,7 +35,7 @@ public class ModifyArtefactOrderCommand extends AbstractOperation {
 	private List<String> newOrder;
 
 	public ModifyArtefactOrderCommand(IServerWorkingCopy workingCopy, List<String> newOrder) {
-		super("Modify Artefact deployment order");
+		super(Messages.ModifyArtefactOrderCommand_Name);
 		this.workingCopy = workingCopy;
 		this.oldOrder = workingCopy.getArtefactOrder();
 		this.newOrder = newOrder;

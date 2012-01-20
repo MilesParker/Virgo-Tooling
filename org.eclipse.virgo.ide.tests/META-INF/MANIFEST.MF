@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Virgo IDE Integration Tests
+Bundle-Name: %Bundle-Name.0
 Bundle-SymbolicName: org.eclipse.virgo.ide.tests
 Bundle-Version: 1.0.0.qualifier
-Bundle-Vendor: Eclipse Virgo
+Bundle-Vendor: %Bundle-Vendor.0
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.junit4;bundle-version="4.5.0",
  org.eclipse.core.filesystem,

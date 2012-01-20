@@ -30,7 +30,7 @@ public class ServerClasspathContainerPage extends WizardPage implements IClasspa
 	private IClasspathEntry classpathEntry = null;
 
 	public ServerClasspathContainerPage() {
-		super("Bundle Classpath Container");
+		super(Messages.ServerClasspathContainerPage_BundleCalsspathTitle);
 	}
 
 	public boolean finish() {
@@ -47,9 +47,9 @@ public class ServerClasspathContainerPage extends WizardPage implements IClasspa
 	}
 
 	public void createControl(Composite parent) {
-		setTitle("Bundle Classpath Container");
+		setTitle(Messages.ServerClasspathContainerPage_BundleCalsspathTitle);
 		Label label = new Label(parent, SWT.NONE);
-		label.setText("Press Finish to add the SpringSource dm Server Bundle Classpath Container");
+		label.setText(Messages.ServerClasspathContainerPage_FinishMessage);
 		label.setFont(parent.getFont());
 		setControl(label);
 	}

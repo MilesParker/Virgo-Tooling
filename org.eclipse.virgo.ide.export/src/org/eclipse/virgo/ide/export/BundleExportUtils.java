@@ -160,7 +160,7 @@ public class BundleExportUtils {
 				}
 				
 				if (charactor != '\n') {
-					warnings.add(new Status(Status.WARNING, ServerExportPlugin.PLUGIN_ID, "Manifest file for project " + project.getElementName() + " is missing a '\\n' at the end of file. The exported bundle might not work properly."));
+					warnings.add(new Status(Status.WARNING, ServerExportPlugin.PLUGIN_ID, Messages.BundleExportUtils_MissingEOL_MessageStart + project.getElementName() + Messages.BundleExportUtils_MissingEOL_MessageEnd));
 				}
 			} catch (FileNotFoundException e) {
 				jarPackage.setGenerateManifest(true);
@@ -207,8 +207,8 @@ public class BundleExportUtils {
 			}
 			children.addAll(warnings);
 			
-			MultiStatus multiStatus = new MultiStatus(ServerExportPlugin.PLUGIN_ID, !status.isOK() ? status.getCode() : Status.WARNING, children.toArray(new Status[0]), !status.isOK() ? status.getMessage() : "There were warnings while exporting bundle project. Click Details to see more...", null);
-			ErrorDialog.openError(shell, "Export Warning", null, multiStatus);
+			MultiStatus multiStatus = new MultiStatus(ServerExportPlugin.PLUGIN_ID, !status.isOK() ? status.getCode() : Status.WARNING, children.toArray(new Status[0]), !status.isOK() ? status.getMessage() : Messages.BundleExportUtils_WarningsMessage, null);
+			ErrorDialog.openError(shell, Messages.BundleExportUtils_WarningMessageTitle, null, multiStatus);
 			return !(status.matches(IStatus.ERROR));
 		}
 		return true;

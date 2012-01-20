@@ -111,7 +111,7 @@ public class ParManifestEditor extends BundleManifestEditor {
 		}
 		catch (PartInitException e) {
 			StatusHandler
-					.log(new Status(IStatus.ERROR, ServerIdeUiPlugin.PLUGIN_ID, "Failed to create editor pages", e));
+					.log(new Status(IStatus.ERROR, ServerIdeUiPlugin.PLUGIN_ID, Messages.ParManifestEditor_FailedCreateMesssage, e));
 		}
 		addSourcePage(BundleInputContext.CONTEXT_ID);
 	}

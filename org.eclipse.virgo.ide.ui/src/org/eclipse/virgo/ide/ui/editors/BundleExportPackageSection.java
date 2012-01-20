@@ -19,7 +19,7 @@ import org.eclipse.swt.widgets.Composite;
  */
 public class BundleExportPackageSection extends ExportPackageSection {
 
-	private static final String DESCRIPTION = "Enumerate all the packages that this bundle exposes to clients. All other packages will be hidden from clients at all times.";
+	private static final String DESCRIPTION = Messages.BundleExportPackageSection_Description;
 
 	public BundleExportPackageSection(PDEFormPage page, Composite parent) {
 		super(page, parent);

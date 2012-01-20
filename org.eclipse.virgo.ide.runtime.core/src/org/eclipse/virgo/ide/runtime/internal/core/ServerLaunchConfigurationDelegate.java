@@ -52,15 +52,15 @@ public class ServerLaunchConfigurationDelegate extends AbstractJavaLaunchConfigu
 
 		IProgressMonitor subMonitor = new SubProgressMonitor(monitor, 5);
 		checkCancelled(subMonitor);
-		subMonitor.beginTask("Starting SpringSource dm Server instance", 5);
+		subMonitor.beginTask(Messages.ServerLaunchConfigurationDelegate_StartingServerMessage, 5);
 		
 		if (server.shouldPublish() && ServerPreferences.getInstance().isAutoPublishing()) {
-			subMonitor.subTask("Publishing to staging directory...");
+			subMonitor.subTask(Messages.ServerLaunchConfigurationDelegate_PublishingMessage);
 			server.publish(IServer.PUBLISH_INCREMENTAL, monitor);
 		}
 		subMonitor.worked(1);
 		checkCancelled(subMonitor);
-		subMonitor.subTask("Configuring launch parameters...");
+		subMonitor.subTask(Messages.ServerLaunchConfigurationDelegate_ConfiguringMessage);
 
 		ServerBehaviour behaviour = (ServerBehaviour) server.loadAdapter(ServerBehaviour.class,
 				null);
@@ -104,14 +104,14 @@ public class ServerLaunchConfigurationDelegate extends AbstractJavaLaunchConfigu
 		subMonitor.worked(1);
 		checkCancelled(subMonitor);
 
-		subMonitor.subTask("Setting up source locator...");
+		subMonitor.subTask(Messages.ServerLaunchConfigurationDelegate_SettingUpSourceMessage);
 		setDefaultSourceLocator(launch, configuration);
 		subMonitor.worked(1);
 		checkCancelled(subMonitor);
 
 		if (ILaunchManager.PROFILE_MODE.equals(mode)) {
 			try {
-				subMonitor.subTask("Configuring TPTP profiling parameter...");
+				subMonitor.subTask(Messages.ServerLaunchConfigurationDelegate_ConfiguringTPTPMessage);
 				ServerProfilerDelegate.configureProfiling(launch, vm, runConfiguration, monitor);
 			}
 			catch (CoreException ce) {
@@ -122,7 +122,7 @@ public class ServerLaunchConfigurationDelegate extends AbstractJavaLaunchConfigu
 		subMonitor.worked(1);
 		checkCancelled(subMonitor);
 
-		subMonitor.subTask("Launching SpringSource dm Server...");
+		subMonitor.subTask(Messages.ServerLaunchConfigurationDelegate_LaunchingMessage);
 		behaviour.setupLaunch(launch, mode, monitor);
 		launch.setAttribute(IServerBehaviour.PROPERTY_MBEAN_SERVER_IP, "127.0.0.1");
 		

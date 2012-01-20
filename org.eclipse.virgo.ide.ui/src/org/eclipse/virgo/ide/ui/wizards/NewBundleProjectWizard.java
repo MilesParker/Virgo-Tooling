@@ -82,7 +82,7 @@ public class NewBundleProjectWizard extends NewElementWizard implements INewWiza
 
 	private final IDataModel model;
 
-	private final String title = "New Bundle Project";
+	private final String title = Messages.NewBundleProjectWizard_Title;
 
 	private Map<String, String> properties;
 
@@ -109,10 +109,10 @@ public class NewBundleProjectWizard extends NewElementWizard implements INewWiza
 				// WST 3.0 only
 
 				if (model.getBooleanProperty(BundleFacetInstallDataModelProvider.ENABLE_WEB_BUNDLE)) {
-					fProject.installProjectFacet(ProjectFacetsManager.getProjectFacet("jst.java").getDefaultVersion(),
+					fProject.installProjectFacet(ProjectFacetsManager.getProjectFacet(Messages.NewBundleProjectWizard_2).getDefaultVersion(),
 							null, monitor);
 					fProject.installProjectFacet(ProjectFacetsManager.getProjectFacet(FacetCorePlugin.WEB_FACET_ID)
-							.getVersion("2.5"), null, monitor);
+							.getVersion(Messages.NewBundleProjectWizard_3), null, monitor);
 
 					// wanna uninstall JavaScript facet, but it doesn't seem to
 					// be there yet
@@ -120,8 +120,8 @@ public class NewBundleProjectWizard extends NewElementWizard implements INewWiza
 					// .getProjectFacet(FacetCorePlugin.WEB_JS_FACET_ID).getDefaultVersion(),
 					// null, monitor);
 
-					removeFromClasspath(project, "org.eclipse.jst.j2ee.internal.web.container", monitor);
-					removeFromClasspath(project, "org.eclipse.jst.j2ee.internal.module.container", monitor);
+					removeFromClasspath(project, Messages.NewBundleProjectWizard_4, monitor);
+					removeFromClasspath(project, Messages.NewBundleProjectWizard_5, monitor);
 				}
 
 				fProject.installProjectFacet(ProjectFacetsManager.getProjectFacet(FacetCorePlugin.BUNDLE_FACET_ID)
@@ -267,7 +267,7 @@ public class NewBundleProjectWizard extends NewElementWizard implements INewWiza
 				}
 			});
 
-			IFile manifestFile = (IFile) project.getProject().findMember("src/META-INF/MANIFEST.MF");
+			IFile manifestFile = (IFile) project.getProject().findMember(Messages.NewBundleProjectWizard_6);
 			if (manifestFile != null) {
 				IWorkbenchWindow workbenchWindow = getWorkbench().getActiveWorkbenchWindow();
 				IWorkbenchPage page = workbenchWindow.getActivePage();
@@ -275,7 +275,7 @@ public class NewBundleProjectWizard extends NewElementWizard implements INewWiza
 					page.openEditor(new FileEditorInput(manifestFile), BundleManifestEditor.ID_EDITOR);
 				}
 				catch (PartInitException e) {
-					MessageDialog.openError(workbenchWindow.getShell(), "Error opening editor", e.getMessage());
+					MessageDialog.openError(workbenchWindow.getShell(), Messages.NewBundleProjectWizard_ErrorMessage, e.getMessage());
 				}
 			}
 		}

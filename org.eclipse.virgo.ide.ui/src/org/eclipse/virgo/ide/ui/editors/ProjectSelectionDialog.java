@@ -26,8 +26,8 @@ public class ProjectSelectionDialog extends ElementListSelectionDialog {
 
 	public ProjectSelectionDialog(Shell parent) {
 		super(parent, WorkbenchLabelProvider.getDecoratingWorkbenchLabelProvider());
-		setTitle("Bundle Selection");
-		setMessage("Select a Bundle:");
+		setTitle(Messages.ProjectSelectionDialog_Title);
+		setMessage(Messages.ProjectSelectionDialog_Message);
 		setElements(FacetUtils.getBundleProjects());
 		setMultipleSelection(true);
 	}

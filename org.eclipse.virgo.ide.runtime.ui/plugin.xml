@@ -201,13 +201,13 @@
         class="org.eclipse.virgo.ide.runtime.internal.ui.actions.OpenManifestAction"
         enablesFor="1"
         id="org.eclipse.virgo.ide.server.ui.openManifestAction"
-        label="Open MANIFEST.MF">
+        label="%action.label">
       </action>
       <action
         class="org.eclipse.virgo.ide.runtime.internal.ui.actions.RedeployBundleAction"
         enablesFor="1"
         id="org.eclipse.virgo.ide.server.ui.redeployAction"
-        label="Redeploy">
+        label="%action.label.0">
       </action>
     </objectContribution>
   </extension>
@@ -270,7 +270,7 @@
 	 <extension point="org.eclipse.ui.preferencePages">
 		<page 
 			id="org.eclipse.virgo.ide.runtime.ui.preferencePage" 
-			name="Repository Browser"
+			name="%page.name"
 			class="org.eclipse.virgo.ide.runtime.internal.ui.properties.RuntimePreferencePage"
 			category="org.springframework.ide.eclipse.ui.preferencePage">
 		</page>

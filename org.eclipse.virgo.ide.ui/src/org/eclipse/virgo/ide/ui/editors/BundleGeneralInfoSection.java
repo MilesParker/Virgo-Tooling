@@ -131,7 +131,7 @@ public class BundleGeneralInfoSection extends AbstractPdeGeneralInfoSection {
 
 	@Override
 	protected String getSectionDescription() {
-		return "This section describes general information about this bundle";
+		return org.eclipse.virgo.ide.ui.editors.Messages.BundleGeneralInfoSection_SectionTitle;
 	}
 
 	/** For JUnit testing only * */

@@ -57,6 +57,12 @@ import org.eclipse.virgo.bundlor.support.partialmanifest.PartialManifest;
  */
 public class ArtifactAnalyserTypeVisitor extends ASTVisitor {
 
+	private static final String QUAL_SEPERATOR = "."; //$NON-NLS-1$
+
+	private static final String VOID_TOKEN = "void"; //$NON-NLS-1$
+
+	private static final String EMPTY_STRING = ""; //$NON-NLS-1$
+
 	private final PartialManifest partialManifest;
 
 	private final Set<String> referencedTypes = new HashSet<String>();
@@ -168,7 +174,7 @@ public class ArtifactAnalyserTypeVisitor extends ASTVisitor {
 		// return value
 		if (binding.getReturnType() != null) {
 			String fqn = binding.getReturnType().getQualifiedName();
-			if (!"void".equals(fqn)) {
+			if (!VOID_TOKEN.equals(fqn)) {
 				recordTypeBinding(binding.getReturnType());
 				if (!Modifier.isPrivate(node.getModifiers())) {
 					IPackageBinding packageBinding = getPackageBinding(binding.getReturnType());
@@ -422,7 +428,7 @@ public class ArtifactAnalyserTypeVisitor extends ASTVisitor {
 	}
 
 	private String recordFullyQualifiedName(String fqn) {
-		if (!"void".equals(fqn)) {
+		if (!VOID_TOKEN.equals(fqn)) {
 			if (this.typePackage == null) {
 				this.referencedTypes.add(fqn);
 				return fqn;
@@ -430,7 +436,7 @@ public class ArtifactAnalyserTypeVisitor extends ASTVisitor {
 			else if (fqn != null && !this.typePackage.equals(getPackageName(fqn))) {
 				// This is required to get FQCNs of the form
 				// org.springframework.util.ReflectionUtils.MethodCallback correctly detected
-				StringTokenizer segments = new StringTokenizer(fqn, ".");
+				StringTokenizer segments = new StringTokenizer(fqn, QUAL_SEPERATOR);
 				if (segments.countTokens() > 1) {
 					List<String> newSegments = new ArrayList<String>();
 					while (segments.hasMoreTokens()) {
@@ -440,19 +446,19 @@ public class ArtifactAnalyserTypeVisitor extends ASTVisitor {
 							break;
 						}
 					}
-					fqn = StringUtils.collectionToDelimitedString(newSegments, ".");
+					fqn = StringUtils.collectionToDelimitedString(newSegments, QUAL_SEPERATOR);
 				}
 
 				this.partialManifest.recordReferencedType(fqn);
 				return fqn;
 			}
 		}
-		return "";
+		return EMPTY_STRING;
 	}
 
 	private String getPackageName(String fullyQualifiedTypeName) {
 		if (fullyQualifiedTypeName == null) {
-			return "";
+			return EMPTY_STRING;
 		}
 		int index = fullyQualifiedTypeName.lastIndexOf('.');
 
@@ -460,7 +466,7 @@ public class ArtifactAnalyserTypeVisitor extends ASTVisitor {
 			return fullyQualifiedTypeName.substring(0, index);
 		}
 
-		return "";
+		return EMPTY_STRING;
 	}
 
 	private String recordTypeBinding(ITypeBinding binding) {
@@ -473,7 +479,7 @@ public class ArtifactAnalyserTypeVisitor extends ASTVisitor {
 				return recordFullyQualifiedName(fqn);
 			}
 		}
-		return "";
+		return EMPTY_STRING;
 	}
 
 }
