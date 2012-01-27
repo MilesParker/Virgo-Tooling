@@ -24,12 +24,12 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.ui.statushandlers.StatusManager;
 import org.eclipse.virgo.ide.jdt.core.JdtCorePlugin;
 import org.eclipse.virgo.ide.manifest.core.BundleManifestUtils;
 import org.eclipse.virgo.ide.manifest.internal.core.model.BundleManifest;
 import org.eclipse.virgo.kernel.osgi.provisioning.tools.DependencyLocationException;
 import org.eclipse.virgo.kernel.osgi.provisioning.tools.ImportDescriptor;
-import org.springframework.ide.eclipse.core.SpringCore;
 
  
 /**
@@ -65,8 +65,8 @@ public class MarkerUtils {
 		final IDocument document = bundleManifest.getDocument();
 
 		// Schedule marker creation in different job as it requires workspace lock
-		Job markerCreationJob = new Job(Messages.MarkerUtils_ManagingMarkersMessageStart
-				+ manifest.getFullPath().toString() + "'") { //$NON-NLS-1$
+		Job markerCreationJob = new Job("Managing markers on resource '"
+				+ manifest.getFullPath().toString() + "'") {
 
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
@@ -81,48 +81,48 @@ public class MarkerUtils {
 				if (e.getUnsatisfiablePackageImports() != null) {
 					for (ImportDescriptor desc : e.getUnsatisfiablePackageImports()) {
 						int lineNumber = BundleManifestUtils.getLineNumber(document, bundleManifest
-								.getHeader("Import-Package"), desc.getName()); //$NON-NLS-1$
+								.getHeader("Import-Package"), desc.getName());
 						createProblemMarker(manifest,
 								MarkerConstants.MISSING_DEPENDENCY_KIND_IMPORT_PACKAGE, desc
 										.getName(), desc.getParseVersion(), new StringBuilder(
-										"Import-Package: ").append(desc.getName()).append(" ") //$NON-NLS-1$ //$NON-NLS-2$
-										.append(desc.getVersion()).append(Messages.MarkerUtils_CouldNotResolveMessageEnd)
+										"Import-Package: ").append(desc.getName()).append(" ")
+										.append(desc.getVersion()).append(" could not be resolved")
 										.toString(), lineNumber, IMarker.SEVERITY_ERROR);
 					}
 				}
 				if (e.getUnsatisfiableLibraryImports() != null) {
 					for (ImportDescriptor desc : e.getUnsatisfiableLibraryImports()) {
 						int lineNumber = BundleManifestUtils.getLineNumber(document, bundleManifest
-								.getHeader("Import-Library"), desc.getName()); //$NON-NLS-1$
+								.getHeader("Import-Library"), desc.getName());
 						createProblemMarker(manifest,
 								MarkerConstants.MISSING_DEPENDENCY_KIND_IMPORT_LIBRARY, desc
 										.getName(), desc.getParseVersion(), new StringBuilder(
-										"Import-Library: ").append(desc.getName()).append(" ") //$NON-NLS-1$ //$NON-NLS-2$
-										.append(desc.getVersion()).append(Messages.MarkerUtils_CouldNotResolveMessageEnd)
+										"Import-Library: ").append(desc.getName()).append(" ")
+										.append(desc.getVersion()).append(" could not be resolved")
 										.toString(), lineNumber, IMarker.SEVERITY_ERROR);
 					}
 				}
 				if (e.getUnsatisfiableRequireBundle() != null) {
 					for (ImportDescriptor desc : e.getUnsatisfiableRequireBundle()) {
 						int lineNumber = BundleManifestUtils.getLineNumber(document, bundleManifest
-								.getHeader("Require-Bundle"), desc.getName()); //$NON-NLS-1$
+								.getHeader("Require-Bundle"), desc.getName());
 						createProblemMarker(manifest,
 								MarkerConstants.MISSING_DEPENDENCY_KIND_REQUIRE_BUNDLE, desc
 										.getName(), desc.getParseVersion(), new StringBuilder(
-										"Require-Bundle: ").append(desc.getName()).append(" ") //$NON-NLS-1$ //$NON-NLS-2$
-										.append(desc.getVersion()).append(Messages.MarkerUtils_CouldNotResolveMessageEnd)
+										"Require-Bundle: ").append(desc.getName()).append(" ")
+										.append(desc.getVersion()).append(" could not be resolved")
 										.toString(), lineNumber, IMarker.SEVERITY_ERROR);
 					}
 				}
 				if (e.getUnsatisfiableBundleImports() != null) {
 					for (ImportDescriptor desc : e.getUnsatisfiableBundleImports()) {
 						int lineNumber = BundleManifestUtils.getLineNumber(document, bundleManifest
-								.getHeader("Import-Bundle"), desc.getName()); //$NON-NLS-1$
+								.getHeader("Import-Bundle"), desc.getName());
 						createProblemMarker(manifest,
 								MarkerConstants.MISSING_DEPENDENCY_KIND_IMPORT_BUNDLE, desc
 										.getName(), desc.getParseVersion(), new StringBuilder(
-										"Import-Bundle: ").append(desc.getName()).append(" ") //$NON-NLS-1$ //$NON-NLS-2$
-										.append(desc.getVersion()).append(Messages.MarkerUtils_CouldNotResolveMessageEnd)
+										"Import-Bundle: ").append(desc.getName()).append(" ")
+										.append(desc.getVersion()).append(" could not be resolved")
 										.toString(), lineNumber, IMarker.SEVERITY_ERROR);
 					}
 				}
@@ -157,7 +157,7 @@ public class MarkerUtils {
 				for (IMarker marker : markers) {
 					int line = marker.getAttribute(IMarker.LINE_NUMBER, -1);
 					if (line == lineNumber) {
-						String msg = marker.getAttribute(IMarker.MESSAGE, ""); //$NON-NLS-1$
+						String msg = marker.getAttribute(IMarker.MESSAGE, "");
 						if (msg.equals(message)) {
 							return;
 						}
@@ -184,7 +184,9 @@ public class MarkerUtils {
 				marker.setAttributes(attributes);
 			}
 			catch (CoreException e) {
-				SpringCore.log(e);
+				//TODO Should we rethrow this?
+				StatusManager.getManager()
+				.handle(new Status(IStatus.ERROR, JdtCorePlugin.PLUGIN_ID, "Couldn't create problem markers", e));
 			}
 		}
 

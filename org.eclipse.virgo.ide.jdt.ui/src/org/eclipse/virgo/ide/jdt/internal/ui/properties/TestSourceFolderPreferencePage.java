@@ -136,7 +136,7 @@ public class TestSourceFolderPreferencePage extends PropertyPage {
 
 		try {
 			List<IClasspathEntry> entries = new ArrayList<IClasspathEntry>();
-			for (IClasspathEntry entry : JdtUtils.getJavaProject(project).getRawClasspath()) {
+			for (IClasspathEntry entry : JavaCore.create(project).getRawClasspath()) {
 				if (entry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
 					Set<IClasspathAttribute> attrs = new HashSet<IClasspathAttribute>();
 					for (IClasspathAttribute attr : entry.getExtraAttributes()) {
@@ -157,7 +157,7 @@ public class TestSourceFolderPreferencePage extends PropertyPage {
 				}
 			}
 
-			JdtUtils.getJavaProject(project).setRawClasspath(
+			JavaCore.create(project).setRawClasspath(
 					(IClasspathEntry[]) entries.toArray(new IClasspathEntry[entries.size()]),
 					new NullProgressMonitor());
 		}
@@ -217,7 +217,7 @@ public class TestSourceFolderPreferencePage extends PropertyPage {
 			if (inputElement instanceof IProject) {
 				List<IClasspathEntry> sourceFolders = new ArrayList<IClasspathEntry>();
 				try {
-					for (IClasspathEntry entry : JdtUtils.getJavaProject(project).getRawClasspath()) {
+					for (IClasspathEntry entry : JavaCore.create(project).getRawClasspath()) {
 						if (entry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
 							sourceFolders.add(entry);
 						}

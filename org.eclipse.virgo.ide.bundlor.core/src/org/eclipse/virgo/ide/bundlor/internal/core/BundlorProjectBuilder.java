@@ -12,7 +12,6 @@ package org.eclipse.virgo.ide.bundlor.internal.core;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,8 +42,10 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
@@ -53,6 +54,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.osgi.util.ManifestElement;
 import org.eclipse.pde.internal.core.text.bundle.ManifestHeader;
+import org.eclipse.ui.statushandlers.StatusManager;
 import org.eclipse.virgo.bundlor.ClassPath;
 import org.eclipse.virgo.bundlor.ClassPathEntry;
 import org.eclipse.virgo.bundlor.EntryScannerListener;
@@ -82,12 +84,10 @@ import org.eclipse.virgo.util.parser.manifest.RecoveringManifestParser;
 import org.osgi.framework.BundleException;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
-import org.springframework.ide.eclipse.core.SpringCore;
 import org.springframework.ide.eclipse.core.SpringCorePreferences;
 import org.springframework.ide.eclipse.core.SpringCoreUtils;
 import org.springframework.ide.eclipse.core.internal.project.SpringProjectContributionManager.ResourceDeltaVisitor;
 import org.springframework.ide.eclipse.core.internal.project.SpringProjectContributionManager.ResourceTreeVisitor;
-import org.springframework.ide.eclipse.core.java.JdtUtils;
 import org.springframework.ide.eclipse.core.project.IProjectContributor;
 import org.springframework.util.StringUtils;
 
@@ -101,6 +101,8 @@ import org.springframework.util.StringUtils;
 @SuppressWarnings("restriction")
 public class BundlorProjectBuilder extends IncrementalProjectBuilder {
 
+	private final static String CLASS_FILE_EXTENSION = ".class";
+	
 	/** Deleted sources from a source directory */
 	private Set<IResource> deletedSourceResources = new HashSet<IResource>();
 
@@ -198,7 +200,7 @@ public class BundlorProjectBuilder extends IncrementalProjectBuilder {
 
 		IncrementalPartialManifestManager manifestManager = BundlorCorePlugin.getDefault().getManifestManager();
 
-		IJavaProject javaProject = JdtUtils.getJavaProject(getProject());
+		IJavaProject javaProject = JavaCore.create(getProject());
 
 		// No incremental manifest model has been recorded or the build is a full build
 		final boolean isFullBuild = !manifestManager.hasPartialManifest(javaProject)
@@ -366,11 +368,8 @@ public class BundlorProjectBuilder extends IncrementalProjectBuilder {
 			try {
 				manifest = parser.parse(new FileReader(templateResource.getRawLocation().toString()));
 			}
-			catch (FileNotFoundException e) {
-				SpringCore.log(e);
-			}
 			catch (IOException e) {
-				SpringCore.log(e);
+				StatusManager.getManager().handle(new Status(IStatus.ERROR, BundlorCorePlugin.PLUGIN_ID, "An IO Exception occurred.", e));
 			}
 			return manifest;
 		}
@@ -382,7 +381,7 @@ public class BundlorProjectBuilder extends IncrementalProjectBuilder {
 
 	private void doGetAffectedResources(IResource resource, int kind, int deltaKind) throws CoreException {
 
-		IJavaProject project = JdtUtils.getJavaProject(getProject());
+		IJavaProject project = JavaCore.create(getProject());
 		if (project == null) {
 			return;
 		}
@@ -396,7 +395,7 @@ public class BundlorProjectBuilder extends IncrementalProjectBuilder {
 				resource.getProject(), true);
 
 		// Java source files
-		if (!scanByteCode && resource.getName().endsWith(JdtUtils.JAVA_FILE_EXTENSION)) {
+		if (!scanByteCode && resource.getName().endsWith("java")) { //$NON-NLS-1$
 			IJavaElement element = JavaCore.create(resource);
 			if (element != null && element.getJavaProject().isOnClasspath(element)) {
 				IPackageFragmentRoot root = (IPackageFragmentRoot) element
@@ -432,7 +431,7 @@ public class BundlorProjectBuilder extends IncrementalProjectBuilder {
 			}
 		}
 		// Java byte code
-		else if (scanByteCode && resource.getName().endsWith(JdtUtils.CLASS_FILE_EXTENSION)) {
+		else if (scanByteCode && resource.getName().endsWith(CLASS_FILE_EXTENSION)) {
 			IPath classFilePath = resource.getFullPath();
 
 			// Check default output folders
@@ -440,7 +439,7 @@ public class BundlorProjectBuilder extends IncrementalProjectBuilder {
 			if (defaultOutputLocation.isPrefixOf(classFilePath)) {
 				// Ok we know that the file is a class in the default output location; let's get the class name
 				String className = classFilePath.removeFirstSegments(defaultOutputLocation.segmentCount()).toString();
-				className = className.substring(0, className.length() - JdtUtils.CLASS_FILE_EXTENSION.length());
+				className = className.substring(0, className.length() - CLASS_FILE_EXTENSION.length());
 
 				int ix = className.indexOf('$');
 				if (ix > 0) {

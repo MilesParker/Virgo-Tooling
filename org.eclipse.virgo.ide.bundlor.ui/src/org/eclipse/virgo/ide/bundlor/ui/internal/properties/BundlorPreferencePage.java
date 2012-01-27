@@ -21,6 +21,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.ui.JavaElementLabelProvider;
 import org.eclipse.jdt.ui.JavaElementSorter;
 import org.eclipse.jface.dialogs.Dialog;
@@ -47,7 +48,6 @@ import org.eclipse.ui.dialogs.PropertyPage;
 import org.eclipse.virgo.ide.bundlor.internal.core.BundlorCorePlugin;
 import org.eclipse.virgo.ide.bundlor.ui.BundlorUiPlugin;
 import org.springframework.ide.eclipse.core.SpringCorePreferences;
-import org.springframework.ide.eclipse.core.java.JdtUtils;
 import org.springframework.ide.eclipse.ui.SpringUIUtils;
 import org.springframework.ide.eclipse.ui.dialogs.FilteredElementTreeSelectionDialog;
 import org.springframework.ide.eclipse.ui.dialogs.StorageSelectionValidator;
@@ -253,7 +253,7 @@ public class BundlorPreferencePage extends PropertyPage {
 				BundlorCorePlugin.FORMAT_GENERATED_MANIFESTS_KEY, formatManifests.getSelection());
 
 		if (oldScanByteCode != scanByteCode.getSelection()) {
-			BundlorCorePlugin.getDefault().getManifestManager().clearPartialManifest(JdtUtils.getJavaProject(project));
+			BundlorCorePlugin.getDefault().getManifestManager().clearPartialManifest(JavaCore.create(project));
 		}
 
 		return true;

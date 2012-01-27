@@ -38,6 +38,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
@@ -46,13 +47,12 @@ import org.eclipse.osgi.util.ManifestElement;
 import org.eclipse.virgo.ide.facet.core.FacetCorePlugin;
 import org.eclipse.virgo.ide.manifest.internal.core.model.BundleManifestHeader;
 import org.eclipse.virgo.ide.module.core.ServerModuleDelegate;
+import org.eclipse.virgo.util.osgi.manifest.BundleManifest;
+import org.eclipse.virgo.util.osgi.manifest.BundleManifestFactory;
 import org.osgi.framework.Constants;
 import org.springframework.ide.eclipse.core.SpringCoreUtils;
 import org.springframework.ide.eclipse.core.java.JdtUtils;
 import org.springframework.util.StringUtils;
-
-import org.eclipse.virgo.util.osgi.manifest.BundleManifest;
-import org.eclipse.virgo.util.osgi.manifest.BundleManifestFactory;
 
 /**
  * Helper methods to located and load {@link BundleManifest} instances.
@@ -317,7 +317,7 @@ public class BundleManifestUtils {
 
 	public static IFile getFirstPossibleManifestFile(final IProject project, boolean isTestManifest) {
 		try {
-			if (JdtUtils.isJavaProject(project)) {
+			if (project.hasNature(JavaCore.NATURE_ID)) {
 
 				List<IClasspathEntry> entries = new ArrayList<IClasspathEntry>(ServerModuleDelegate
 						.getSourceClasspathEntries(project, isTestManifest));

@@ -22,6 +22,7 @@ import java.util.TreeSet;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableContext;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -40,13 +41,11 @@ import org.eclipse.virgo.ide.runtime.core.ServerCorePlugin;
 import org.eclipse.virgo.ide.runtime.core.ServerUtils;
 import org.eclipse.virgo.ide.runtime.internal.core.ServerRuntime;
 import org.eclipse.virgo.ide.runtime.internal.core.ServerRuntimeUtils;
-import org.eclipse.wst.server.core.IRuntime;
-import org.osgi.framework.Version;
-import org.springframework.ide.eclipse.core.java.JdtUtils;
-
 import org.eclipse.virgo.kernel.repository.BundleRepository;
 import org.eclipse.virgo.util.osgi.manifest.BundleManifest;
 import org.eclipse.virgo.util.osgi.manifest.ExportedPackage;
+import org.eclipse.wst.server.core.IRuntime;
+import org.osgi.framework.Version;
 
 /**
  * Utility class that is able to create {@link Repository} instances from either the remote
@@ -547,7 +546,7 @@ public class RepositoryUtils {
 		for (IProject p : ResourcesPlugin.getWorkspace().getRoot().getProjects()) {
 			if (FacetUtils.isBundleProject(p) && !p.equals(project)) {
 				BundleManifest manifest = BundleManifestCorePlugin.getBundleManifestManager()
-						.getBundleManifest(JdtUtils.getJavaProject(p));
+						.getBundleManifest(JavaCore.create(project));
 				addImportBundleProposalsFromManifest(bundles, manifest, value);
 			}
 		}
@@ -599,7 +598,7 @@ public class RepositoryUtils {
 		for (IProject p : ResourcesPlugin.getWorkspace().getRoot().getProjects()) {
 			if (FacetUtils.isBundleProject(p) && !p.equals(project)) {
 				BundleManifest manifest = BundleManifestCorePlugin.getBundleManifestManager()
-						.getBundleManifest(JdtUtils.getJavaProject(p));
+						.getBundleManifest(JavaCore.create(project));
 				addImportPackageProposalsFromManifest(value, packages, manifest);
 			}
 		}

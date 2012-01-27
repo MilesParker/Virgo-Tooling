@@ -17,9 +17,8 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IURIEditorInput;
+import org.eclipse.ui.statushandlers.StatusManager;
 import org.eclipse.virgo.ide.ui.ServerIdeUiPlugin;
-import org.springframework.ide.eclipse.core.SpringCore;
-
 
 /**
  * @author Steffen Pingel
@@ -38,9 +37,11 @@ class PdeCompatibilityUtil {
 			catch (ClassNotFoundException e) {
 				isEclipse34 = false;
 			}
+			// TODO why is this so general?
 			catch (Throwable e) {
-				SpringCore.log(new Status(IStatus.ERROR, ServerIdeUiPlugin.PLUGIN_ID,
-						"Failed to check fo instance of SystemFileEditorInput")); //$NON-NLS-1$
+				StatusManager.getManager().handle(
+						new Status(IStatus.ERROR, ServerIdeUiPlugin.PLUGIN_ID,
+								"Failed to check for instance of SystemFileEditorInput", e));
 				isEclipse34 = false;
 			}
 		}
@@ -62,13 +63,14 @@ class PdeCompatibilityUtil {
 			catch (ClassNotFoundException e) {
 				isEclipse34 = false;
 			}
+			// TODO why is this so general?
 			catch (Throwable e) {
-				SpringCore.log(new Status(IStatus.ERROR, ServerIdeUiPlugin.PLUGIN_ID,
-						"Failed to create instance of SystemFileEditorInput")); //$NON-NLS-1$
+				StatusManager.getManager().handle(
+						new Status(IStatus.ERROR, ServerIdeUiPlugin.PLUGIN_ID,
+								"Failed to create instance of SystemFileEditorInput", e));
 				isEclipse34 = false;
 			}
 		}
 		return null;
 	}
-
 }

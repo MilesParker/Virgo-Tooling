@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.ui.ISharedImages;
 import org.eclipse.jdt.ui.JavaUI;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -64,7 +65,6 @@ import org.eclipse.virgo.ide.ui.ServerIdeUiPlugin;
 import org.eclipse.virgo.ide.ui.StatusHandler;
 import org.springframework.ide.eclipse.beans.ui.graph.BeansGraphImages;
 import org.springframework.ide.eclipse.core.SpringCoreUtils;
-import org.springframework.ide.eclipse.core.java.JdtUtils;
 
 /**
  * @author Christian Dupuis
@@ -181,15 +181,13 @@ public class BundleOverviewPage extends PDEFormPage implements IHyperlinkListene
 
 		Composite container = createStaticSectionClient(toolkit, section);
 
-		FormText noteText = createClient(
-				container,
-				org.eclipse.virgo.ide.ui.editors.Messages.BundleOverviewPage_NoteMessage,
-				true, toolkit);
+		FormText noteText = createClient(container,
+				org.eclipse.virgo.ide.ui.editors.Messages.BundleOverviewPage_NoteMessage, true, toolkit);
 		noteText.setImage("manifest", ServerIdeUiPlugin.getImage("full/obj16/osgi_obj.gif")); //$NON-NLS-1$ //$NON-NLS-2$
 		noteText.addHyperlinkListener(this);
 
-		Button button = toolkit.createButton(container, org.eclipse.virgo.ide.ui.editors.Messages.BundleOverviewPage_AutoUpdateCheckBox,
-				SWT.CHECK);
+		Button button = toolkit.createButton(container,
+				org.eclipse.virgo.ide.ui.editors.Messages.BundleOverviewPage_AutoUpdateCheckBox, SWT.CHECK);
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -291,7 +289,7 @@ public class BundleOverviewPage extends PDEFormPage implements IHyperlinkListene
 			IRunnableWithProgress op = new WorkspaceModifyOperation() {
 				protected void execute(IProgressMonitor monitor) throws CoreException, InterruptedException {
 					ServerClasspathContainerUpdateJob.scheduleClasspathContainerUpdateJob(
-							JdtUtils.getJavaProject(resource), BundleManifestManager.IMPORTS_CHANGED);
+							JavaCore.create(resource.getProject()), BundleManifestManager.IMPORTS_CHANGED);
 				}
 			};
 			try {
@@ -304,7 +302,7 @@ public class BundleOverviewPage extends PDEFormPage implements IHyperlinkListene
 			}
 		}
 		else if (e.getHref().equals("generate")) { //$NON-NLS-1$
-			BundlorUiPlugin.runBundlorOnProject(JdtUtils.getJavaProject(resource));
+			BundlorUiPlugin.runBundlorOnProject(JavaCore.create(resource.getProject()));
 		}
 		else if (e.getHref().equals("exportbundle")) { //$NON-NLS-1$
 			Display.getDefault().asyncExec(new Runnable() {
@@ -313,7 +311,7 @@ public class BundleOverviewPage extends PDEFormPage implements IHyperlinkListene
 					BundleExportWizard wizard = new BundleExportWizard();
 					WizardDialog dialog = new WizardDialog(Display.getDefault().getActiveShell(), wizard);
 					wizard.init(PlatformUI.getWorkbench(),
-							new StructuredSelection(new Object[] { JdtUtils.getJavaProject(resource) }));
+							new StructuredSelection(new Object[] { JavaCore.create(resource) }));
 					dialog.open();
 				}
 			});

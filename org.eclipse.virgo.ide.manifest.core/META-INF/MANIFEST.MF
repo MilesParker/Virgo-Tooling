@@ -34,7 +34,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.virgo.util.io,
  org.eclipse.virgo.util.parser.manifest,
  org.eclipse.virgo.repository,
- org.eclipse.virgo.medic
+ org.eclipse.virgo.medic,
+ org.eclipse.jdt.debug
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Eclipse-LazyStart: true
 Export-Package: com.springsource.json.parser,

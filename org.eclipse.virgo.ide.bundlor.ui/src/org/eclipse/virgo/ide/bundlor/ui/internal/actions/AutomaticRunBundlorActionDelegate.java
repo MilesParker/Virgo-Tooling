@@ -22,8 +22,11 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ISelection;
@@ -33,12 +36,11 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.eclipse.ui.statushandlers.StatusManager;
 import org.eclipse.virgo.ide.bundlor.internal.core.BundlorCorePlugin;
 import org.eclipse.virgo.ide.bundlor.ui.BundlorUiPlugin;
 import org.eclipse.virgo.ide.facet.core.FacetUtils;
-import org.springframework.ide.eclipse.core.SpringCore;
 import org.springframework.ide.eclipse.core.SpringCoreUtils;
-import org.springframework.ide.eclipse.core.java.JdtUtils;
 import org.springframework.ide.eclipse.ui.SpringUIUtils;
 
 
@@ -57,7 +59,7 @@ public class AutomaticRunBundlorActionDelegate implements IObjectActionDelegate 
 		while (iter.hasNext()) {
 			IProject project = iter.next();
 			if (FacetUtils.isBundleProject(project)) {
-				projects.add(JdtUtils.getJavaProject(project));
+				projects.add(JavaCore.create(project));
 			}
 		}
 		IRunnableWithProgress op = new WorkspaceModifyOperation() {
@@ -75,7 +77,7 @@ public class AutomaticRunBundlorActionDelegate implements IObjectActionDelegate 
 						}
 					}
 					catch (CoreException e) {
-						SpringCore.log(e);
+						StatusManager.getManager().handle(new Status(IStatus.ERROR, BundlorUiPlugin.PLUGIN_ID, "An exception occurred while running bundlor.", e));
 					}
 				}
 			}
@@ -87,7 +89,7 @@ public class AutomaticRunBundlorActionDelegate implements IObjectActionDelegate 
 					ResourcesPlugin.getWorkspace().getRoot());
 		}
 		catch (InvocationTargetException e) {
-			SpringCore.log(e);
+			StatusManager.getManager().handle(new Status(IStatus.ERROR, BundlorUiPlugin.PLUGIN_ID, "An exception occurred while running bundlor.", e));
 		}
 		catch (InterruptedException e) {
 		}

@@ -27,10 +27,10 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.osgi.util.NLS;
+import org.eclipse.ui.statushandlers.StatusManager;
 import org.eclipse.virgo.ide.jdt.core.JdtCorePlugin;
 import org.eclipse.virgo.ide.jdt.internal.core.util.ClasspathUtils;
 import org.eclipse.virgo.ide.manifest.core.IBundleManifestChangeListener.Type;
-import org.springframework.ide.eclipse.core.SpringCore;
 
 /**
  * {@link WorkspaceJob} that triggers the class path container refresh.
@@ -60,15 +60,13 @@ public class ServerClasspathContainerUpdateJob extends WorkspaceJob {
 	/**
 	 * Private constructor to create an instance
 	 * 
-	 * @param javaProject
-	 *            the {@link IJavaProject} the class path container should be
-	 *            updated for
-	 * @param types
-	 *            the change types happened to the manifest
+	 * @param javaProject the {@link IJavaProject} the class path container
+	 *        should be updated for
+	 * @param types the change types happened to the manifest
 	 */
-	private ServerClasspathContainerUpdateJob(IJavaProject javaProject,
-			Set<Type> types) {
-		super(NLS.bind(Messages.ServerClasspathContainerUpdateJob_UpdatingContainerMessage, javaProject.getElementName()));
+	private ServerClasspathContainerUpdateJob(IJavaProject javaProject, Set<Type> types) {
+		super(NLS.bind(	Messages.ServerClasspathContainerUpdateJob_UpdatingContainerMessage,
+						javaProject.getElementName()));
 		this.javaProject = javaProject;
 		this.types = types;
 	}
@@ -87,37 +85,31 @@ public class ServerClasspathContainerUpdateJob extends WorkspaceJob {
 	 * .
 	 */
 	@Override
-	public IStatus runInWorkspace(IProgressMonitor monitor)
-			throws CoreException {
+	public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
 		if (!javaProject.getProject().isOpen() || monitor.isCanceled()) {
 			return Status.CANCEL_STATUS;
 		}
 		try {
-			ClasspathUtils
-					.updateClasspathContainer(javaProject, types, monitor);
+			ClasspathUtils.updateClasspathContainer(javaProject, types, monitor);
 		} catch (Exception e) {
 			return Status.CANCEL_STATUS;
 		}
 
 		return new Status(IStatus.OK, JdtCorePlugin.PLUGIN_ID,
-				Messages.ServerClasspathContainerUpdateJob_UpdatingSpringSourceContainerMessage);
+			Messages.ServerClasspathContainerUpdateJob_UpdatingSpringSourceContainerMessage);
 	}
 
 	/**
 	 * Helper method to schedule a new {@link ServerClasspathContainerUpdateJob}
 	 * .
 	 * 
-	 * @param javaProject
-	 *            the {@link IJavaProject} the class path container should be
-	 *            updated for
-	 * @param types
-	 *            the change types of the manifest
+	 * @param javaProject the {@link IJavaProject} the class path container
+	 *        should be updated for
+	 * @param types the change types of the manifest
 	 */
-	public static void scheduleClasspathContainerUpdateJob(
-			IJavaProject javaProject, Set<Type> types) {
-		if (javaProject != null && !SCHEDULED_PROJECTS.contains(javaProject)
-				&& types.size() > 0
-				&& ClasspathUtils.hasClasspathContainer(javaProject)) {
+	public static void scheduleClasspathContainerUpdateJob(IJavaProject javaProject, Set<Type> types) {
+		if (javaProject != null && !SCHEDULED_PROJECTS.contains(javaProject) && types.size() > 0
+			&& ClasspathUtils.hasClasspathContainer(javaProject)) {
 			newClasspathContainerUpdateJob(javaProject, types);
 		}
 	}
@@ -126,10 +118,9 @@ public class ServerClasspathContainerUpdateJob extends WorkspaceJob {
 	 * Creates a new instance of {@link ServerClasspathContainerUpdateJob} and
 	 * configures required properties and schedules it to the workbench.
 	 */
-	private static ServerClasspathContainerUpdateJob newClasspathContainerUpdateJob(
-			IJavaProject javaProject, Set<Type> types) {
-		ServerClasspathContainerUpdateJob job = new ServerClasspathContainerUpdateJob(
-				javaProject, types);
+	private static ServerClasspathContainerUpdateJob newClasspathContainerUpdateJob(IJavaProject javaProject,
+			Set<Type> types) {
+		ServerClasspathContainerUpdateJob job = new ServerClasspathContainerUpdateJob(javaProject, types);
 		// job.setRule(ResourcesPlugin.getWorkspace().getRuleFactory().buildRule());
 		job.setPriority(Job.BUILD);
 		job.setSystem(true);
@@ -145,20 +136,16 @@ public class ServerClasspathContainerUpdateJob extends WorkspaceJob {
 	 * Internal {@link IJobChangeListener} to detect duplicates in the scheduled
 	 * list of {@link ServerClasspathContainerUpdateJob Jobs}.
 	 */
-	private static class DuplicateJobListener extends JobChangeAdapter
-			implements IJobChangeListener {
+	private static class DuplicateJobListener extends JobChangeAdapter implements IJobChangeListener {
 
 		@Override
 		public void done(IJobChangeEvent event) {
-			SCHEDULED_PROJECTS
-					.remove(((ServerClasspathContainerUpdateJob) event.getJob())
-							.getJavaProject());
+			SCHEDULED_PROJECTS.remove(((ServerClasspathContainerUpdateJob) event.getJob()).getJavaProject());
 		}
 
 		@Override
 		public void scheduled(IJobChangeEvent event) {
-			SCHEDULED_PROJECTS.add(((ServerClasspathContainerUpdateJob) event
-					.getJob()).getJavaProject());
+			SCHEDULED_PROJECTS.add(((ServerClasspathContainerUpdateJob) event.getJob()).getJavaProject());
 		}
 	}
 
@@ -166,8 +153,7 @@ public class ServerClasspathContainerUpdateJob extends WorkspaceJob {
 	 * Internal {@link IJobChangeListener} to limit the number of concurrent
 	 * builds.
 	 */
-	private static class LimitConcurrentClasspathUpdatesListener extends
-			JobChangeAdapter implements IJobChangeListener {
+	private static class LimitConcurrentClasspathUpdatesListener extends JobChangeAdapter implements IJobChangeListener {
 		/**
 		 * Queue with the jobs which are scheduled, used to make sure a limited
 		 * amount of projects is being rebuilt at the same time
@@ -178,8 +164,7 @@ public class ServerClasspathContainerUpdateJob extends WorkspaceJob {
 		 * Maximum number of concurrent jobs, defaults to the number of
 		 * available processors
 		 */
-		private int maxNrOfConcurrentJobs = Runtime.getRuntime()
-				.availableProcessors();
+		private int maxNrOfConcurrentJobs = Runtime.getRuntime().availableProcessors();
 
 		/** Holds the number of builds in progress */
 		private AtomicInteger nrOfBuildingProjects = new AtomicInteger(0);
@@ -192,9 +177,11 @@ public class ServerClasspathContainerUpdateJob extends WorkspaceJob {
 
 		@Override
 		public void running(IJobChangeEvent event) {
-			ServerClasspathContainerUpdateJob job = (ServerClasspathContainerUpdateJob) event
-					.getJob();
-			logInfo(NLS.bind(Messages.ServerClasspathContainerUpdateJob_UpdatingClasspathMessage, new String[]{job.javaProject.getProject().getName(), SCHEDULED_JOBS.size() + ""})); //$NON-NLS-1$
+			ServerClasspathContainerUpdateJob job = (ServerClasspathContainerUpdateJob) event.getJob();
+			StatusManager.getManager()
+					.handle(new Status(IStatus.INFO, JdtCorePlugin.PLUGIN_ID, NLS
+									.bind(	Messages.ServerClasspathContainerUpdateJob_UpdatingClasspathMessage,
+											new String[] { job.javaProject.getProject().getName() })));
 		}
 
 		@Override
@@ -215,14 +202,5 @@ public class ServerClasspathContainerUpdateJob extends WorkspaceJob {
 				}
 			}
 		}
-	}
-
-	private static void logInfo(String message) {
-		log(Status.INFO, message);
-	}
-
-	private static void log(int level, String message) {
-		SpringCore.log(new Status(level,
-				"com.springsource.server.ide.jdt.core", message));
 	}
 }
