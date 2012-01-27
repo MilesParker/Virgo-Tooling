@@ -1,19 +1,13 @@
-/**
- * <copyright>
+/*******************************************************************************
+ * Copyright (c) 2012 SpringSource, a divison of VMware, Inc.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  *
- * Copyright (c) 2010 Metascape, LLC.
- * All rights reserved.   This program and the accompanying materials
- * are the confidential and proprietary property of Metascape, LLC, and subject to the terms
- * of the accompanying license.
- * THIS SOFTWARE IS NOT OPEN SOURCE
- * http://butterflyzer.com  http://metascapeabm.com
- * 
  * Contributors:
- *   Metascape - Initial API and Implementation
- *
- * </copyright>
- *
- */
+ *     SpringSource, a division of VMware, Inc. - initial API and implementation
+ *******************************************************************************/
 package org.eclipse.virgo.ide.runtime.internal.core.utils;
 
 import java.io.IOException;
